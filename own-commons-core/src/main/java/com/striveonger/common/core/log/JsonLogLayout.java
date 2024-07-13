@@ -1,8 +1,8 @@
-package com.cecbrain.omm.core.log;
+package com.striveonger.common.core.log;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.LayoutBase;
-import com.cecbrain.omm.core.utils.SpringContextHolder;
+import com.striveonger.common.core.web.SpringContextHolder;
 
 public class JsonLogLayout extends LayoutBase<ILoggingEvent> {
 

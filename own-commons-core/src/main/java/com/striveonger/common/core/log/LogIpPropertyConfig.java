@@ -1,4 +1,4 @@
-package com.cecbrain.omm.core.log;
+package com.striveonger.common.core.log;
 
 import ch.qos.logback.core.PropertyDefinerBase;
 import org.slf4j.Logger;
@@ -19,7 +19,6 @@ public class LogIpPropertyConfig extends PropertyDefinerBase {
 
     static {
         try {
-            // TODO: 如果有多张网卡, 可能会有问题
             ip = InetAddress.getLocalHost().getHostAddress();
             System.setProperty("app.ip", ip);
         } catch (UnknownHostException e) {

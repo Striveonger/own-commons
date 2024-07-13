@@ -71,4 +71,8 @@ public class SpringContextHolder implements ApplicationContextAware {
         }
     }
 
+    public static boolean initialize() {
+        return SpringContextHolder.context != null;
+    }
+
 }
