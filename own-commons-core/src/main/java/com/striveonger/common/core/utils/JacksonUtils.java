@@ -4,10 +4,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.striveonger.common.core.constant.ResultStatus;
+import com.striveonger.common.core.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,14 +27,15 @@ import java.util.Map;
 public class JacksonUtils {
 
     private static final Logger log = LoggerFactory.getLogger(JacksonUtils.class);
-    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {};
+    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {
+    };
     private static final ObjectMapper mapper;
 
     static {
         mapper = JsonMapper.builder()
-                           .addModule(new JavaTimeModule())
-                           .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-                           .build();
+                .addModule(new JavaTimeModule())
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .build();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
@@ -77,5 +83,33 @@ public class JacksonUtils {
 
     public static ObjectMapper getMapper() {
         return mapper;
+    }
+
+    public static JsonNode readJsonNode(String props) {
+        try {
+            return mapper.readTree(props);
+        } catch (JsonProcessingException e) {
+            // throw new CustomException(ResultStatus.READ_JSON_FAIL);
+            log.error("Jackson Convert JsonNode error ", e);
+        }
+        return null;
+    }
+
+    public static ObjectNode readObjectNode(String props) {
+        JsonNode node = readJsonNode(props);
+        if (node instanceof ObjectNode object) {
+            return object;
+        }
+        log.warn("Jackson Convert ObjectNode error, props is not ObjectNode");
+        return null;
+    }
+
+    public static ArrayNode readArrayNode(String props) {
+        JsonNode node = readJsonNode(props);
+        if (node instanceof ArrayNode array) {
+            return array;
+        }
+        log.warn("Jackson Convert ArrayNode error, props is not ArrayNode");
+        return null;
     }
 }

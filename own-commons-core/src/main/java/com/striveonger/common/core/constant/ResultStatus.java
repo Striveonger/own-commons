@@ -46,7 +46,7 @@ public enum ResultStatus {
     /**
      * 消息序列化失败
      */
-    MESSAGE_SERIALIZE_FAIL(511, "Message SERIALIZE Fail"),
+    MESSAGE_SERIALIZE_FAIL(511, "Message Serialize Fail"),
 
     /**
      * 消息反序列化失败
@@ -57,6 +57,13 @@ public enum ResultStatus {
      * 消息发送失败
      */
     MESSAGE_SEND_FAIL(513, "Message Send Fail"),
+
+    /**
+     * JSON 读取失败
+     */
+    READ_JSON_FAIL(514, "Read Json Fail"),
+
+
 
     /**
      * 任务执行失败
