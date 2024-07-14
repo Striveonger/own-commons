@@ -47,6 +47,7 @@
         <module>own-commons-core</module>
         <module>own-commons-web</module>
         <module>own-commons-db</module>
+        <module>own-commons-user</module>
     </modules>
 
     <dependencyManagement>
@@ -60,6 +61,11 @@
             <dependency>
                 <groupId>com.striveonger.common</groupId>
                 <artifactId>own-commons-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.striveonger.common</groupId>
+                <artifactId>own-commons-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

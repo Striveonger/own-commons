@@ -1,0 +1,25 @@
+server:
+  port: @data-hamal-auth.port@
+
+spring:
+  application:
+    name: @project.artifactId@
+  cloud:
+    nacos:
+      discovery:
+        group: @nacos.group@
+        server-addr: @nacos.server-addr@
+        namespace: @nacos.namespace@
+      config:
+        group: ${spring.cloud.nacos.discovery.group}
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+  config:
+    import:
+      - optional:nacos:data-hamal-auth.yaml
+      - optional:nacos:application-common.yaml
+      - optional:nacos:application-db.yaml
+      - optional:nacos:application-redis.yaml
+      - optional:nacos:application-token.yaml
+      - optional:nacos:application-dubbo.yaml
+      - optional:nacos:application-docker.yaml
