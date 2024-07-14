@@ -4,8 +4,6 @@ import com.cecbrain.omm.mybatis.entity.BaseEntity;
 import com.striveonger.common.core.utils.JacksonUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDateTime;
-
 /**
  * <p>
  * 用户表
