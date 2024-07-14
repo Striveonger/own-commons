@@ -15,8 +15,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "Users对象", description = "用户表")
 public class Users extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-
     @Schema(name = "用户ID")
     private String id;
 
