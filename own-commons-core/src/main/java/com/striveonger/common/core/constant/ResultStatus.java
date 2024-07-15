@@ -39,36 +39,9 @@ public enum ResultStatus {
     ACCIDENT(500, "Accident Error"),
 
     /**
-     * 获取分布式锁失败
+     * 解析内容失败
      */
-    LOCK_ACQUIRE_FAIL(510, "Acquire Lock Fail"),
-
-    /**
-     * 消息序列化失败
-     */
-    MESSAGE_SERIALIZE_FAIL(511, "Message Serialize Fail"),
-
-    /**
-     * 消息反序列化失败
-     */
-    MESSAGE_DESERIALIZATION_FAIL(512, "Message Deserialization Fail"),
-
-    /**
-     * 消息发送失败
-     */
-    MESSAGE_SEND_FAIL(513, "Message Send Fail"),
-
-    /**
-     * JSON 读取失败
-     */
-    READ_JSON_FAIL(514, "Read Json Fail"),
-
-
-
-    /**
-     * 任务执行失败
-     */
-    TASK_EXECUTE_FAIL(520, "Task Execute Fail");
+    ANALYZE_CONTENT_FAIL(510, "Acquire Lock Fail");
 
     private final int state;
     private final String message;
