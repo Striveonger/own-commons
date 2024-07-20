@@ -1,4 +1,4 @@
-package com.cecbrain.omm.mybatis.config;
+package com.striveonger.common.mybatis.config;
 
 import com.mybatisflex.core.FlexGlobalConfig;
 import com.mybatisflex.core.audit.AuditManager;
@@ -20,15 +20,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MybatisConfiguration implements MyBatisFlexCustomizer {
     private final Logger log = LoggerFactory.getLogger(MybatisConfiguration.class);
 
-    // 应该在启动类中显示声明扫描路径
-    // private final String basePackage = "com.striveonger.*.*.mapper";
-    //
-    // @Bean
-    // public MapperScannerConfigurer mapperScannerConfigurer() {
-    //     MapperScannerConfigurer configurer = new MapperScannerConfigurer();
-    //     configurer.setBasePackage(basePackage);
-    //     return configurer;
-    // }
+    @Bean
+    public MapperScannerConfigurer mapperScannerConfigurer() {
+        MapperScannerConfigurer configurer = new MapperScannerConfigurer();
+        // 包名的命名规则
+        configurer.setBasePackage("com.striveonger.*.*.mapper");
+        return configurer;
+    }
 
     @Override
     public void customize(FlexGlobalConfig config) {

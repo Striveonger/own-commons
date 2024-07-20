@@ -15,25 +15,25 @@ public class SleepHelper {
 
     /**
      * 秒级阻塞
-     * @param timeout
+     * @param timeout 秒
      */
     public static void sleepSeconds(int timeout) {
         try {
             TimeUnit.SECONDS.sleep(timeout);
         } catch (InterruptedException e) {
-            log.error(Thread.currentThread().getName() + ", Interrupted...By SleepHelper", e);
+            log.error("{}, Interrupted...By SleepHelper", Thread.currentThread().getName(), e);
         }
     }
 
     /**
      * 毫秒级阻塞
-     * @param timeout
+     * @param timeout 毫秒
      */
     public static void sleepMilliSeconds(int timeout) {
         try {
             TimeUnit.MILLISECONDS.sleep(timeout);
         } catch (InterruptedException e) {
-            log.error(Thread.currentThread().getName() + ", Interrupted...By SleepHelper", e);
+            log.error("{}, Interrupted...By SleepHelper", Thread.currentThread().getName(), e);
         }
     }
 

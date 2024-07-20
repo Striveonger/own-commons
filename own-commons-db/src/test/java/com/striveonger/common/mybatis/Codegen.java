@@ -1,6 +1,6 @@
-package com.cecbrain.omm.mybatis;
+package com.striveonger.common.mybatis;
 
-import com.cecbrain.omm.mybatis.entity.BaseEntity;
+import com.striveonger.common.mybatis.entity.BaseEntity;
 import com.mybatisflex.codegen.Generator;
 import com.mybatisflex.codegen.config.GlobalConfig;
 import com.zaxxer.hikari.HikariDataSource;

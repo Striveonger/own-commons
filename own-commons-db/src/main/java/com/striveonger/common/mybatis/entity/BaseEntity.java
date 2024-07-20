@@ -1,4 +1,4 @@
-package com.cecbrain.omm.mybatis.entity;
+package com.striveonger.common.mybatis.entity;
 
 import com.mybatisflex.annotation.Column;
 

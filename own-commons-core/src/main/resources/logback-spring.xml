@@ -6,7 +6,7 @@
     <springProperty scope="context" name="app.name"  source="spring.application.name" />
     <springProperty scope="context" name="app.port"  source="server.port" />
     <springProperty scope="context" name="log.path"  source="logging.file.path" />
-    <springProperty scope="context" name="log.level" source="logging.root.level" />
+    <springProperty scope="context" name="log.level" source="logging.level.root" />
 
     <define scope="context" name="ip" class="com.striveonger.common.core.log.LogIpPropertyConfig" />
 
@@ -38,10 +38,10 @@
 
     <!-- 控制台输出 -->
     <appender name="file_console" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-console.log</file>
+        <file>${log.path}/${app.name}-console.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-console-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-console-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大 7天 -->
             <maxHistory>7</maxHistory>
         </rollingPolicy>
@@ -57,11 +57,11 @@
 
     <!-- 日志文件输出 -->
     <appender name="file_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-debug.log</file>
+        <file>${log.path}/${app.name}-debug.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-debug-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-debug-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -80,11 +80,11 @@
     </appender>
 
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-info.log</file>
+        <file>${log.path}/${app.name}-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-info-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-info-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -103,11 +103,11 @@
     </appender>
 
     <appender name="file_warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-warn.log</file>
+        <file>${log.path}/${app.name}-warn.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-warn-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-warn-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -126,11 +126,11 @@
     </appender>
 
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-error.log</file>
+        <file>${log.path}/${app.name}-error.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-error-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -149,10 +149,10 @@
     </appender>
 
     <appender name="file_json" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/${app.name}/${ip}-${app.port}-json.log</file>
+        <file>${log.path}/${app.name}-json.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/${app.name}/${ip}-${app.port}-json-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${app.name}-json-%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大 7天 -->
             <maxHistory>7</maxHistory>
         </rollingPolicy>
@@ -210,10 +210,10 @@
     <root level="${log.level}">
         <appender-ref ref="console"/>
         <appender-ref ref="async_console"/>
-        <appender-ref ref="async_debug"/>
-        <appender-ref ref="async_info"/>
-        <appender-ref ref="async_warn"/>
-        <appender-ref ref="async_error"/>
+        <!--<appender-ref ref="async_debug"/>-->
+        <!--<appender-ref ref="async_info"/>-->
+        <!--<appender-ref ref="async_warn"/>-->
+        <!--<appender-ref ref="async_error"/>-->
         <appender-ref ref="async_json"/>
     </root>
 

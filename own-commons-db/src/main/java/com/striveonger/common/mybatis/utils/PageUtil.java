@@ -1,4 +1,4 @@
-package com.cecbrain.omm.mybatis.utils;
+package com.striveonger.common.mybatis.utils;
 
 import com.mybatisflex.core.paginate.Page;
 import com.striveonger.common.core.result.Result;

@@ -1,0 +1,5 @@
+com.striveonger.common.user.web.controller.TestController
+com.striveonger.common.user.web.controller.UserController
+com.striveonger.common.user.config.PasswordConfig
+com.striveonger.common.user.service.impl.UsersServiceImpl
+com.striveonger.common.user.config.UserAutoConfiguration

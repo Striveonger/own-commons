@@ -1,6 +1,6 @@
 package com.striveonger.common.user.entity;
 
-import com.cecbrain.omm.mybatis.entity.BaseEntity;
+import com.striveonger.common.mybatis.entity.BaseEntity;
 import com.striveonger.common.core.utils.JacksonUtils;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -31,7 +31,7 @@ public class Users extends BaseEntity {
     private String email;
 
     @Schema(name = "手机号码")
-    private String telNumber;
+    private String tel;
 
     @Schema(name = "用户性别（1男 2女 0未知）")
     private Boolean sex;
@@ -77,13 +77,15 @@ public class Users extends BaseEntity {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getTelNumber() {
-        return telNumber;
+
+    public String getTel() {
+        return tel;
     }
 
-    public void setTelNumber(String telNumber) {
-        this.telNumber = telNumber;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
+
     public Boolean getSex() {
         return sex;
     }
