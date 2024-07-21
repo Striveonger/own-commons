@@ -2,7 +2,7 @@ package com.striveonger.common.user.mapper;
 
 
 import com.mybatisflex.core.BaseMapper;
-import com.striveonger.common.user.entity.Users;
+import com.striveonger.common.user.entity.User;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.striveonger.common.user.entity.Users;
  * @author Mr.Lee
  * @since 2022-10-30
  */
-public interface UsersMapper extends BaseMapper<Users> {
+public interface UserMapper extends BaseMapper<User> {
 
 }

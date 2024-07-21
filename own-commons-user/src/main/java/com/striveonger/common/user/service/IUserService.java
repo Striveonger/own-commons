@@ -2,7 +2,7 @@ package com.striveonger.common.user.service;
 
 
 import com.mybatisflex.core.service.IService;
-import com.striveonger.common.user.entity.Users;
+import com.striveonger.common.user.entity.User;
 
 /**
  * <p>
@@ -12,6 +12,6 @@ import com.striveonger.common.user.entity.Users;
  * @author Mr.Lee
  * @since 2022-10-30
  */
-public interface IUsersService extends IService<Users> {
+public interface IUserService extends IService<User> {
 
 }

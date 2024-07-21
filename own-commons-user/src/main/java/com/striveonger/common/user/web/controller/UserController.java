@@ -5,8 +5,8 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.Dict;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.striveonger.common.core.utils.MarkGenerate;
-import com.striveonger.common.user.entity.Users;
-import com.striveonger.common.user.service.IUsersService;
+import com.striveonger.common.user.entity.User;
+import com.striveonger.common.user.service.IUserService;
 import com.striveonger.common.user.web.vo.UserRegisterVo;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
@@ -36,7 +36,7 @@ public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Resource
-    private IUsersService usersService;
+    private IUserService usersService;
 
     @Resource
     private PasswordEncoder encoder;
@@ -48,17 +48,16 @@ public class UserController {
     public Result register(UserRegisterVo vo) {
         synchronized (vo.toString().intern()) {
             // 1. 检查用户名和邮箱是否已占用
-            QueryWrapper wrapper = QueryWrapper.create().where(Users::getUsername).eq(vo.getUsername())
-                                                        .or(Users::getEmail).eq(vo.getEmail());
+            QueryWrapper wrapper = QueryWrapper.create().where(User::getUsername).eq(vo.getUsername())
+                                                        .or(User::getEmail).eq(vo.getEmail());
             long count = usersService.count(wrapper);
             if (count > 0) {
-                throw new CustomException(ResultStatus.FAIL, "注册用户失败");
+                throw new CustomException(ResultStatus.NON_SUPPORT, "用户已存在");
             }
 
             // 2. 落库
             String id = MarkGenerate.build(vo.getUsername(), vo.getEmail());
-
-            Users user = new Users();
+            User user = new User();
             user.setId(id);
             user.setUsername(vo.getUsername());
             // 3. 密码加密存储
@@ -78,9 +77,9 @@ public class UserController {
      */
     @PostMapping("/login")
     public Result login(String username, String password) {
-        Users hold = usersService.getOne(QueryWrapper.create().where(Users::getUsername).eq(username));
+        User hold = usersService.getOne(QueryWrapper.create().where(User::getUsername).eq(username));
         if (hold == null) {
-            return Result.status(ResultStatus.NOT_FOUND).message("用户名错误");
+            return Result.status(ResultStatus.NOT_FOUND).message("用户不存在");
         }
         String encode = encoder.encode(password);
         if (encode.equals(hold.getPassword())) {
