@@ -40,11 +40,4 @@ public class UserAutoConfiguration {
         };
     }
 
-    // @Bean
-    // @ConditionalOnProperty(name = "own.auth.whitelist", matchIfMissing = true)
-    // public WhitelistConfig whitelist() {
-    //     WhitelistConfig config = new WhitelistConfig();
-    //     return
-    // }
-
 }

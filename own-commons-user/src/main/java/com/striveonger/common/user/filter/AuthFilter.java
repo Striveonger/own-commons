@@ -41,7 +41,10 @@ public class AuthFilter implements Filter {
     private final WhitelistConfig whitelist;
 
     public AuthFilter(WhitelistConfig whitelist) {
-        this.whitelist = whitelist;
+        this.whitelist = whitelist == null ? WhitelistConfig.create() : whitelist;
+        // 配置User默认的白名单
+        this.whitelist.addWhitelist("/user/login");
+        this.whitelist.addWhitelist("/user/register");
     }
 
 

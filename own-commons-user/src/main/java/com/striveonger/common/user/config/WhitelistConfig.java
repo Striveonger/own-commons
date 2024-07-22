@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,17 +18,25 @@ import java.util.Set;
 public class WhitelistConfig {
     private final Logger log = LoggerFactory.getLogger(WhitelistConfig.class);
 
-    private Set<String> whitelist;
+    private final Set<String> whitelist = new HashSet<>();
 
     public Set<String> getWhitelist() {
         return whitelist;
     }
 
     public void setWhitelist(Set<String> whitelist) {
-        this.whitelist = whitelist;
+        this.whitelist.addAll(whitelist);
+    }
+
+    public void addWhitelist(String path) {
+        this.whitelist.add(path);
     }
 
     public boolean contains(String uri) {
         return whitelist.contains(uri);
+    }
+
+    public static WhitelistConfig create() {
+        return new WhitelistConfig();
     }
 }
