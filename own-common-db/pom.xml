@@ -7,41 +7,42 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>own-commons-user</artifactId>
+    <artifactId>own-common-db</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-commons-user</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>own-commons-db</name>
 
     <dependencies>
         <dependency>
             <groupId>com.striveonger.common</groupId>
-            <artifactId>own-commons-web</artifactId>
+            <artifactId>own-common-core</artifactId>
         </dependency>
 
+        <!-- DataBase -->
         <dependency>
-            <groupId>com.striveonger.common</groupId>
-            <artifactId>own-commons-db</artifactId>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-processor</artifactId>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot3-starter</artifactId>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-codegen</artifactId>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
 
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
