@@ -27,8 +27,7 @@
         <spring-boot.version>3.3.1</spring-boot.version>
         <hutool.version>5.8.29</hutool.version>
         <sa-token.version>1.38.0</sa-token.version>
-        <mybatis-flex.version>1.7.5</mybatis-flex.version>
-        <mybatis-spring.version>3.0.3</mybatis-spring.version>
+        <mybatis-flex.version>1.9.3</mybatis-flex.version>
         <freemarker.version>2.3.31</freemarker.version>
         <mysql-connector.version>8.0.30</mysql-connector.version>
         <knife4j.version>4.4.0</knife4j.version>
@@ -123,20 +122,8 @@
             <!-- Mybatis 依赖配置 -->
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-spring-boot-starter</artifactId>
+                <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
                 <version>${mybatis-flex.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.mybatis</groupId>
-                        <artifactId>mybatis-spring</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- fix bug https://stackoverflow.com/questions/78682673/invalid-value-type-for-attribute-factorybeanobjecttype-java-lang-string-in-sp -->
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-                <version>${mybatis-spring.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.mybatis-flex</groupId>
