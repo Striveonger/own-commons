@@ -49,6 +49,7 @@
         <module>own-common-web</module>
         <module>own-common-db</module>
         <module>own-common-user</module>
+        <module>own-common-store</module>
     </modules>
 
     <dependencyManagement>

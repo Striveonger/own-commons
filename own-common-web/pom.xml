@@ -10,7 +10,7 @@
     <artifactId>own-common-web</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-commons-web</name>
+    <name>own-common-web</name>
 
     <dependencies>
         <dependency>

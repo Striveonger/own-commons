@@ -11,8 +11,6 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.striveonger.common.core.constant.ResultStatus;
-import com.striveonger.common.core.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,7 +83,7 @@ public class JacksonUtils {
         return mapper;
     }
 
-    public static JsonNode readJsonNode(String props) {
+    public static JsonNode toJsonNode(String props) {
         try {
             return mapper.readTree(props);
         } catch (JsonProcessingException e) {
@@ -95,8 +93,12 @@ public class JacksonUtils {
         return null;
     }
 
-    public static ObjectNode readObjectNode(String props) {
-        JsonNode node = readJsonNode(props);
+    public static JsonNode toJsonNode(Object object) {
+        return mapper.valueToTree(object);
+    }
+
+    public static ObjectNode toObjectNode(String props) {
+        JsonNode node = toJsonNode(props);
         if (node instanceof ObjectNode object) {
             return object;
         }
@@ -104,8 +106,8 @@ public class JacksonUtils {
         return null;
     }
 
-    public static ArrayNode readArrayNode(String props) {
-        JsonNode node = readJsonNode(props);
+    public static ArrayNode toArrayNode(String props) {
+        JsonNode node = toJsonNode(props);
         if (node instanceof ArrayNode array) {
             return array;
         }

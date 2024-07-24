@@ -10,7 +10,7 @@
     <artifactId>own-common-db</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-commons-db</name>
+    <name>own-common-db</name>
 
     <dependencies>
         <dependency>

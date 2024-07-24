@@ -10,7 +10,7 @@
     <artifactId>own-common-user</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-commons-user</name>
+    <name>own-common-user</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
