@@ -1,5 +1,6 @@
 package com.striveonger.common.user.entity;
 
+import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.Table;
 import com.striveonger.common.mybatis.entity.BaseEntity;
 import com.striveonger.common.core.utils.JacksonUtils;
@@ -14,10 +15,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @since 2022-10-30
  */
 @Schema(name = "Users对象", description = "用户表")
-@Table("users")
-public class User extends BaseEntity {
+@Table("t_user")
+public class UserEntity extends BaseEntity {
 
     @Schema(name = "用户ID")
+    @Id
     private String id;
 
     @Schema(name = "用户账号")

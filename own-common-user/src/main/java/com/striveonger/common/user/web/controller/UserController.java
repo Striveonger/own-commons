@@ -5,8 +5,8 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.Dict;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.striveonger.common.core.utils.MarkGenerate;
-import com.striveonger.common.user.entity.User;
-import com.striveonger.common.user.service.IUserService;
+import com.striveonger.common.user.entity.UserEntity;
+import com.striveonger.common.user.service.UserService;
 import com.striveonger.common.user.web.vo.UserRegisterVo;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
@@ -36,7 +36,7 @@ public class UserController {
     private final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Resource
-    private IUserService usersService;
+    private UserService usersService;
 
     @Resource
     private PasswordEncoder encoder;
@@ -48,8 +48,8 @@ public class UserController {
     public Result register(UserRegisterVo vo) {
         synchronized (vo.toString().intern()) {
             // 1. 检查用户名和邮箱是否已占用
-            QueryWrapper wrapper = QueryWrapper.create().where(User::getUsername).eq(vo.getUsername())
-                                                        .or(User::getEmail).eq(vo.getEmail());
+            QueryWrapper wrapper = QueryWrapper.create().where(UserEntity::getUsername).eq(vo.getUsername())
+                                                        .or(UserEntity::getEmail).eq(vo.getEmail());
             long count = usersService.count(wrapper);
             if (count > 0) {
                 throw new CustomException(ResultStatus.NON_SUPPORT, "用户已存在");
@@ -57,7 +57,7 @@ public class UserController {
 
             // 2. 落库
             String id = MarkGenerate.build(vo.getUsername(), vo.getEmail());
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setId(id);
             user.setUsername(vo.getUsername());
             // 3. 密码加密存储
@@ -77,7 +77,7 @@ public class UserController {
      */
     @PostMapping("/login")
     public Result login(String username, String password) {
-        User hold = usersService.getOne(QueryWrapper.create().where(User::getUsername).eq(username));
+        UserEntity hold = usersService.getOne(QueryWrapper.create().where(UserEntity::getUsername).eq(username));
         if (hold == null) {
             return Result.status(ResultStatus.NOT_FOUND).message("用户不存在");
         }
@@ -90,7 +90,6 @@ public class UserController {
         }
         return Result.fail().message("密码错误");
     }
-
 
     /**
      * 用户登出

@@ -1,8 +1,8 @@
 -- ----------------------------
--- 1. 用户表 (担心user会是关键字, 就用 'users' 吧)
+-- 1. 用户表 (担心user会是关键字, 就用 't_user' 吧)
 -- ----------------------------
--- drop table if exists users;
-create table if not exists users (
+-- drop table if exists t_user;
+create table if not exists t_user (
     id            varchar(50)    not null       comment '用户ID',
     username      varchar(30)    not null       comment '用户账号',
     password      varchar(255)   not null       comment '密码',
@@ -16,5 +16,5 @@ create table if not exists users (
     update_time   datetime       default now()  comment '更新时间',
     deleted       tinyint(1)     default 0      comment '删除标志(0否 1是)',
     primary key (id)
-    ) engine = innodb comment = '用户表';
-create unique index users_username_index on users (username);
+) engine = innodb comment = '用户表';
+create unique index t_user_username_index on t_user (username);

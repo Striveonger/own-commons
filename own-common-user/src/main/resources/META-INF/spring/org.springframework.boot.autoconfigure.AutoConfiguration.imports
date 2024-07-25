@@ -1,6 +1,6 @@
 com.striveonger.common.user.config.UserAutoConfiguration
 com.striveonger.common.user.config.WhitelistConfig
 com.striveonger.common.user.filter.AuthFilter
-com.striveonger.common.user.service.impl.UserServiceImpl
+com.striveonger.common.user.service.UserService
 com.striveonger.common.user.web.controller.UserController
 com.striveonger.common.user.web.controller.TestController
