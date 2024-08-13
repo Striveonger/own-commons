@@ -19,8 +19,17 @@ public enum RegularVerify {
         this.pattern = Pattern.compile(pattern);
     }
 
-    public boolean verify(String s) {
-        return this.pattern.matcher(s).matches();
+    public boolean verify(Object o) {
+        String str;
+        if (o instanceof String s) {
+            str = s;
+        } else {
+            if (o == null) {
+                return false;
+            }
+            str = String.valueOf(o);
+        }
+        return this.pattern.matcher(str).matches();
     }
 
 }

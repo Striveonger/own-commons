@@ -124,6 +124,11 @@ public class Result implements Serializable {
         return this;
     }
 
+    public Result show(boolean show) {
+        this.show = show;
+        return this;
+    }
+
     public <T> Result data(T data) {
         this.data = data;
         return this;

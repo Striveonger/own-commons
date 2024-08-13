@@ -23,7 +23,7 @@ public class WebExceptionHandler {
     @ExceptionHandler(CustomException.class)
     public Result customExceptionHandler(CustomException e, HttpServletRequest request) {
         log.error(e.getMessage(), e);
-        return Result.status(e.getStatus()).message(e.getMessage());
+        return Result.status(e.getStatus()).message(e.getMessage()).show(e.getStatus().getShow());
     }
 
     @ResponseBody
