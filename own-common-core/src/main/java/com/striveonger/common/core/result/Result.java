@@ -28,6 +28,12 @@ public class Result implements Serializable {
     private String code;
 
     /**
+     * 响应状态
+     */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean show;
+
+    /**
      * 响应时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
@@ -38,6 +44,9 @@ public class Result implements Serializable {
      */
     private String message;
 
+    /**
+     * 用户前端是否显示
+     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
@@ -107,6 +116,11 @@ public class Result implements Serializable {
 
     public Result message(String message) {
         this.message = message;
+        return this;
+    }
+
+    public Result show() {
+        this.show = true;
         return this;
     }
 

@@ -14,7 +14,14 @@ public enum FileType {
     PNG      ("png",       "image",      true),
     GIF      ("gif",       "image",      true),
     MP3      ("mp3",       "audio",      true),
-    MP4      ("mp4",       "video",      true)
+    MP4      ("mp4",       "video",      true),
+    DOC      ("doc",       "doc",      false),
+    DOCX     ("docx",      "docx" ,    false),
+    XLS      ("xls",       "xls",      false),
+    XLSX     ("xlsx",      "xlsx",     false),
+    PPT      ("ppt",       "ppt",      false),
+    PPTX     ("pptx",      "pptx",     false),
+    TXT      ("txt",       "txt",      false),
     ;
     /**
      * 文件类型

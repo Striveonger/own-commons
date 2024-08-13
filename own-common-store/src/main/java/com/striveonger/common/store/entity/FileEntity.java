@@ -33,6 +33,16 @@ public class FileEntity extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String hashcode;
 
+    public FileEntity() { }
+
+    public FileEntity(String id, String filename, String filepath, String filetype, String hashcode) {
+        this.id = id;
+        this.filename = filename;
+        this.filepath = filepath;
+        this.filetype = filetype;
+        this.hashcode = hashcode;
+    }
+
     public String getId() {
         return id;
     }

@@ -32,6 +32,10 @@ public enum FileHash {
         return null;
     }
 
+    public String code(byte[] bytes) {
+        return code(new ByteArrayInputStream(bytes));
+    }
+
     public String code(InputStream input) {
         try (input) {
             MessageDigest digest = MessageDigest.getInstance(this.name);

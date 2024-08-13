@@ -45,10 +45,16 @@ public enum ResultStatus {
 
     private final int state;
     private final String message;
+    private boolean show = false;
 
     ResultStatus(int state, String message) {
         this.state = state;
         this.message = message;
+    }
+
+    public ResultStatus show() {
+        this.show = true;
+        return this;
     }
 
     public int getState() {
@@ -61,5 +67,9 @@ public enum ResultStatus {
 
     public String getMessage() {
         return message;
+    }
+
+    public boolean getShow() {
+        return show;
     }
 }

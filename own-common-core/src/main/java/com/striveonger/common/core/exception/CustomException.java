@@ -31,6 +31,11 @@ public class CustomException extends RuntimeException {
         this.message = message;
     }
 
+    public CustomException show() {
+        this.status.show();
+        return this;
+    }
+
     public ResultStatus getStatus() {
         return status;
     }
