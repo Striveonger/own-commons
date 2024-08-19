@@ -1,6 +1,7 @@
 package com.striveonger.common.mybatis.entity;
 
 import com.mybatisflex.annotation.Column;
+import com.striveonger.common.core.utils.JacksonUtils;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -43,4 +44,10 @@ public class BaseEntity implements Serializable {
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
+
+    @Override
+    public String toString() {
+        return JacksonUtils.toJSONString(this);
+    }
+
 }

@@ -113,9 +113,4 @@ public class UserEntity extends BaseEntity {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return JacksonUtils.toJSONString(this);
-    }
-
 }
