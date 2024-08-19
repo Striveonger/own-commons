@@ -1,4 +1,4 @@
-package com.striveonger.common.web.handler;
+package com.striveonger.common.leaf.handler;
 
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;

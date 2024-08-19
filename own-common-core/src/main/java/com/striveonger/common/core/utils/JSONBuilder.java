@@ -15,11 +15,6 @@ import java.util.Map;
 public class JSONBuilder {
     private final Logger log = LoggerFactory.getLogger(JSONBuilder.class);
 
-    /**
-     * TODO: 基于对 ObjectMapper 和 ObjectNode的了解, 重写JsonBuilder
-     * https://blog.csdn.net/qq_38688267/article/details/124614982
-     */
-
     private ObjectNode root;
 
     private String split = "\\.";
@@ -69,17 +64,6 @@ public class JSONBuilder {
         return this;
     }
 
-    private void put(ObjectNode node, String key, Object value) {
-        if (node == null) {
-        } else if(value == null) {
-            node.putNull(key);
-        } else {
-            JsonNode val = JacksonUtils.toJsonNode(value);
-            node.set(key, val);
-        }
-    }
-
-
     public ObjectNode getRootNode() {
         return root;
     }
@@ -91,5 +75,15 @@ public class JSONBuilder {
 
     public String toJSONString() {
         return toString();
+    }
+
+    private void put(ObjectNode node, String key, Object value) {
+        if (node == null) {
+        } else if(value == null) {
+            node.putNull(key);
+        } else {
+            JsonNode val = JacksonUtils.toJsonNode(value);
+            node.set(key, val);
+        }
     }
 }

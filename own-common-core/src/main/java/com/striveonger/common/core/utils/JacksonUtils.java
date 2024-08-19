@@ -25,8 +25,7 @@ import java.util.Map;
 public class JacksonUtils {
 
     private static final Logger log = LoggerFactory.getLogger(JacksonUtils.class);
-    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {
-    };
+    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {};
     private static final ObjectMapper mapper;
 
     static {

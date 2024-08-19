@@ -1,4 +1,4 @@
-package com.striveonger.common.web.knife4j;
+package com.striveonger.common.leaf.knife4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

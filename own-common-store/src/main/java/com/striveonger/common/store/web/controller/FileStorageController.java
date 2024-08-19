@@ -55,13 +55,6 @@ public class FileStorageController {
             log.info("upload filename: {}", filename);
             try {
                 String id = "";
-                // ID id = null; int retry = 3;
-                // do {
-                //     id = idGenRemoteService.acquireDisrupt(FILE_STORAGE.getKey());
-                // } while (retry-- > 0 && Status.exception(id));
-                // if (Status.exception(id)) {
-                //     return Result.fail().message("User ID create failure");
-                // }
 
                 // 1. generate file info
                 String filetype = StrUtil.subAfter(filename, '.', true);

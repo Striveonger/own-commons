@@ -1,2 +1,2 @@
-com.striveonger.common.web.handler.WebExceptionHandler
-com.striveonger.common.web.knife4j.OpenAPIConfig
+com.striveonger.common.leaf.handler.WebExceptionHandler
+com.striveonger.common.leaf.knife4j.OpenAPIConfig

@@ -1,9 +1,10 @@
 package com.striveonger.common.core.constant;
 
 /**
+ * 通用状态码 <br/>
+ * 如有扩展需求, 继承该枚举类, 在所需扩展类状态码数字 * 100 + 自定义状态码
  * @author Mr.Lee
- * @description: 通用状态码
- * @date 2022-11-08 22:05
+ * @since 2022-11-08 22:05
  */
 public enum ResultStatus {
 
@@ -52,9 +53,8 @@ public enum ResultStatus {
         this.message = message;
     }
 
-    public ResultStatus show() {
+    public void show() {
         this.show = true;
-        return this;
     }
 
     public int getState() {

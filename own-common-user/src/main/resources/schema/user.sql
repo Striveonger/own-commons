@@ -1,5 +1,5 @@
 -- ----------------------------
--- 1. 用户表 (担心user会是关键字, 就用 't_user' 吧)
+-- 用户表 (担心user会是关键字, 就用 't_user' 吧)
 -- ----------------------------
 -- drop table if exists t_user;
 create table if not exists t_user (

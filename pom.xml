@@ -46,10 +46,11 @@
 
     <modules>
         <module>own-common-core</module>
-        <module>own-common-web</module>
         <module>own-common-db</module>
-        <module>own-common-user</module>
+        <module>own-common-leaf</module>
         <module>own-common-store</module>
+        <module>own-common-user</module>
+        <module>own-common-web</module>
     </modules>
 
     <dependencyManagement>
