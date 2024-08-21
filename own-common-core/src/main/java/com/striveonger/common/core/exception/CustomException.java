@@ -11,7 +11,7 @@ public class CustomException extends RuntimeException {
 
     private final ResultStatus status;
 
-    private final String message;
+    private String message;
 
     public CustomException(ResultStatus status) {
         super(status.getMessage());
@@ -31,11 +31,6 @@ public class CustomException extends RuntimeException {
         this.message = message;
     }
 
-    public CustomException show() {
-        this.status.show();
-        return this;
-    }
-
     public ResultStatus getStatus() {
         return status;
     }
@@ -43,5 +38,23 @@ public class CustomException extends RuntimeException {
     @Override
     public String getMessage() {
         return message;
+    }
+
+    public static CustomException create(ResultStatus status) {
+        return new CustomException(status);
+    }
+
+    public static CustomException create(String message) {
+        return new CustomException(message);
+    }
+
+    public CustomException message(String message) {
+        this.message = message;
+        return this;
+    }
+
+    public CustomException show() {
+        this.status.show();
+        return this;
     }
 }
