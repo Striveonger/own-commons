@@ -113,4 +113,13 @@ public class JacksonUtils {
         log.warn("Jackson Convert ArrayNode error, props is not ArrayNode");
         return null;
     }
+
+    public static ObjectNode createObjectNode() {
+        return mapper.createObjectNode();
+    }
+
+    public static ArrayNode createArrayNode() {
+        return mapper.createArrayNode();
+    }
+
 }

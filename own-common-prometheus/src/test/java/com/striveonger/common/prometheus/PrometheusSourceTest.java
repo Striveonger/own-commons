@@ -36,7 +36,7 @@ public class PrometheusSourceTest extends TestCase {
         for (Pair<String, String> pair : pairs) {
             String objectType = pair.getKey();
             String objectName = pair.getValue();
-            List<ObjectNode> list = prometheus.getMetaDataList(List.of(Pair.of("object_name", objectName), Pair.of("object_type", objectType)));
+            List<ObjectNode> list = prometheus.metadatas(List.of(Pair.of("object_name", objectName), Pair.of("object_type", objectType)));
             List<Row> part = list.stream().map(x -> {
                 String metric = x.get("metric").asText();
                 String type = x.get("type").asText();
@@ -115,5 +115,19 @@ public class PrometheusSourceTest extends TestCase {
         public String getIndicatorType() {
             return indicatorType;
         }
+    }
+
+    public void test2() {
+        PrometheusConfig config = new PrometheusConfig();
+        config.setHost("10.13.144.116");
+        config.setPort("9090");
+        config.setTimeout(5000);
+        PrometheusSource prometheus = PrometheusSource.Builder.builder().config(config).build();
+
+        List<ObjectNode> targets = prometheus.targets();
+        System.out.println(targets);
+
+        List<ObjectNode> result = prometheus.query("{job='postgres'}");
+        System.out.println(result);
     }
 }
