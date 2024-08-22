@@ -75,48 +75,6 @@ public class PrometheusSourceTest extends TestCase {
         FileUtil.writeBytes(bytes, "/Users/striveonger/temp/metrics.xlsx");
     }
 
-    public static class Row {
-        private final String name;
-        private final String nameCn;
-        private final String type;
-        private final String help;
-        private final String objectType;
-        private final String indicatorType;
-
-        public Row(String name, String nameCn, String type, String help, String objectType, String indicatorType) {
-            this.name = name;
-            this.nameCn = nameCn;
-            this.type = type;
-            this.help = help;
-            this.objectType = objectType;
-            this.indicatorType = indicatorType;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getNameCn() {
-            return nameCn;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public String getHelp() {
-            return help;
-        }
-
-        public String getObjectType() {
-            return objectType;
-        }
-
-        public String getIndicatorType() {
-            return indicatorType;
-        }
-    }
-
     public void test2() {
         PrometheusConfig config = new PrometheusConfig();
         config.setHost("10.13.144.116");
@@ -129,5 +87,48 @@ public class PrometheusSourceTest extends TestCase {
 
         List<ObjectNode> result = prometheus.query("{job='postgres'}");
         System.out.println(result);
+    }
+
+}
+
+class Row {
+    private final String name;
+    private final String nameCn;
+    private final String type;
+    private final String help;
+    private final String objectType;
+    private final String indicatorType;
+
+    public Row(String name, String nameCn, String type, String help, String objectType, String indicatorType) {
+        this.name = name;
+        this.nameCn = nameCn;
+        this.type = type;
+        this.help = help;
+        this.objectType = objectType;
+        this.indicatorType = indicatorType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNameCn() {
+        return nameCn;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getHelp() {
+        return help;
+    }
+
+    public String getObjectType() {
+        return objectType;
+    }
+
+    public String getIndicatorType() {
+        return indicatorType;
     }
 }
