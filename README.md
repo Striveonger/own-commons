@@ -1,8 +1,18 @@
 # own-commons
 自己常用的一些工具包
 
-## 1. own-commons-core
-自己常用的一些工具类
-
-## 2. own-commons-db
-自己常用的一些dao层工具类
+## 1. own-common-core
+包含了一些常用的工具类, 如: 统一的返回格式, 基础的错误码定义, 日志打印等... 
+## 2. own-common-db
+包含了一些数据库相关的工具类, 如: 数据库连接池, 数据库操作, 数据库事务等...
+## 3. own-common-leaf
+包含了一些分布式ID生成器相关的工具类, 如: Snowflake, 美团雪花算法等...
+## 4. own-common-store
+包含了一些存储相关的工具类, 如: MiniO, 阿里OSS, 腾讯云OSS等...
+## 5. own-common-third
+包含了一些第三方工具类, 如: Prometheus, Kubernetes, Redis等...
+> 不在配置中引入相关配置, 对应工具类, 不会加载到SpringIOC容器中, 可以根据需要引入相关配置
+## 6. own-common-user
+包含了一些用户相关的工具类, 如: 密码加密, 密码校验等...
+## 7. own-common-web
+包含了一些Web相关的工具类, 如: 验证码, 图片验证码等...

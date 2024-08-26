@@ -34,6 +34,7 @@
         <hikari.version>5.0.1</hikari.version>
         <redisson.version>3.22.1</redisson.version>
         <guava.version>31.1-jre</guava.version>
+        <kubernetes-client.version>20.0.1</kubernetes-client.version>
         <junit.version>5.9.1</junit.version>
         <junit.platform.version>1.9.1</junit.platform.version>
         <mockito.version>4.6.1</mockito.version>
@@ -48,7 +49,7 @@
         <module>own-common-core</module>
         <module>own-common-db</module>
         <module>own-common-leaf</module>
-        <module>own-common-prometheus</module>
+        <module>own-common-third</module>
         <module>own-common-store</module>
         <module>own-common-user</module>
         <module>own-common-web</module>
@@ -105,6 +106,13 @@
                 <version>${guava.version}</version>
             </dependency>
 
+            <!-- Kubernetes Client -->
+            <dependency>
+                <groupId>io.kubernetes</groupId>
+                <artifactId>client-java</artifactId>
+                <version>${kubernetes-client.version}</version>
+            </dependency>
+
             <!--Sa Token 配置-->
             <dependency>
                 <groupId>cn.dev33</groupId>
@@ -138,7 +146,6 @@
                 <artifactId>mybatis-flex-codegen</artifactId>
                 <version>${mybatis-flex.version}</version>
             </dependency>
-
 
             <!-- MySQL 驱动 -->
             <dependency>

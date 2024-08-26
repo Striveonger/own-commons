@@ -6,7 +6,6 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ContainerNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
@@ -21,8 +20,8 @@ import java.util.stream.Collectors;
  * @author Mr.Lee
  * @since 2024-08-21 13:55
  */
-public class PrometheusSource {
-    private final Logger log = LoggerFactory.getLogger(PrometheusSource.class);
+public class PrometheusHolds {
+    private final Logger log = LoggerFactory.getLogger(PrometheusHolds.class);
 
     /**
      * 配置类
@@ -39,7 +38,7 @@ public class PrometheusSource {
      */
     // todo 后面再实现吧...
     // private HttpClient client;
-    private PrometheusSource(PrometheusConfig config) {
+    private PrometheusHolds(PrometheusConfig config) {
         this.config = config;
         this.host = "http://" + config.getHost() + ":" + config.getPort();
     }
@@ -131,9 +130,9 @@ public class PrometheusSource {
             return this;
         }
 
-        public PrometheusSource build() {
+        public PrometheusHolds build() {
             if (Objects.nonNull(this.config)) {
-                return new PrometheusSource(config);
+                return new PrometheusHolds(config);
             }
             throw CustomException.create(ResultStatus.NON_SUPPORT).message("缺少必要的配置项").show();
         }
