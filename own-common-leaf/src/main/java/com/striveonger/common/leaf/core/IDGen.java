@@ -10,6 +10,12 @@ import com.striveonger.common.core.exception.CustomException;
 public interface IDGen {
     // private final Logger log = LoggerFactory.getLogger(IDGen.class);
 
+    ID next();
+
+    ID next(String tag);
+
+
+
     static Builder builder() {
         return new Builder();
     }

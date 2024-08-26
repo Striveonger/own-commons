@@ -9,15 +9,15 @@ package com.striveonger.common.core.constant;
 public enum ResultStatus {
 
     /**
-     * 请求成功标识
-     */
-    SUCCESS(200, "Success"),
-
-    /**
-     * 默认请求失败标识
+     * 默认请求失败标识<br/>
      * 没有准确定义的错误信息, 可以使用
      */
     FAIL(0, "Fail"),
+
+    /**
+     * 请求成功标识
+     */
+    SUCCESS(200, "Success"),
 
     /**
      * 资源找不到的错误标识
