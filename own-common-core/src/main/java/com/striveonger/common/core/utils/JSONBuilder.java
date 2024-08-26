@@ -1,11 +1,14 @@
 package com.striveonger.common.core.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author Mr.Lee
@@ -17,7 +20,7 @@ public class JSONBuilder {
 
     private ObjectNode root;
 
-    private String split = "\\.";
+    String split = "\\.";
 
     private JSONBuilder() {
         root = JacksonUtils.toObjectNode("{}");
@@ -33,20 +36,12 @@ public class JSONBuilder {
     }
 
     private JSONBuilder(String split, Map<String, Object> root) {
-        this.split = split;
-        this.root = JacksonUtils.toObjectNode(JacksonUtils.toJSONString(root));
-    }
-
-    public static JSONBuilder builder() {
-        return new JSONBuilder();
-    }
-
-    public static JSONBuilder builder(String split) {
-        return new JSONBuilder(split);
-    }
-
-    public static JSONBuilder builder(String split, Map<String, Object> root) {
-        return new JSONBuilder(split, root);
+        if (StrUtil.isNotBlank(split)) {
+            this.split = split;
+        }
+        if (Objects.nonNull(root)) {
+            this.root = Optional.ofNullable(JacksonUtils.toJSONString(root)).map(JacksonUtils::toObjectNode).orElse(JacksonUtils.toObjectNode("{}"));
+        }
     }
 
     public JSONBuilder reset() {
@@ -85,5 +80,17 @@ public class JSONBuilder {
             JsonNode val = JacksonUtils.toJsonNode(value);
             node.set(key, val);
         }
+    }
+
+    static JSONBuilder builder() {
+        return new JSONBuilder();
+    }
+
+    static JSONBuilder builder(String split) {
+        return new JSONBuilder(split);
+    }
+
+    static JSONBuilder builder(String split, Map<String, Object> root) {
+        return new JSONBuilder(split, root);
     }
 }

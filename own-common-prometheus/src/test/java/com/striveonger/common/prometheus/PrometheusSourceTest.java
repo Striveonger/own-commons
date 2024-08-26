@@ -27,10 +27,14 @@ public class PrometheusSourceTest extends TestCase {
         List<Row> rows = new ArrayList<>();
 
         List<Pair<String, String>> pairs = List.of(
-                Pair.of("通用基础套件", "Nacos注册中心"),
-                Pair.of("通用基础套件", "达梦数据库"),
-                Pair.of("通用基础套件", "Redis内存数据库"),
-                Pair.of("通用基础套件", "Postgresql")
+                // Pair.of("通用基础套件", "Nacos注册中心"),
+                // Pair.of("通用基础套件", "达梦数据库"),
+                // Pair.of("通用基础套件", "Redis内存数据库"),
+                // Pair.of("通用基础套件", "Postgresql")
+                Pair.of("数据中台运营", "监控数据采集"),
+                Pair.of("数据中台运营", "告警管理"),
+                Pair.of("数据中台运营", "多维视图展现"),
+                Pair.of("数据中台运营", "智能运维")
         );
 
         for (Pair<String, String> pair : pairs) {
@@ -72,7 +76,7 @@ public class PrometheusSourceTest extends TestCase {
         byte[] bytes = bos.toByteArray();
         bos.close();
         workbook.close();
-        FileUtil.writeBytes(bytes, "/Users/striveonger/temp/metrics.xlsx");
+        FileUtil.writeBytes(bytes, "/Users/striveonger/temp/metrics1.xlsx");
     }
 
     public void test2() {

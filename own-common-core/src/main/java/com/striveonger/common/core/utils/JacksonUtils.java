@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.jayway.jsonpath.JsonPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -120,6 +121,30 @@ public class JacksonUtils {
 
     public static ArrayNode createArrayNode() {
         return mapper.createArrayNode();
+    }
+
+    public static <T> T eval(JsonNode node, String path) {
+        return eval(node.toString(), path);
+    }
+
+    public static <T> T eval(String json, String path) {
+        return JsonPath.read(json, path);
+    }
+
+    public static JSONBuilder builder() {
+        return JSONBuilder.builder();
+    }
+
+    public static JSONBuilder builder(String split) {
+        return JSONBuilder.builder(split);
+    }
+
+    public static JSONBuilder builder(Map<String, Object> root) {
+        return JSONBuilder.builder(null, root);
+    }
+
+    public static JSONBuilder builder(String split, Map<String, Object> root) {
+        return JSONBuilder.builder(split, root);
     }
 
 }

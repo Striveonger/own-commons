@@ -1,5 +1,8 @@
 package com.striveonger.common.core.utils;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Mr.Lee
@@ -43,6 +47,35 @@ public class JacksonTest {
         builder.put("a.x.y.z", map);
 
         System.out.println(builder.getRootNode());
+
+    }
+
+    @Test
+    public void test2() {
+        // https://github.com/json-path/JsonPath 使用文档
+
+        ObjectNode root = JacksonUtils.builder()
+                .put("A.B.C", "1")
+                .put("A.B.D", 2)
+                .put("A.B.E", 3.14)
+                .put("A.B.F", List.of("a", "b", "c")).getRootNode();
+        String x = JacksonUtils.eval(root, "$.A.B.C");
+        System.out.println(x);
+        List<String> eval = JacksonUtils.eval(root, "$.A.B.F[1:]");
+        System.out.println(eval);
+
+        int d = JacksonUtils.eval(root, "$.A.B.D");
+        System.out.println(d);
+        double f = JacksonUtils.eval(root, "$.A.B.E");
+        System.out.println(f);
+
+        ArrayNode array = JacksonUtils.createArrayNode();
+        array.add(root);
+        array.add(root);
+        System.out.println(array);
+
+        List<Double> fs = JacksonUtils.eval(array, "$..A.B.E");
+        System.out.println(fs);
 
     }
 
