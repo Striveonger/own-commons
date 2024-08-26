@@ -1,4 +1,4 @@
-package com.striveonger.common.leaf.core.alloc.model;
+package com.striveonger.common.leaf.core.segment.model;
 
 import java.util.concurrent.atomic.AtomicLong;
 

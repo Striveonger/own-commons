@@ -1,7 +1,4 @@
-package com.striveonger.common.leaf.core.alloc.model;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.striveonger.common.leaf.core.segment.model;
 
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;

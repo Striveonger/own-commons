@@ -1,4 +1,4 @@
-package com.striveonger.common.leaf.core.alloc;
+package com.striveonger.common.leaf.core.segment;
 
 import cn.hutool.core.date.StopWatch;
 import com.striveonger.common.core.constant.ResultStatus;
@@ -6,8 +6,8 @@ import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.leaf.core.ID;
 import com.striveonger.common.leaf.core.IDGen;
 import com.striveonger.common.leaf.core.Status;
-import com.striveonger.common.leaf.core.alloc.model.Segment;
-import com.striveonger.common.leaf.core.alloc.model.SegmentBuffer;
+import com.striveonger.common.leaf.core.segment.model.Segment;
+import com.striveonger.common.leaf.core.segment.model.SegmentBuffer;
 import com.striveonger.common.leaf.entity.AllocEntity;
 import com.striveonger.common.leaf.service.AllocService;
 import org.slf4j.Logger;
@@ -23,8 +23,8 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Mr.Lee
  * @since 2024-08-17 00:28
  */
-public class AllocIDGen implements IDGen {
-    private final Logger log = LoggerFactory.getLogger(AllocIDGen.class);
+public class SegmentIDGen implements IDGen {
+    private final Logger log = LoggerFactory.getLogger(SegmentIDGen.class);
 
     /**
      * IDCache未初始化成功时的异常码
@@ -67,7 +67,7 @@ public class AllocIDGen implements IDGen {
 
     private final AllocService service;
 
-    public AllocIDGen(AllocService service) {
+    public SegmentIDGen(AllocService service) {
         this.service = service;
         // 初始化缓存
         refreshCacheFromDB();
