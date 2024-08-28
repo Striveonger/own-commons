@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.AntPathMatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,22 +19,29 @@ import java.util.Set;
 public class WhitelistConfig {
     private final Logger log = LoggerFactory.getLogger(WhitelistConfig.class);
 
-    private final Set<String> whitelist = new HashSet<>();
+    private final AntPathMatcher matcher = new AntPathMatcher();
 
-    public Set<String> getWhitelist() {
-        return whitelist;
+    private final Set<String> whites = new HashSet<>();
+
+    public Set<String> getWhites() {
+        return whites;
     }
 
-    public void setWhitelist(Set<String> whitelist) {
-        this.whitelist.addAll(whitelist);
+    public void setWhites(Set<String> whites) {
+        this.whites.addAll(whites);
     }
 
-    public void addWhitelist(String path) {
-        this.whitelist.add(path);
+    public void addWhite(String path) {
+        this.whites.add(path);
     }
 
-    public boolean contains(String uri) {
-        return whitelist.contains(uri);
+    public boolean match(String url) {
+        for (String white : whites) {
+            if (matcher.match(white, url)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static WhitelistConfig create() {

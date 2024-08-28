@@ -3,10 +3,8 @@ package com.striveonger.common.user.filter;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.io.IoUtil;
 import com.striveonger.common.core.constant.ResultStatus;
-import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
 import com.striveonger.common.core.utils.JacksonUtils;
-import com.striveonger.common.core.web.SpringContextHolder;
 import com.striveonger.common.user.config.WhitelistConfig;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -14,18 +12,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * @author Mr.Lee
@@ -38,15 +30,14 @@ import java.util.Set;
 public class AuthFilter implements Filter {
     private final Logger log = LoggerFactory.getLogger(AuthFilter.class);
 
-    private final WhitelistConfig whitelist;
+    private final WhitelistConfig config;
 
-    public AuthFilter(WhitelistConfig whitelist) {
-        this.whitelist = whitelist == null ? WhitelistConfig.create() : whitelist;
+    public AuthFilter(WhitelistConfig config) {
+        this.config = Objects.isNull(config) ? WhitelistConfig.create() : config;
         // 配置User默认的白名单
-        this.whitelist.addWhitelist("/user/login");
-        this.whitelist.addWhitelist("/user/register");
+        this.config.addWhite("/user/login");
+        this.config.addWhite("/user/register");
     }
-
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -55,7 +46,7 @@ public class AuthFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        if (whitelist.contains(uri)) {
+        if (config.match(uri)) {
             chain.doFilter(request, response);
         } else {
             if (StpUtil.isLogin()) {
