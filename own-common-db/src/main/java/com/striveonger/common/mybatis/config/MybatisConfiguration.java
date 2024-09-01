@@ -33,9 +33,7 @@ public class MybatisConfiguration implements MyBatisFlexCustomizer {
         // 开启审计功能
         AuditManager.setAuditEnable(true);
         // 设置 SQL 审计收集器
-        AuditManager.setMessageCollector(
-            message -> log.info("{}, {}ms", message.getFullSql(), message.getElapsedTime())
-        );
+        AuditManager.setMessageCollector(message -> log.info("{}, {}ms", message.getFullSql(), message.getElapsedTime()));
 
         config.setLogicDeleteColumn("deleted");
         config.setNormalValueOfLogicDelete(0);

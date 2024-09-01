@@ -1,8 +1,8 @@
 package com.striveonger.common.leaf.core.segment;
 
-import cn.hutool.core.date.StopWatch;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
+import com.striveonger.common.core.utils.Timepiece;
 import com.striveonger.common.leaf.core.ID;
 import com.striveonger.common.leaf.core.IDGen;
 import com.striveonger.common.leaf.core.Status;
@@ -18,7 +18,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 号段分配模式, 生成ID
+ * 号段分配, 生成ID
  *
  * @author Mr.Lee
  * @since 2024-08-17 00:28
@@ -105,7 +105,7 @@ public class SegmentIDGen implements IDGen {
     private void refreshCacheFromDB() {
         log.info("update cache from db");
         // 计时开始～
-        StopWatch sw = new StopWatch();
+        Timepiece timepiece = Timepiece.of("RefreshCacheFromDB");
         try {
             List<String> dbTags = service.listTags();
             if (dbTags == null || dbTags.isEmpty()) {
@@ -139,8 +139,7 @@ public class SegmentIDGen implements IDGen {
         } catch (Exception e) {
             log.warn("update cache from db exception", e);
         } finally {
-            sw.stop();
-            log.info("updateCacheFromDb, total time millis: {}", sw.getTotalTimeMillis());
+            timepiece.show();
         }
     }
 

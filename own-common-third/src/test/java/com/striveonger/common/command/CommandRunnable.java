@@ -61,8 +61,9 @@ public class CommandRunnable {
 
     @Test
     public void test2() throws Exception {
-        Process p = new ProcessBuilder("pwd").start();
-        p.waitFor();
+        Process p = new ProcessBuilder("helm", "list", "-n", "omm").start();
+        int exitCode = p.waitFor();
+        System.out.println("exitCode: " + exitCode);
         byte[] bytes = IoUtil.readBytes(p.getInputStream(), true);
         System.out.println(new String(bytes, StandardCharsets.UTF_8));
     }

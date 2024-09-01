@@ -3,6 +3,7 @@ package com.striveonger.common.leaf.core;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.leaf.core.segment.SegmentIDGen;
+import com.striveonger.common.leaf.core.snowflake.SnowflakeIDGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +15,16 @@ public class FitIDGen implements IDGen {
     private final Logger log = LoggerFactory.getLogger(FitIDGen.class);
 
     private final SegmentIDGen segment;
+    private final SnowflakeIDGen snowflake;
 
     public FitIDGen(SegmentIDGen segment) {
         this.segment = segment;
+        this.snowflake = new SnowflakeIDGen();
     }
 
     @Override
     public ID next() {
-        return null;
+        return snowflake.next();
     }
 
     @Override

@@ -134,7 +134,7 @@ public class PrometheusHolds {
             if (Objects.nonNull(this.config)) {
                 return new PrometheusHolds(config);
             }
-            throw CustomException.create(ResultStatus.NON_SUPPORT).message("缺少必要的配置项").show();
+            throw CustomException.of(ResultStatus.NON_SUPPORT).message("缺少必要的配置项").show();
         }
     }
 }

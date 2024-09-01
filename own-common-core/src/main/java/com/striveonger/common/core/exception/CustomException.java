@@ -40,11 +40,11 @@ public class CustomException extends RuntimeException {
         return message;
     }
 
-    public static CustomException create(ResultStatus status) {
+    public static CustomException of(ResultStatus status) {
         return new CustomException(status);
     }
 
-    public static CustomException create(String message) {
+    public static CustomException of(String message) {
         return new CustomException(message);
     }
 
