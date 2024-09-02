@@ -46,13 +46,13 @@
     </profiles>
 
     <modules>
-        <module>own-common-core</module>
-        <module>own-common-db</module>
-        <module>own-common-leaf</module>
-        <module>own-common-third</module>
-        <module>own-common-store</module>
-        <module>own-common-user</module>
-        <module>own-common-web</module>
+        <module>own-core</module>
+        <module>own-db</module>
+        <module>own-leaf</module>
+        <module>own-third</module>
+        <module>own-store</module>
+        <module>own-user</module>
+        <module>own-web</module>
     </modules>
 
     <dependencyManagement>
@@ -60,17 +60,17 @@
             <!-- own-commons -->
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-common-core</artifactId>
+                <artifactId>own-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-common-web</artifactId>
+                <artifactId>own-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-common-db</artifactId>
+                <artifactId>own-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
