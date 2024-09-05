@@ -1,14 +1,11 @@
 package com.striveonger.common.command;
 
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.util.ByteUtil;
-import org.apache.xmlbeans.impl.common.IOUtil;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -40,7 +37,6 @@ public class CommandRunnable {
         Object o = future.get();
         // System.out.println(o);
         assertEquals(0, exitCode);
-
     }
 
     private static class StreamGobbler implements Runnable {

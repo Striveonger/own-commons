@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.striveonger.common</groupId>
-        <artifactId>own-commons</artifactId>
+        <artifactId>own-parent</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <artifactId>own-user</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-user</name>
+    <name>${project.artifactId}</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,6 +35,13 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.striveonger.common</groupId>
+            <artifactId>own-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

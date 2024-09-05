@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.striveonger.common</groupId>
-        <artifactId>own-commons</artifactId>
+        <artifactId>own-parent</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <artifactId>own-core</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-core</name>
+    <name>${project.artifactId}</name>
 
     <dependencies>
 
@@ -59,12 +59,11 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <!--
+            <groupId>com.striveonger.common</groupId>
+            <artifactId>own-test</artifactId>
             <scope>test</scope>
-            -->
         </dependency>
+
     </dependencies>
 
     <build>

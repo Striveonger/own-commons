@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.striveonger.common</groupId>
-        <artifactId>own-commons</artifactId>
+        <artifactId>own-parent</artifactId>
         <version>1.0.0</version>
     </parent>
 
     <artifactId>own-third</artifactId>
     <packaging>jar</packaging>
 
-    <name>own-third</name>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
@@ -24,12 +24,20 @@
         </dependency>
 
 
+
+        <!-- Test -->
+        <dependency>
+            <groupId>com.striveonger.common</groupId>
+            <artifactId>own-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.29</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
