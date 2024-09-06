@@ -2,10 +2,13 @@ package com.striveonger.common.leaf.core;
 
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
+import com.striveonger.common.leaf.config.LeafConfig;
 import com.striveonger.common.leaf.core.segment.SegmentIDGen;
 import com.striveonger.common.leaf.core.snowflake.SnowflakeIDGen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 /**
  * @author Mr.Lee
@@ -17,9 +20,10 @@ public class FitIDGen implements IDGen {
     private final SegmentIDGen segment;
     private final SnowflakeIDGen snowflake;
 
-    public FitIDGen(SegmentIDGen segment) {
+
+    public FitIDGen(SegmentIDGen segment, SnowflakeIDGen snowflake) {
         this.segment = segment;
-        this.snowflake = new SnowflakeIDGen();
+        this.snowflake = Objects.requireNonNullElseGet(snowflake, SnowflakeIDGen::new);
     }
 
     @Override

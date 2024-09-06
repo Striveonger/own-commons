@@ -1,2 +1,4 @@
 com.striveonger.common.leaf.service.AllocService
+com.striveonger.common.leaf.config.LeafConfig
 com.striveonger.common.leaf.config.LeafAutoConfiguration
+

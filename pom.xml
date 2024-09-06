@@ -10,8 +10,23 @@
     <version>1.0.0</version>
 
     <name>own-parent</name>
-    <url>https://gitee.com/striveonger/own-commons</url>
-    <description>自己常用的一些工具包, 旨在快速搭建自己熟悉可用的后台项目</description>
+    <description>自己常用的一些工具包, 旨在可以快速构建自己熟悉的开发环境.</description>
+    <url>https://github.com/striveonger/own-commons</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Mr.Lee</name>
+            <email>striveonger@163.com</email>
+            <url>https://blog.striveonger.com</url>
+        </developer>
+    </developers>
 
     <properties>
         <!-- Ground Work -->
@@ -21,8 +36,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
-
-        <!-- Libraries -->
 
     </properties>
 

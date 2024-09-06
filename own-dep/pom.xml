@@ -10,7 +10,7 @@
 
     <name>${project.artifactId}</name>
     <description>自己常用的一些工具包, 旨在可以快速构建自己熟悉的开发环境.</description>
-    <url>https://github.com/Striveonger/own-commons</url>
+    <url>https://github.com/striveonger/own-commons</url>
 
     <licenses>
         <license>
@@ -64,22 +64,6 @@
                         <plugin>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-maven-plugin</artifactId>
-                            <configuration>
-                                <image>
-                                    <builder>paketobuildpacks/builder-jammy-tiny:latest</builder>
-                                    <env>
-                                        <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                                    </env>
-                                </image>
-                            </configuration>
-                            <executions>
-                                <execution>
-                                    <id>process-aot</id>
-                                    <goals>
-                                        <goal>process-aot</goal>
-                                    </goals>
-                                </execution>
-                            </executions>
                         </plugin>
                     </plugins>
                 </pluginManagement>
@@ -310,6 +294,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+
         </plugins>
     </build>
 </project>

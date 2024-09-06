@@ -51,12 +51,17 @@ public class SnowflakeIDGen implements IDGen {
     /**
      * 默认的起始时间, 为 2016-07-20 13:14:05+08:00
      */
-    public static long DEFAULT_TWEPOCH = 1468991645688L;
+    public static final long DEFAULT_TWEPOCH = 1468991645688L;
 
     /**
      * 默认回拨时间, 500毫秒
      */
-    public static long DEFAULT_TIME_OFFSET = 500L;
+    public static final long DEFAULT_TIME_OFFSET = 500L;
+
+    /**
+     * 默认的机器ID
+     */
+    public static final int DEFAULT_WORKER_ID = 0;
 
     /**
      * 机器节点占10位
@@ -123,7 +128,7 @@ public class SnowflakeIDGen implements IDGen {
      * 随机构造一个工作机器节点ID
      */
     public SnowflakeIDGen() {
-        this(RANDOM.nextInt(MAX_WORKER_ID));
+        this(DEFAULT_WORKER_ID);
     }
 
     /**
