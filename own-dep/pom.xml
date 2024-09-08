@@ -52,6 +52,7 @@
         <junit.version>5.9.1</junit.version>
         <junit.platform.version>1.9.1</junit.platform.version>
         <mockito.version>4.6.1</mockito.version>
+        <minio.version>8.5.12</minio.version>
     </properties>
 
     <!--
@@ -92,7 +93,7 @@
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-store</artifactId>
+                <artifactId>own-storage</artifactId>
                 <version>${own.version}</version>
             </dependency>
             <dependency>
@@ -153,6 +154,13 @@
                 <groupId>io.kubernetes</groupId>
                 <artifactId>client-java</artifactId>
                 <version>${kubernetes-client.version}</version>
+            </dependency>
+
+            <!-- Minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
 
             <!--Sa Token 配置-->
@@ -260,7 +268,7 @@
         </dependency>
         <dependency>
             <groupId>com.striveonger.common</groupId>
-            <artifactId>own-store</artifactId>
+            <artifactId>own-storage</artifactId>
             <version>${own.version}</version>
         </dependency>
         <dependency>

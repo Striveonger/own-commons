@@ -44,7 +44,7 @@
         <module>own-db</module>
         <module>own-dep</module>
         <module>own-leaf</module>
-        <module>own-store</module>
+        <module>own-storage</module>
         <module>own-test</module>
         <module>own-third</module>
         <module>own-user</module>
