@@ -9,8 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2022-11-08 21:32
+ * @since 2022-11-08 21:32
  */
 public enum FileHash {
 

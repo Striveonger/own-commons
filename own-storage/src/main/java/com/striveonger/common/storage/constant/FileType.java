@@ -4,8 +4,7 @@ import cn.hutool.core.util.StrUtil;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-26 00:27
+ * @since 2024-07-26 00:27
  */
 public enum FileType {
     BMP      ("bmp",       "image",      true),

@@ -19,8 +19,7 @@ import java.util.function.Consumer;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-26 00:32
+ * @since 2024-07-26 00:32
  */
 public class FileStreamUtils {
     private final static Logger log = LoggerFactory.getLogger(FileStreamUtils.class);
@@ -106,7 +105,7 @@ public class FileStreamUtils {
 
     private static String filenameDisplay(HttpServletRequest request, String fileName) {
         String filenameDisplay = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
-        if (request.getHeader("User-Agent").toLowerCase().indexOf("firefox") > 0) {
+        if (request.getHeader("User-Agent").toUpperCase().indexOf("FIREFOX") > 0) {
             // firefox浏览器
             filenameDisplay = new String(fileName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
         } else if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {

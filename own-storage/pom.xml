@@ -21,15 +21,13 @@
             <groupId>com.striveonger.common</groupId>
             <artifactId>own-web</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.striveonger.common</groupId>
-            <artifactId>own-leaf</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.striveonger.common</groupId>
             <artifactId>own-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.striveonger.common</groupId>
+            <artifactId>own-leaf</artifactId>
         </dependency>
 
         <dependency>
@@ -43,6 +41,7 @@
             <artifactId>own-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

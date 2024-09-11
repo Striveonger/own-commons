@@ -8,8 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-25 23:18
+ * @since 2024-07-25 23:18
  */
 @Schema(name = "文件", description = "文件表")
 @Table("t_file")

@@ -9,8 +9,7 @@ import io.swagger.v3.oas.models.info.Info;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-14 10:55
+ * @since 2024-07-14 10:55
  */
 @Configuration
 public class OpenAPIConfig {

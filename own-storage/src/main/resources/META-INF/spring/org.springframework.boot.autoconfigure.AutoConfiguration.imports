@@ -1,4 +1,5 @@
-com.striveonger.common.storage.config.StorageConfig
 com.striveonger.common.storage.config.StorageAutoConfiguration
+com.striveonger.common.storage.config.StorageConfig
 com.striveonger.common.storage.service.FileService
-com.striveonger.common.storage.web.controller.FileStorageController
+com.striveonger.common.storage.web.controller.StorageController
+com.striveonger.common.storage.web.controller.TestController

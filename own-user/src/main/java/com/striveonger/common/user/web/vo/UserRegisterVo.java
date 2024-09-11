@@ -1,9 +1,9 @@
 package com.striveonger.common.user.web.vo;
 
 /**
+ * 用户注册VO
  * @author Mr.Lee
- * @description: 用户注册VO
- * @date 2023-02-20 10:43
+ * @since 2023-02-20 10:43
  */
 public class UserRegisterVo {
 

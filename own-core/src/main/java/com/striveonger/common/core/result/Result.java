@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
+ * 公用响应结果
  * @author Mr.Lee
- * @description: 公用响应结果
- * @date 2022-11-08 21:36
+ * @since 2022-11-08 21:36
  */
 public class Result implements Serializable {
 

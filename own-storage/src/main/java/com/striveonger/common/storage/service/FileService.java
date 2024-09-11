@@ -21,8 +21,7 @@ import java.util.Objects;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-25 23:39
+ * @since 2024-07-25 23:39
  */
 @Service
 public class FileService extends ServiceImpl<FileMapper, FileEntity> implements IService<FileEntity> {

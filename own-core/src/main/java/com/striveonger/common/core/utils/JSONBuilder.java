@@ -11,9 +11,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
+ * 基于Jackson的JSON生成器
  * @author Mr.Lee
- * @description: 基于Jackson的JSON生成器
- * @date 2023-09-18 06:23
+ * @since 2023-09-18 06:23
  */
 public class JSONBuilder {
     private final Logger log = LoggerFactory.getLogger(JSONBuilder.class);

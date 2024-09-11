@@ -11,9 +11,9 @@ import static com.striveonger.common.storage.context.Storage.StorageType.FILE;
 import static com.striveonger.common.storage.context.Storage.StorageType.MINIO;
 
 /**
+ * 存储器
  * @author Mr.Lee
- * @description: 存储器
- * @date 2024-07-26 00:18
+ * @since 2024-07-26 00:18
  */
 public interface Storage {
 
@@ -75,13 +75,13 @@ public interface Storage {
         }
 
         public static Storage of(String type) {
-            if (StrUtil.equalsIgnoreCase(type, MINIO.toString())) {
-                return minioStorage;
-            } else if (StrUtil.equalsIgnoreCase(type, FILE.toString())) {
+            if (StrUtil.equalsIgnoreCase(type, FILE.toString()) && Objects.nonNull(fileStorage)) {
                 return fileStorage;
             }
+            if (StrUtil.equalsIgnoreCase(type, MINIO.toString()) && Objects.nonNull(minioStorage)) {
+                return minioStorage;
+            }
             throw CustomException.of(ResultStatus.NON_SUPPORT).message("不支持的存储类型");
-
         }
     }
 

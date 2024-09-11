@@ -8,9 +8,9 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
+ * 日志配置文件中获取IP
  * @author Mr.Lee
- * @description: 日志配置文件中获取IP
- * @date 2024-01-03 16:02
+ * @since 2024-01-03 16:02
  */
 public class LogIpPropertyConfig extends PropertyDefinerBase {
     private static final Logger log = LoggerFactory.getLogger(LogIpPropertyConfig.class);

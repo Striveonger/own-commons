@@ -19,9 +19,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
+ * JSON 辅助工具
  * @author Mr.Lee
- * @description: JSON 辅助工具
- * @date 2023-02-24 10:42
+ * @since 2023-02-24 10:42
  */
 public class JacksonUtils {
 

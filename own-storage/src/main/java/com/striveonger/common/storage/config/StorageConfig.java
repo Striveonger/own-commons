@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2024-09-06 18:22
  */
 @Configuration
-@ConfigurationProperties(prefix = "own.store")
+@ConfigurationProperties(prefix = "own.storage")
 public class StorageConfig {
 
     private FileStoreConfig file;

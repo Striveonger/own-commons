@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
+ * MyBatis-Flex 配置文件
  * @author Mr.Lee
- * @description: MyBatis-Flex 配置文件
- * @date 2023-10-20 16:37
+ * @since 2023-10-20 16:37
  */
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)

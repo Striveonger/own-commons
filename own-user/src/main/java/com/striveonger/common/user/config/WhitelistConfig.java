@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 白名单
  * @author Mr.Lee
- * @description: 白名单
- * @date 2024-07-21 22:06
+ * @since 2024-07-21 22:06
  */
 @Configuration
 @ConfigurationProperties(prefix = "own.auth")

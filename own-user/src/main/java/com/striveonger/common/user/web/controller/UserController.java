@@ -25,8 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2022-11-03 23:16
+ * @since 2022-11-03 23:16
  */
 @Tag(name = "用户模块")
 @RestController

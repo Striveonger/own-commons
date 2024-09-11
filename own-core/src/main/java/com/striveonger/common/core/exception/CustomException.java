@@ -4,8 +4,7 @@ import com.striveonger.common.core.constant.ResultStatus;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2022-11-12 13:12
+ * @since 2022-11-12 13:12
  */
 public class CustomException extends RuntimeException {
 

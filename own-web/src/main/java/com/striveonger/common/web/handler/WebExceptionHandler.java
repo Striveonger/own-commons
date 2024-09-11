@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2022-11-12 12:38
+ * @since 2022-11-12 12:38
  */
 @ControllerAdvice
 public class WebExceptionHandler {

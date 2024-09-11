@@ -11,8 +11,7 @@ import java.net.URL;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2023-06-17 18:28
+ * @since 2023-06-17 18:28
  */
 public class FileUtil {
     private final Logger log = LoggerFactory.getLogger(FileUtil.class);

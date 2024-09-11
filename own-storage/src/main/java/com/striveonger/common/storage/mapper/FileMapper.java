@@ -5,8 +5,7 @@ import com.striveonger.common.storage.entity.FileEntity;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-25 23:37
+ * @since 2024-07-25 23:37
  */
 public interface FileMapper extends BaseMapper<FileEntity> {
 

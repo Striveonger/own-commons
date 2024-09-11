@@ -7,8 +7,7 @@ import java.util.function.Function;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-04-09 11:37
+ * @since 2024-04-09 11:37
  */
 public class PageUtil {
 

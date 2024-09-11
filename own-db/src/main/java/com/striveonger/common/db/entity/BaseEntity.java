@@ -8,8 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author Mr.Lee
- * @description: 实体类
- * @date 2023-10-23 16:14
+ * @since 2023-10-23 16:14
  */
 public class BaseEntity implements Serializable {
 

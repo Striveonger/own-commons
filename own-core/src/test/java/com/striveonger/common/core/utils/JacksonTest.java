@@ -15,8 +15,7 @@ import java.util.Objects;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-14 02:35
+ * @since 2024-07-14 02:35
  */
 public class JacksonTest {
     private final Logger log = LoggerFactory.getLogger(JacksonTest.class);

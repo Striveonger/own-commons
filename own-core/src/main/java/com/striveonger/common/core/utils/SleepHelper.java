@@ -7,8 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2022-11-30 13:50
+ * @since 2022-11-30 13:50
  */
 public class SleepHelper {
     private final static Logger log = LoggerFactory.getLogger(SleepHelper.class);

@@ -9,8 +9,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2023-12-13 17:12
+ * @since 2023-12-13 17:12
  */
 public class Codegen {
     private final Logger log = LoggerFactory.getLogger(Codegen.class);

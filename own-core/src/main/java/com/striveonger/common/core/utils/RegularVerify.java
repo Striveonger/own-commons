@@ -3,9 +3,9 @@ package com.striveonger.common.core.utils;
 import java.util.regex.Pattern;
 
 /**
+ * 基于规则的校验
  * @author Mr.Lee
- * @description: 基于规则的校验
- * @date 2023-02-28 18:26
+ * @since 2023-02-28 18:26
  */
 public enum RegularVerify {
 

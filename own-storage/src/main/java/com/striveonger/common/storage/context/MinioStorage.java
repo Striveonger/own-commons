@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-26 01:27
+ * @since 2024-07-26 01:27
  */
 public class MinioStorage implements Storage {
     private final Logger log = LoggerFactory.getLogger(MinioStorage.class);

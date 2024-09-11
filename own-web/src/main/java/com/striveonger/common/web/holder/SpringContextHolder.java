@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * @author Mr.Lee
- * @description: Spring Context 工具类
- * @date 2024-07-14 01:02
+ * @author Mr.Lee Spring Context 工具类
+ * @since 2024-07-14 01:02
  */
 @Component
 public class SpringContextHolder implements ApplicationContextAware {

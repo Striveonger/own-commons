@@ -12,8 +12,7 @@ import java.util.Map;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2023-11-21 11:23
+ * @since 2023-11-21 11:23
  */
 public class LogJSONConverter extends ClassicConverter {
 

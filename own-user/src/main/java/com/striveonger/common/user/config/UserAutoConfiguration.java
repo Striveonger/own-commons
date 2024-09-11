@@ -11,13 +11,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author Mr.Lee
- * @description:
- * @date 2024-07-20 17:00
+ * @since 2024-07-20 17:00
  */
 @AutoConfiguration
 // 可以灵活配置加载条件哦
 // @ConditionalOnClass(DataSource.class)
-@AutoConfigurationPackage(basePackages = {"com.striveonger.common.user.*"})
+@AutoConfigurationPackage(basePackages = {"com.striveonger.common.user"})
 // @Import({PasswordConfig.class})
 public class UserAutoConfiguration {
     private final Logger log = LoggerFactory.getLogger(UserAutoConfiguration.class);
