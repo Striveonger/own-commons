@@ -8,6 +8,7 @@ create table if not exists t_file (
     filepath      varchar(255)   not null       comment '文件路径',
     filetype      varchar(30)    not null       comment '文件类型',
     hashcode      varchar(255)   not null       comment '文件hash',
+    storage       varchar(30)    not null       comment '存储类型',
     create_time   datetime       default now()  comment '创建时间',
     update_time   datetime       default now()  comment '更新时间',
     deleted       tinyint(1)     default 0      comment '删除标志(0否 1是)',

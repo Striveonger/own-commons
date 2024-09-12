@@ -32,14 +32,19 @@ public class FileEntity extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String hashcode;
 
+    @Schema(name = "文件存储类型")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String storage;
+
     public FileEntity() { }
 
-    public FileEntity(String id, String filename, String filepath, String filetype, String hashcode) {
+    public FileEntity(String id, String filename, String filepath, String filetype, String hashcode, String storage) {
         this.id = id;
         this.filename = filename;
         this.filepath = filepath;
         this.filetype = filetype;
         this.hashcode = hashcode;
+        this.storage  = storage;
     }
 
     public String getId() {
@@ -80,5 +85,13 @@ public class FileEntity extends BaseEntity {
 
     public void setHashcode(String hashcode) {
         this.hashcode = hashcode;
+    }
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
     }
 }

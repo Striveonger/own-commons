@@ -3,10 +3,13 @@ package com.striveonger.common.storage.web.controller;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
+import com.striveonger.common.storage.context.Storage;
 import com.striveonger.common.storage.service.FileService;
+import com.striveonger.common.storage.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,11 +26,10 @@ import static com.striveonger.common.storage.context.Storage.StorageType.FILE;
 public class StorageController {
     private final Logger log = LoggerFactory.getLogger(StorageController.class);
 
-    private final FileService fileService;
+    private final StorageService service;
 
-    public StorageController(FileService fileService) {
-        log.info("FileController init...");
-        this.fileService = fileService;
+    public StorageController(StorageService service) {
+        this.service = service;
     }
 
     /**
@@ -42,7 +44,7 @@ public class StorageController {
             throw new CustomException(ResultStatus.NOT_FOUND);
         }
         log.info("upload file: {}", files.length);
-        fileService.upload(files, FILE);
+        service.upload(files, FILE);
         return Result.success().message("文件上传成功");
     }
 

@@ -27,10 +27,9 @@ public class FileStorage implements Storage {
     }
 
     @Override
-    public String write(String url, byte[] bytes) {
+    public void write(String url, byte[] bytes) {
         String path = storageFolder + url;
         FileUtil.writeBytes(bytes, path);
-        return path;
     }
 
     @Override

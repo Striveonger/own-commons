@@ -21,9 +21,8 @@ public class MinioStorage implements Storage {
     }
 
     @Override
-    public String write(String url, byte[] bytes) {
+    public void write(String url, byte[] bytes) {
 
-        return "";
     }
 
     @Override

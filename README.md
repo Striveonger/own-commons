@@ -1,5 +1,5 @@
 # own-commons
-自己常用的一些工具包, 旨在可以快速构建自己熟悉的开发环境. 
+Some of their commonly used tool classes.
 
 ## 1. own-common-core
 包含了一些常用的工具类, 如: 统一的返回格式, 基础的错误码定义, 日志打印等... 
