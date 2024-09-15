@@ -3,17 +3,23 @@ package com.striveonger.common.storage.web.controller;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
-import com.striveonger.common.storage.context.Storage;
-import com.striveonger.common.storage.service.FileService;
+import com.striveonger.common.core.vo.BasicSearchVo;
+import com.striveonger.common.storage.entity.FileEntity;
 import com.striveonger.common.storage.service.StorageService;
+import com.striveonger.common.storage.web.utils.FileStreamUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Objects;
 
 import static com.striveonger.common.storage.context.Storage.StorageType.FILE;
 
@@ -44,8 +50,33 @@ public class StorageController {
             throw new CustomException(ResultStatus.NOT_FOUND);
         }
         log.info("upload file: {}", files.length);
-        service.upload(files, FILE);
+        for (MultipartFile file : files) {
+            try {
+                String filename = file.getOriginalFilename();
+                byte[] bytes = file.getBytes();
+                log.info("upload file: {}", filename);
+                service.upload(filename, bytes, FILE);
+            } catch (IOException e) {
+                throw CustomException.of("上传文件失败");
+            }
+        }
         return Result.success().message("文件上传成功");
     }
 
+    @GetMapping("/file/list")
+    @ResponseBody
+    public Result list(BasicSearchVo vo) {
+        Result.Page<FileEntity> data = service.list(vo);
+        return Result.success().page(data);
+    }
+
+    @GetMapping("file/preview")
+    public void preview(HttpServletRequest request, HttpServletResponse response, String id) {
+        FileEntity entity = service.get(id);
+        if (Objects.isNull(entity)) {
+            throw CustomException.of(ResultStatus.NOT_FOUND).message("未找到文件");
+        }
+        byte[] bytes = service.read(id, FILE);
+        FileStreamUtils.preview(entity.getFilename(), request, response, bytes);
+    }
 }

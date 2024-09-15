@@ -9,7 +9,7 @@ import cn.hutool.core.util.StrUtil;
 public enum FileType {
     BMP      ("bmp",       "image",      true),
     JPG      ("jpg",       "image",      true),
-    JPGE     ("jpge",      "image",      true),
+    JPEG     ("jpeg",      "image",      true),
     PNG      ("png",       "image",      true),
     GIF      ("gif",       "image",      true),
     MP3      ("mp3",       "audio",      true),
