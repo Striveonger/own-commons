@@ -1,5 +1,6 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -17,15 +18,17 @@ import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * JSON 辅助工具
  * @author Mr.Lee
  * @since 2023-02-24 10:42
  */
-public class JacksonUtils {
+public class Jackson {
 
-    private static final Logger log = LoggerFactory.getLogger(JacksonUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(Jackson.class);
     private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {};
     private static final ObjectMapper mapper;
 
@@ -131,20 +134,100 @@ public class JacksonUtils {
         return JsonPath.read(json, path);
     }
 
-    public static JSONBuilder builder() {
-        return JSONBuilder.builder();
+    public static Builder builder() {
+        return Builder.builder();
     }
 
-    public static JSONBuilder builder(String split) {
-        return JSONBuilder.builder(split);
+    public static Builder builder(String split) {
+        return Builder.builder(split);
     }
 
-    public static JSONBuilder builder(Map<String, Object> root) {
-        return JSONBuilder.builder(null, root);
+    public static Builder builder(Map<String, Object> root) {
+        return Builder.builder(null, root);
     }
 
-    public static JSONBuilder builder(String split, Map<String, Object> root) {
-        return JSONBuilder.builder(split, root);
+    public static Builder builder(String split, Map<String, Object> root) {
+        return Builder.builder(split, root);
     }
+
+    public static class Builder {
+        private ObjectNode root;
+
+        String split = "\\.";
+
+        private Builder() {
+            root = Jackson.toObjectNode("{}");
+        }
+
+        private Builder(String split) {
+            this.split = split;
+            root = Jackson.toObjectNode("{}");
+        }
+
+        private Builder(Map<String, Object> root) {
+            // this.root = JacksonUtils.toObjectNode(JacksonUtils.toJSONString(root));
+            this.root = Jackson.getMapper().convertValue(root, ObjectNode.class);
+        }
+
+        private Builder(String split, Map<String, Object> root) {
+            if (StrUtil.isNotBlank(split)) {
+                this.split = split;
+            }
+            if (Objects.nonNull(root)) {
+                this.root = Optional.ofNullable(Jackson.toJSONString(root)).map(Jackson::toObjectNode).orElse(Jackson.toObjectNode("{}"));
+            }
+        }
+
+        public Builder reset() {
+            root = Jackson.toObjectNode("{}");
+            return this;
+        }
+
+        public Builder put(String key, Object value) {
+            String[] keys = key.split(split);
+            ObjectNode node = root;
+            for (int i = 0; i < keys.length - 1; i++) {
+                node = node.withObject(keys[i]);
+            }
+            put(node, keys[keys.length - 1], value);
+            return this;
+        }
+
+        public ObjectNode getRootNode() {
+            return root;
+        }
+
+        @Override
+        public String toString() {
+            return root.toString();
+        }
+
+        public String toJSONString() {
+            return toString();
+        }
+
+        private void put(ObjectNode node, String key, Object value) {
+            if (node == null) {
+            } else if(value == null) {
+                node.putNull(key);
+            } else {
+                JsonNode val = Jackson.toJsonNode(value);
+                node.set(key, val);
+            }
+        }
+
+        static Builder builder() {
+            return new Builder();
+        }
+
+        static Builder builder(String split) {
+            return new Builder(split);
+        }
+
+        static Builder builder(String split, Map<String, Object> root) {
+            return new Builder(split, root);
+        }
+    }
+
 
 }

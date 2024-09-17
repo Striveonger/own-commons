@@ -4,7 +4,7 @@ import ch.qos.logback.classic.pattern.ClassicConverter;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import ch.qos.logback.classic.spi.StackTraceElementProxy;
-import com.striveonger.common.core.utils.JacksonUtils;
+import com.striveonger.common.core.Jackson;
 import org.slf4j.MDC;
 
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class LogJSONConverter extends ClassicConverter {
             content.put("error_stack_trace", getErrorStackTrace(throwable));
         }
         log.put("content", content);
-        return JacksonUtils.toJSONString(log) + "\n";
+        return Jackson.toJSONString(log) + "\n";
     }
 
     private String getErrorStackTrace(IThrowableProxy throwable) {

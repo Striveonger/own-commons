@@ -2,7 +2,7 @@ package com.striveonger.common.leaf.core.segment;
 
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
-import com.striveonger.common.core.utils.Timepiece;
+import com.striveonger.common.core.Timepiece;
 import com.striveonger.common.leaf.core.ID;
 import com.striveonger.common.leaf.core.IDGen;
 import com.striveonger.common.leaf.core.Status;

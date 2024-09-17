@@ -1,4 +1,4 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core.constant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

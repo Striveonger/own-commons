@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.Dict;
 import com.mybatisflex.core.query.QueryWrapper;
-import com.striveonger.common.core.utils.MarkGenerate;
+import com.striveonger.common.core.MarkGenerate;
 import com.striveonger.common.user.entity.UserEntity;
 import com.striveonger.common.user.service.UserService;
 import com.striveonger.common.user.web.vo.UserRegisterVo;

@@ -4,7 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.io.IoUtil;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.result.Result;
-import com.striveonger.common.core.utils.JacksonUtils;
+import com.striveonger.common.core.Jackson;
 import com.striveonger.common.user.config.WhitelistConfig;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -54,7 +54,7 @@ public class AuthFilter implements Filter {
                 log.error("user not login, '{}' need login", uri);
                 // throw new CustomException(ResultStatus.NEED_USER_LOGIN);
                 res.setContentType(MediaType.APPLICATION_JSON.toString());
-                IoUtil.write(res.getOutputStream(), true, JacksonUtils.toJSONBytes(Result.status(ResultStatus.NEED_USER_LOGIN)));
+                IoUtil.write(res.getOutputStream(), true, Jackson.toJSONBytes(Result.status(ResultStatus.NEED_USER_LOGIN)));
             }
         }
     }

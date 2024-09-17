@@ -1,7 +1,7 @@
 package com.striveonger.common.db.entity;
 
 import com.mybatisflex.annotation.Column;
-import com.striveonger.common.core.utils.JacksonUtils;
+import com.striveonger.common.core.Jackson;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -46,7 +46,7 @@ public class BaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return JacksonUtils.toJSONString(this);
+        return Jackson.toJSONString(this);
     }
 
 }

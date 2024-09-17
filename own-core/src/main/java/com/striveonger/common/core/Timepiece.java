@@ -1,4 +1,4 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core;
 
 import cn.hutool.core.collection.CollUtil;
 import org.slf4j.Logger;
@@ -49,31 +49,13 @@ public class Timepiece {
                 Keep start = list.get(0), prev = start;
                 for (int i = 1; i < list.size(); i++) {
                     Keep curr = list.get(i);
-                    log.info("{} cost {} ms", curr.getName(), curr.getTime() - prev.getTime());
+                    log.info("{} cost {} ms", curr.name(), curr.time() - prev.time());
                     prev = curr;
                 }
-                log.info("task: {}, total cost {} ms", name, now - start.getTime());
+                log.info("task: {}, total cost {} ms", name, now - start.time());
             }
         }
     }
 
-    private static class Keep {
-        private final String name;
-        private final long time;
-
-        public Keep(String name, long time) {
-            this.name = name;
-            this.time = time;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public long getTime() {
-            return time;
-        }
-    }
-
-
+    private record Keep(String name, long time) { }
 }

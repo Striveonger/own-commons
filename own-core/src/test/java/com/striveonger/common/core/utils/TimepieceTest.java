@@ -1,18 +1,20 @@
 package com.striveonger.common.core.utils;
 
+import com.striveonger.common.core.ThreadHelper;
+import com.striveonger.common.core.Timepiece;
 import junit.framework.TestCase;
 
 public class TimepieceTest extends TestCase {
 
     public void testTimepiece() {
         Timepiece timepiece = Timepiece.of("XXX");
-        SleepHelper.sleepSeconds(2);
+        ThreadHelper.sleepSeconds(2);
         timepiece.keep("B");
-        SleepHelper.sleepSeconds(3);
+        ThreadHelper.sleepSeconds(3);
         timepiece.keep("C");
-        SleepHelper.sleepSeconds(4);
+        ThreadHelper.sleepSeconds(4);
         timepiece.keep("D");
-        SleepHelper.sleepSeconds(5);
+        ThreadHelper.sleepSeconds(5);
         timepiece.show();
     }
 

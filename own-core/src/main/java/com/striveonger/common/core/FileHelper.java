@@ -1,4 +1,4 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core;
 
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
@@ -14,8 +14,8 @@ import java.net.URL;
  * @author Mr.Lee
  * @since 2023-06-17 18:28
  */
-public class FileUtil {
-    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
+public class FileHelper {
+    private static final Logger log = LoggerFactory.getLogger(FileHelper.class);
 
     /**
      * 获取文件的URL

@@ -1,4 +1,4 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core;
 
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.StrUtil;

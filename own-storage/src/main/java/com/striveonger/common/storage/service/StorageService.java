@@ -3,12 +3,11 @@ package com.striveonger.common.storage.service;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.mybatisflex.core.paginate.Page;
-import com.mybatisflex.core.query.QueryCondition;
 import com.mybatisflex.core.query.QueryWrapper;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
-import com.striveonger.common.core.utils.FileHash;
+import com.striveonger.common.core.constant.FileHash;
 import com.striveonger.common.core.vo.BasicSearchVo;
 import com.striveonger.common.db.utils.PageUtil;
 import com.striveonger.common.leaf.core.IDGen;
@@ -18,11 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 /**

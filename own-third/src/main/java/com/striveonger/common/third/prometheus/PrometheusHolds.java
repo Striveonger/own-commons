@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
-import com.striveonger.common.core.utils.JacksonUtils;
+import com.striveonger.common.core.Jackson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ public class PrometheusHolds {
         if (CollUtil.isNotEmpty(filterLabels)) {
             url.append(filterLabels.stream().map(x -> String.format("%s=\"%s\"", x.getKey(), x.getValue())).collect(Collectors.joining(",", "?match_target={", "}")));
         }
-        ObjectNode response = JacksonUtils.toObjectNode(get(url.toString()));
+        ObjectNode response = Jackson.toObjectNode(get(url.toString()));
         List<ObjectNode> result = new ArrayList<>();
         if (Objects.nonNull(response)) {
             JsonNode status = response.get("status");
@@ -70,10 +70,10 @@ public class PrometheusHolds {
         String url = host + "/api/v1/targets?state=active";
         String response = get(url);
         List<ObjectNode> targets = new ArrayList<>();
-        ArrayNode activeTargets = Optional.ofNullable(JacksonUtils.toObjectNode(response))
+        ArrayNode activeTargets = Optional.ofNullable(Jackson.toObjectNode(response))
                 .map(o -> o.get("data")).map(ObjectNode.class::cast)
                 .map(o -> o.get("activeTargets")).map(ArrayNode.class::cast)
-                .orElse(JacksonUtils.createArrayNode());
+                .orElse(Jackson.createArrayNode());
         for (JsonNode target : activeTargets) {
             if (target instanceof ObjectNode o) {
                 targets.add(o);
@@ -88,7 +88,7 @@ public class PrometheusHolds {
         if (StrUtil.isNotBlank(query)) {
             body.put("query", query);
         }
-        ObjectNode response = JacksonUtils.toObjectNode(post(url, body));
+        ObjectNode response = Jackson.toObjectNode(post(url, body));
         List<ObjectNode> result = new ArrayList<>();
         if (Objects.nonNull(response)) {
             JsonNode status = response.get("status");
