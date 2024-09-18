@@ -11,11 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
+ * 命令执行器
  * @author Mr.Lee
  * @since 2024-09-17 10:03
  */
@@ -30,8 +30,7 @@ public class Command {
 
     private Result result;
 
-    private Command() {
-    }
+    private Command() {}
 
     public static Command of(String ...cmds) {
         Command command = new Command();
@@ -41,7 +40,6 @@ public class Command {
 
     /**
      * 设置工作目录
-     *
      * @param home
      * @return
      */
@@ -51,19 +49,7 @@ public class Command {
     }
 
     /**
-     * 设置命令
-     *
-     * @param commands
-     * @return
-     */
-    // public Command command(String... commands) {
-    //     this.commands.addAll(Arrays.stream(commands).toList());
-    //     return this;
-    // }
-
-    /**
      * 设置环境变量
-     *
      * @param key
      * @param value
      * @return
@@ -115,7 +101,7 @@ public class Command {
             if (Status.RUNNING == status && null != process) {
                 this.thread = ThreadHelper.run(() -> {
                     try {
-                        int exitCode = process.waitFor();
+                        int exitCode = process.waitFor(); // 阻塞方法
                         if (exitCode == 0) {
                             this.status = Status.SUCCESS;
                         } else {
@@ -140,6 +126,10 @@ public class Command {
             return status;
         }
 
+        public List<String> getLines() {
+            return getLines(true);
+        }
+
         /**
          * 获取命令执行结果
          *
@@ -153,16 +143,12 @@ public class Command {
             return this.lines == null ? List.of() : this.lines;
         }
 
-        public List<String> getLines() {
-            return getLines(true);
+        public String getContent() {
+            return getContent(true);
         }
 
         public String getContent(boolean sync) {
             return String.join("\n", getLines(sync));
-        }
-
-        public String getContent() {
-            return getContent(true);
         }
     }
 
