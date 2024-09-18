@@ -11,18 +11,13 @@
     <define scope="context" name="ip" class="com.striveonger.common.core.log.LogIpPropertyConfig" />
 
     <conversionRule conversionWord="log" converterClass="com.striveonger.common.core.log.LogJSONConverter" />
-
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
-    <conversionRule conversionWord="wex"
-                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
-    <conversionRule conversionWord="wEx"
-                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
 
     <!-- 日志输出格式 -->
-    <property name="console.log.pattern"
-              value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(62145){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} :[%4line]%clr(:){faint} %m%n%wEx"/>
-    <property name="file.log.pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p 62145 --- [%t] %-40.40logger{39} : %m%n%wEx"/>
+    <property name="console.log.pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(62145){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} :[%4line]%clr(:){faint} %m%n%wEx"/>
+    <property name="file.log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p 62145 --- [%t] %-40.40logger{39} : %m%n%wEx"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
