@@ -57,12 +57,11 @@ public class FileStreamUtils {
             Consumer<OutputStream> write = o -> IoUtil.write(o, true, bytes);
             response.reset();
             String filenameDisplay = filenameDisplay(request, filename);
-            String tag = fileType.getType();
-            response.setContentType(tag + "/" + prefix);
+            response.setContentType(fileType.getTag() + "/" + fileType.getType());
             response.setHeader("Content-Disposition", "inline;filename=\"" + filenameDisplay + "\"");
-            response.setHeader("Content-Length", String.valueOf(bytes.length / 8));
-            response.setHeader("Accept-Ranges", "bytes");
+            // response.setHeader("Content-Length", String.valueOf(bytes.length / 8));
             response.setHeader("Content-Range", "bytes 0-");
+            response.setHeader("Accept-Ranges", "bytes");
             process(response, write);
         } else {
             throw new CustomException(ResultStatus.ACCIDENT, "不支持预览的文件类型");

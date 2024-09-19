@@ -12,7 +12,7 @@ public enum FileType {
     JPEG     ("jpeg",      "image",      true),
     PNG      ("png",       "image",      true),
     GIF      ("gif",       "image",      true),
-    MP3      ("mp3",       "audio",      true),
+    MP3      ("mpeg",      "audio",      true),
     MP4      ("mp4",       "video",      true),
     DOC      ("doc",       "doc",        false),
     DOCX     ("docx",      "docx" ,      false),
@@ -51,7 +51,7 @@ public enum FileType {
 
     public static FileType of(String type) {
         for (FileType fileType : values()) {
-            if (StrUtil.equals(fileType.getType(), type, true)) {
+            if (StrUtil.equals(fileType.name(), type, true)) {
                 return fileType;
             }
         }
