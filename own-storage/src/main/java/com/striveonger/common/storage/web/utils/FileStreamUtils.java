@@ -57,7 +57,7 @@ public class FileStreamUtils {
             Consumer<OutputStream> write = o -> IoUtil.write(o, true, bytes);
             response.reset();
             String filenameDisplay = filenameDisplay(request, filename);
-            response.setContentType(fileType.getTag() + "/" + fileType.getType());
+            response.setContentType(fileType.contentType());
             response.setHeader("Content-Disposition", "inline;filename=\"" + filenameDisplay + "\"");
             // response.setHeader("Content-Length", String.valueOf(bytes.length / 8));
             response.setHeader("Content-Range", "bytes 0-");

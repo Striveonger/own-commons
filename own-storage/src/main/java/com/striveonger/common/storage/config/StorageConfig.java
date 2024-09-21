@@ -48,9 +48,32 @@ public class StorageConfig {
     }
 
     public static class MinioStoreConfig {
+        /**
+         * minio 服务地址
+         */
         private String endpoint;
+
+        /**
+         * minio 服务端口
+         */
+        private int port;
+
+        /**
+         * minio 服务是否使用https
+         */
+        private boolean secure;
+
+        /**
+         * minio 服务的访问key
+         */
         private String accessKey;
+
+        /**
+         * minio 服务的访问密钥
+         */
         private String secretKey;
+
+        private String bucket;
 
         public String getEndpoint() {
             return endpoint;
@@ -58,6 +81,22 @@ public class StorageConfig {
 
         public void setEndpoint(String endpoint) {
             this.endpoint = endpoint;
+        }
+
+        public int getPort() {
+            return port;
+        }
+
+        public void setPort(int port) {
+            this.port = port;
+        }
+
+        public boolean getSecure() {
+            return secure;
+        }
+
+        public void setSecure(boolean secure) {
+            this.secure = secure;
         }
 
         public String getAccessKey() {
@@ -74,6 +113,14 @@ public class StorageConfig {
 
         public void setSecretKey(String secretKey) {
             this.secretKey = secretKey;
+        }
+
+        public String getBucket() {
+            return bucket;
+        }
+
+        public void setBucket(String bucket) {
+            this.bucket = bucket;
         }
     }
 }

@@ -11,8 +11,13 @@ import org.slf4j.LoggerFactory;
 public class MinioStorage implements Storage {
     private final Logger log = LoggerFactory.getLogger(MinioStorage.class);
 
-    public MinioStorage(StorageConfig.MinioStoreConfig config) {
+    private final MinioHelper helper;
 
+    private final String bucket;
+
+    public MinioStorage(StorageConfig.MinioStoreConfig config) {
+        this.helper = new MinioHelper(config);
+        this.bucket = config.getBucket();
     }
 
     @Override

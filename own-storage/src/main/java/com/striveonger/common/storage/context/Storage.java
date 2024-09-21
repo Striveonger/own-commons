@@ -59,7 +59,7 @@ public interface Storage {
          */
         public static void init(StorageConfig config) {
             synchronized (lock) {
-                if (Factory.config == null) {
+                if (config != null && Factory.config == null) {
                     Factory.config = config;
                     if (Objects.nonNull(config.getMinio())) {
                         Factory.minioStorage = new MinioStorage(config.getMinio());

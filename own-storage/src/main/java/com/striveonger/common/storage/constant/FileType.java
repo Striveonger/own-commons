@@ -49,6 +49,10 @@ public enum FileType {
 
     public boolean supportPreview() { return supportPreview; }
 
+    public String contentType() {
+        return  tag + "/" + type;
+    }
+
     public static FileType of(String type) {
         for (FileType fileType : values()) {
             if (StrUtil.equals(fileType.name(), type, true)) {
