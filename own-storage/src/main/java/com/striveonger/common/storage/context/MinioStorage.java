@@ -21,17 +21,17 @@ public class MinioStorage implements Storage {
     }
 
     @Override
-    public byte[] read(String url) {
-        return null;
+    public byte[] read(String path) {
+        return helper.getObject(bucket, path);
     }
 
     @Override
-    public void write(String url, byte[] bytes) {
-
+    public void write(String path, byte[] bytes) {
+        helper.saveObject(bucket, path, bytes);
     }
 
     @Override
-    public void delete(String url) {
-
+    public void delete(String path) {
+        helper.deleteObject(bucket, path);
     }
 }
