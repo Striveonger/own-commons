@@ -7,10 +7,9 @@ import com.striveonger.common.core.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
+import java.util.function.Consumer;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -30,11 +29,14 @@ public class Command {
 
     private Result result;
 
+    private Consumer<Status> callback;
+    private Consumer<String> console;
+
     private Command() {}
 
-    public static Command of(String ...cmds) {
+    public static Command of(List<String> cmds) {
         Command command = new Command();
-        command.cmds.addAll(Arrays.stream(cmds).flatMap(x -> StrUtil.split(x, " ").stream()).toList());
+        command.cmds.addAll(cmds.stream().flatMap(x -> StrUtil.split(x, " ").stream()).toList());
         return command;
     }
 
@@ -56,6 +58,28 @@ public class Command {
      */
     public Command env(String key, String value) {
         env.put(key, value);
+        return this;
+    }
+
+    /**
+     * 设置回调
+     *
+     * @param callback 回调
+     * @return
+     */
+    public Command callback(Consumer<Status> callback) {
+        this.callback = callback;
+        return this;
+    }
+
+    /**
+     * 设置控制台输出
+     *
+     * @param console
+     * @return
+     */
+    public Command console(Consumer<String> console) {
+        this.console = console;
         return this;
     }
 
@@ -82,43 +106,65 @@ public class Command {
             builder.directory(dir);
             builder.environment().putAll(env);
             Process process = builder.start();
-            this.result = new Result(Status.RUNNING, process, null);
+            this.result = new Result(Status.RUNNING, process, callback, console);
         } catch (IOException e) {
             log.error("命令执行失败", e);
-            this.result = new Result(Status.FAIL, null, "命令执行失败");
+            this.result = new Result(Status.FAIL, null, callback, null);
         }
         return this.result;
     }
 
+    public Result getResult() {
+        return result;
+    }
+
     public static class Result {
         private Status status;
-        private List<String> lines;
-        private Thread thread;
+        private final List<String> lines;
+        private Thread outputThread = null;
+        private Thread executeThread = null;
+        private final Consumer<Status> callback;
+        private final Consumer<String> console;
 
-        public Result(Status status, Process process, String content) {
+        public Result(Status status, Process process, Consumer<Status> callback, Consumer<String> console) {
             this.status = status;
-            this.lines = StrUtil.isNotBlank(content) ? List.of(content) : List.of();
+            this.lines = new LinkedList<>();
+            this.callback = callback;
+            this.console = console;
             if (Status.RUNNING == status && null != process) {
-                this.thread = ThreadHelper.run(() -> {
+                InputStream inputStream = process.getInputStream();
+                this.outputThread = ThreadHelper.run(() -> {
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, UTF_8))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            lines.add(line);
+                            execoutput(line);
+                        }
+                    } catch (IOException e) {
+                        log.error("Error reading process output", e);
+                    }
+                });
+
+                this.executeThread = ThreadHelper.run(() -> {
                     try {
-                        int exitCode = process.waitFor(); // 阻塞方法
+                        int exitCode = process.waitFor();
                         if (exitCode == 0) {
                             this.status = Status.SUCCESS;
                         } else {
                             this.status = Status.FAIL;
                         }
-                        InputStream in = null;
-                        try {
-                            in = process.getInputStream();
-                            this.lines = IoUtil.readLines(in, UTF_8, new ArrayList<>());
-                        } finally {
-                            IoUtil.close(in);
-                            process.destroy();
-                        }
+                        execallbakk();
                     } catch (Exception e) {
                         log.error("命令执行失败", e);
+                    } finally {
+                        IoUtil.close(inputStream);
+                        process.destroy();
                     }
                 });
+            } else if (Status.FAIL == status || null == process) {
+                this.lines.add("命令执行失败");
+                this.status = Status.FAIL;
+                execallbakk();
             }
         }
 
@@ -127,28 +173,31 @@ public class Command {
         }
 
         public List<String> getLines() {
-            return getLines(true);
-        }
-
-        /**
-         * 获取命令执行结果
-         *
-         * @param sync 是否要同步等待返回结果
-         * @return
-         */
-        public List<String> getLines(boolean sync) {
-            if (this.thread.isAlive() && sync && Status.RUNNING == this.status) {
-                ThreadHelper.join(this.thread);
-            }
-            return this.lines == null ? List.of() : this.lines;
+            return new ArrayList<>(lines);
         }
 
         public String getContent() {
-            return getContent(true);
+            return String.join("\n", getLines());
         }
 
-        public String getContent(boolean sync) {
-            return String.join("\n", getLines(sync));
+        /**
+         * 等待命令执行结束
+         */
+        public void await() {
+            ThreadHelper.join(executeThread);
+            ThreadHelper.join(outputThread);
+        }
+
+        private void execallbakk() {
+            if (this.callback != null) {
+                this.callback.accept(this.status);
+            }
+        }
+
+        private void execoutput(String line) {
+            if (this.console != null) {
+                this.console.accept(line);
+            }
         }
     }
 
