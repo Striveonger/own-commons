@@ -9,11 +9,7 @@ import com.striveonger.common.third.prometheus.PrometheusConfig;
 import com.striveonger.common.third.prometheus.PrometheusHolds;
 import junit.framework.TestCase;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -29,7 +25,7 @@ public class PrometheusSourceTest extends TestCase {
         PrometheusHolds prometheus = PrometheusHolds.Builder.builder().config(config).build();
 
 
-        List<Dict> rows = new ArrayList<>();
+        Set<Dict> rows = new HashSet<>();
 
         List<Pair<String, String>> pairs = List.of(
                 // Pair.of("通用基础套件", "Nacos注册中心"),
@@ -50,38 +46,44 @@ public class PrometheusSourceTest extends TestCase {
                 String metric = x.get("metric").asText();
                 String type = x.get("type").asText();
                 String help = x.get("help").asText();
-                return new Dict(metric, metric, type, help, objectType, objectName);
-            }).toList();
+                if (metric.startsWith("hikaricp_")) {
+                    return new Dict(metric, metric, type, help, "通用基础套件", "JVM指标");
+                } else {
+                    return null;
+                }
+            }).filter(Objects::nonNull).toList();
             rows.addAll(part);
         }
 
-        // 写入excel文件
-        XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet();
-        XSSFRow tableHead = sheet.createRow(0);
-        tableHead.createCell(0).setCellValue("指标名称");
-        tableHead.createCell(1).setCellValue("指标名称(中文)");
-        tableHead.createCell(2).setCellValue("指标类型");
-        tableHead.createCell(3).setCellValue("指标说明");
-        tableHead.createCell(4).setCellValue("监控对象分类");
-        tableHead.createCell(5).setCellValue("监控对象名称");
-        for (int i = 0; i < rows.size(); i++) {
-            Dict row = rows.get(i);
-            XSSFRow xssfRow = sheet.createRow(i + 1);
-            xssfRow.createCell(0).setCellValue(row.getName());
-            xssfRow.createCell(1).setCellValue(row.getNameCn());
-            xssfRow.createCell(2).setCellValue(row.getType());
-            xssfRow.createCell(3).setCellValue(row.getHelp());
-            xssfRow.createCell(4).setCellValue(row.getObjectType());
-            xssfRow.createCell(5).setCellValue(row.getIndicatorType());
-        }
+        rows.forEach(x -> System.out.println(x.sql()));
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        workbook.write(bos);
-        byte[] bytes = bos.toByteArray();
-        bos.close();
-        workbook.close();
-        FileUtil.writeBytes(bytes, "/Users/striveonger/temp/metrics1.xlsx");
+        // 写入excel文件
+        // XSSFWorkbook workbook = new XSSFWorkbook();
+        // XSSFSheet sheet = workbook.createSheet();
+        // XSSFRow tableHead = sheet.createRow(0);
+        // tableHead.createCell(0).setCellValue("指标名称");
+        // tableHead.createCell(1).setCellValue("指标名称(中文)");
+        // tableHead.createCell(2).setCellValue("指标类型");
+        // tableHead.createCell(3).setCellValue("指标说明");
+        // tableHead.createCell(4).setCellValue("监控对象分类");
+        // tableHead.createCell(5).setCellValue("监控对象名称");
+        // for (int i = 0; i < rows.size(); i++) {
+        //     // Dict row = rows.get(i);
+        //     XSSFRow xssfRow = sheet.createRow(i + 1);
+        //     xssfRow.createCell(0).setCellValue(row.getName());
+        //     xssfRow.createCell(1).setCellValue(row.getNameCn());
+        //     xssfRow.createCell(2).setCellValue(row.getType());
+        //     xssfRow.createCell(3).setCellValue(row.getHelp());
+        //     xssfRow.createCell(4).setCellValue(row.getObjectType());
+        //     xssfRow.createCell(5).setCellValue(row.getIndicatorType());
+        // }
+        //
+        // ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        // workbook.write(bos);
+        // byte[] bytes = bos.toByteArray();
+        // bos.close();
+        // workbook.close();
+        // FileUtil.writeBytes(bytes, "/Users/striveonger/temp/metrics1.xlsx");
     }
 
     public void test2() {

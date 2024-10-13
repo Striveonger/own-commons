@@ -103,7 +103,7 @@ public class SegmentIDGen implements IDGen {
     }
 
     private void refreshCacheFromDB() {
-        log.info("update cache from db");
+        log.debug("update cache from db");
         // 计时开始～
         Timepiece timepiece = Timepiece.of("RefreshCacheFromDB");
         try {
@@ -126,7 +126,7 @@ public class SegmentIDGen implements IDGen {
                 segment.setMax(0);
                 segment.setStep(0);
                 cache.put(tag, buffer);
-                log.info("Add tag {} from db to IdCache, SegmentBuffer {}", tag, buffer);
+                log.debug("Add tag {} from db to IdCache, SegmentBuffer {}", tag, buffer);
             }
             // cache中已失效的tags从cache删除
             for (String tag : dbTags) {
@@ -134,7 +134,7 @@ public class SegmentIDGen implements IDGen {
             }
             for (String tag : removeTagsSet) {
                 cache.remove(tag);
-                log.info("Remove tag {} from IdCache", tag);
+                log.debug("Remove tag {} from IdCache", tag);
             }
         } catch (Exception e) {
             log.warn("update cache from db exception", e);
@@ -195,7 +195,7 @@ public class SegmentIDGen implements IDGen {
         segment.setMax(entity.getMaxId());
         segment.setStep(buffer.getStep());
         // sw.stop();
-        log.info("updateSegmentFromDb {}", tag + " " + segment);
+        log.debug("updateSegmentFromDb {}", tag + " " + segment);
     }
 
     public ID getIdFromSegmentBuffer(final SegmentBuffer buffer) {
