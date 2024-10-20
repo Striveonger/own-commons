@@ -1,5 +1,6 @@
 package com.striveonger.common.core;
 
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.HexUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
@@ -27,5 +28,9 @@ public class MarkGenerate {
     public static String build(Stream<String> stream) {
         final String s = stream.filter(StrUtil::isNotBlank).collect(Collectors.joining("^_^"));
         return SecureUtil.md5(HexUtil.encodeHexStr(s));
+    }
+
+    public static String uuid() {
+        return UUID.randomUUID().toString();
     }
 }

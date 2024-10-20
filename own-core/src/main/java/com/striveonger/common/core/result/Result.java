@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.striveonger.common.core.constant.ResultStatus;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class Result implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

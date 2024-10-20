@@ -5,7 +5,6 @@ import com.striveonger.common.storage.config.StorageConfig;
 import io.minio.*;
 import io.minio.messages.Bucket;
 import io.minio.messages.Tags;
-import org.bouncycastle.LICENSE;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

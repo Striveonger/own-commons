@@ -35,8 +35,16 @@ public class Command {
     private Command() {}
 
     public static Command of(List<String> cmds) {
+        return of(cmds, true);
+    }
+
+    public static Command of(List<String> cmds, boolean split) {
         Command command = new Command();
-        command.cmds.addAll(cmds.stream().flatMap(x -> StrUtil.split(x, " ").stream()).toList());
+        if (split) {
+            command.cmds.addAll(cmds.stream().flatMap(x -> StrUtil.split(x, " ").stream()).toList());
+        } else {
+            command.cmds.addAll(cmds);
+        }
         return command;
     }
 
