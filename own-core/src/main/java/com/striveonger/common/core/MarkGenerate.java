@@ -30,7 +30,7 @@ public class MarkGenerate {
         return SecureUtil.md5(HexUtil.encodeHexStr(s));
     }
 
-    public static String uuid() {
-        return UUID.randomUUID().toString();
+    public static String build() {
+        return UUID.randomUUID().toString(true);
     }
 }
