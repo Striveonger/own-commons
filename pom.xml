@@ -43,6 +43,7 @@
         <module>own-core</module>
         <module>own-db</module>
         <module>own-dep</module>
+        <module>own-ext</module>
         <module>own-leaf</module>
         <module>own-storage</module>
         <module>own-test</module>
