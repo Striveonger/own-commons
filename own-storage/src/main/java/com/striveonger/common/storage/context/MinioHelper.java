@@ -21,10 +21,14 @@ import java.util.Map;
 public class MinioHelper {
     private final Logger log = LoggerFactory.getLogger(MinioHelper.class);
 
-    private final MinioClient client;
+    private final ExtMinioClient client;
 
     public MinioHelper(StorageConfig.MinioStoreConfig config) {
-        this.client = MinioClient.builder().endpoint(config.getEndpoint(), config.getPort(), config.getSecure()).credentials(config.getAccessKey(), config.getSecretKey()).build();
+        this(config.getEndpoint(), config.getPort(), config.getSecure(), config.getAccessKey(), config.getSecretKey());
+    }
+
+    public MinioHelper(String endpoint, int port, boolean secure, String accessKey, String secretKey) {
+        this.client = ExtMinioClient.of(MinioClient.builder().endpoint(endpoint, port, secure).credentials(accessKey, secretKey).build());
     }
 
     /**
@@ -273,4 +277,26 @@ public class MinioHelper {
     }
 
 
+    /**
+     * 扩展MinioClient
+     * super.createMultipartUpload 被弃用了, 自己实现一个呗
+     */
+    private static class ExtMinioClient extends MinioClient {
+
+        private ExtMinioClient(MinioClient client) {
+            super(client);
+        }
+
+        public static ExtMinioClient of(MinioClient client) {
+            return new ExtMinioClient(client);
+        }
+
+        //
+
+
+
+
+
+
+    }
 }
