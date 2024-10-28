@@ -1,6 +1,10 @@
 package com.striveonger.common.storage.context;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Pair;
+import com.striveonger.common.core.FileHelper;
+import com.striveonger.common.core.MarkGenerate;
+import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.storage.config.StorageConfig;
 import io.minio.*;
 import io.minio.messages.Bucket;
@@ -9,10 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Mr.Lee
@@ -276,6 +280,31 @@ public class MinioHelper {
         return false;
     }
 
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public MultipartUpload createMultipartUpload(String fileName, long fileSize, int chunkCount) {
+        return client.createMultipartUpload(fileName, fileSize, chunkCount);
+    }
+
+    public boolean uploadChunk(String fileId, byte[] bytes, int index) {
+        return client.uploadChunk(fileId, bytes, index);
+    }
+
+    public File mergeChunks(String fileId) {
+        return client.mergeChunks(fileId);
+    }
+
+    public boolean uploadMergedFile(String bucket, String filepath, String fileId) {
+        File file = client.mergeChunks(fileId);
+        byte[] bytes = FileUtil.readBytes(file);
+        return saveObject(bucket, filepath, bytes);
+    }
+
+    public boolean clear(String fileId) {
+        return client.clear(fileId);
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * 扩展MinioClient
@@ -283,20 +312,166 @@ public class MinioHelper {
      */
     private static class ExtMinioClient extends MinioClient {
 
-        private ExtMinioClient(MinioClient client) {
+        /**
+         * 分片上传的文件信息
+         */
+        private final Map<String, MultipartUpload> uploads = new ConcurrentHashMap<>();
+
+        private final String tempath;
+
+        private ExtMinioClient(MinioClient client, String tempath) {
             super(client);
+            this.tempath = tempath;
+        }
+
+        public static ExtMinioClient of(MinioClient client, String tempath) {
+            return new ExtMinioClient(client, tempath);
         }
 
         public static ExtMinioClient of(MinioClient client) {
-            return new ExtMinioClient(client);
+            return of(client, "/var/tmp");
         }
 
-        //
+        public MultipartUpload createMultipartUpload(String fileName, long fileSize, int chunkCount) {
+            MultipartUpload upload = new MultipartUpload(fileName, fileSize, chunkCount);
+            uploads.put(upload.getFileId(), upload);
+            // 初始化临时文件夹
+            String path = this.tempath + File.separator + upload.getFileId();
+            upload.setTempath(path);
+            FileHelper.of().mkdir(path);
+            return upload;
+        }
 
+        public boolean uploadChunk(String fileId, byte[] bytes, int index) {
+            // 多线程上传时, 避免乱序问题, 加入 chunk index
+            MultipartUpload upload = uploads.get(fileId);
+            boolean result = false;
+            if (Objects.nonNull(upload)) {
+                int len = String.valueOf(upload.getChunkCount()).length();
+                String filename = fileId + ".%0" + len + "d" + ".part";
+                File file = new File(upload.getTempath(), String.format(filename, index));
+                result = FileHelper.of().write(file, bytes);
+                FileChunk chunk = new FileChunk(file, index);
+                upload.uploadChunk(chunk);
+            }
+            return result;
+        }
 
+        /**
+         * 合并分片
+         * @param fileId
+         * @return
+         */
+        public File mergeChunks(String fileId) {
+            MultipartUpload upload = uploads.get(fileId);
+            if (Objects.nonNull(upload) && upload.isComplete()) {
+                if (Objects.nonNull(upload.getMergedFile())) {
+                    // 已经合并过了, 直接返回
+                    return upload.getMergedFile();
+                }
+                File target = new File(upload.getTempath(), upload.getFileName());
+                // 根据 index 排序
+                Comparator<FileChunk> comparator = Comparator.comparingInt(FileChunk::getIndex);
+                List<File> chunks = upload.getChunks().stream().sorted(comparator).map(FileChunk::getFile).toList();
+                FileHelper.of().mergeFile(chunks, target);
+                upload.setMergedFile(target);
+                return target;
+            } else {
+                String s = Objects.nonNull(upload) ? "文件上传不完整" : "文件ID不正确";
+                throw new CustomException(s + ", 导致文件合并失败").show();
+            }
+        }
 
+        public boolean clear(String fileId) {
+            MultipartUpload upload = uploads.remove(fileId);
+            if (Objects.nonNull(upload)) {
+                return FileHelper.of().delete(upload.getTempath());
+            }
+            return true;
+        }
+    }
 
+    public static class MultipartUpload {
+        private final String fileId;
+        private final String fileName;
+        private final long fileTotalSize;
+        private final int chunkCount;
+        private final List<FileChunk> chunks = new ArrayList<>();
 
+        private String tempath;
+        private File mergedFile;
 
+        public MultipartUpload(String fileName, long fileTotalSize, int chunkCount) {
+            this.fileId = MarkGenerate.build();
+            this.fileName = fileName;
+            this.fileTotalSize = fileTotalSize;
+            this.chunkCount = chunkCount;
+        }
+
+        public String getFileId() {
+            return fileId;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public long getFileTotalSize() {
+            return fileTotalSize;
+        }
+
+        public int getChunkCount() {
+            return chunkCount;
+        }
+
+        public List<FileChunk> getChunks() {
+            return chunks;
+        }
+
+        public String getTempath() {
+            return tempath;
+        }
+
+        public void setTempath(String tempath) {
+            this.tempath = tempath;
+        }
+
+        public File getMergedFile() {
+            return mergedFile;
+        }
+
+        public void setMergedFile(File mergedFile) {
+            this.mergedFile = mergedFile;
+        }
+
+        public synchronized void uploadChunk(FileChunk chunk) {
+            chunks.add(chunk);
+        }
+
+        /**
+         * 是否完整
+         */
+        public boolean isComplete() {
+            long total = chunks.stream().map(FileChunk::getFile).mapToLong(File::length).sum();
+            return chunks.size() == chunkCount && total == fileTotalSize;
+        }
+    }
+
+    public static class FileChunk {
+        private final File file;
+        private final int index;
+
+        public FileChunk(File file, int index) {
+            this.file = file;
+            this.index = index;
+        }
+
+        public File getFile() {
+            return file;
+        }
+
+        public int getIndex() {
+            return index;
+        }
     }
 }

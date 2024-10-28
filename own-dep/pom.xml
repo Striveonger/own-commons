@@ -53,6 +53,7 @@
         <junit.platform.version>1.9.1</junit.platform.version>
         <mockito.version>4.6.1</mockito.version>
         <minio.version>8.5.12</minio.version>
+        <byte-buddy.version>1.15.7</byte-buddy.version>
     </properties>
 
     <!--
@@ -215,6 +216,19 @@
                 <artifactId>HikariCP</artifactId>
                 <version>${hikari.version}</version>
             </dependency>
+
+            <!-- 字节码增强 -->
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${byte-buddy.version}</version>
+            </dependency>
+
 
             <!-- 引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目 -->
             <dependency>

@@ -5,7 +5,9 @@ import com.striveonger.common.core.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -59,6 +61,35 @@ public class FileHelper {
         }
     }
 
+    public boolean delete(String path) {
+        return delete(new File(path));
+    }
+
+    public boolean delete(File file) {
+        if (!file.exists()) {
+            return true;
+        }
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files!= null) {
+                for (File f : files) {
+                    delete(f);
+                }
+            }
+        }
+        return file.delete();
+    }
+
+    public boolean write(File file, byte[] bytes) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(bytes, 0, bytes.length);
+        } catch (Exception e) {
+            log.error("write file error...", e);
+            return false;
+        }
+        return true;
+    }
+
     public List<String> splitFile(String filePath, int size) {
         File file = new File(filePath);
         if (!file.exists() || !file.isFile()) {
@@ -107,25 +138,25 @@ public class FileHelper {
         return chunks;
     }
 
-    public void mergeFile(List<String> chunks, String file) {
+    public void mergeFile(List<String> chunks, String path) {
         List<File> files = new ArrayList<>();
         for (String chunk : chunks) {
             files.add(new File(chunk));
         }
-        mergeFile(files, new File(file));
+        mergeFile(files, new File(path));
     }
 
     /**
      * 合并文件
      * @param chunks 待合并文件列表
-     * @param file 合并后的文件
+     * @param target 合并后的文件
      */
-    public void mergeFile(List<File> chunks, File file) {
+    public void mergeFile(List<File> chunks, File target) {
         byte[] buffer = new byte[1024 * 1024];
-        if (file.exists()) {
-            file.delete();
+        if (target.exists()) {
+            target.delete();
         }
-        try (FileOutputStream fos = new FileOutputStream(file, true)) {
+        try (FileOutputStream fos = new FileOutputStream(target, true)) {
             for (File chunk : chunks) {
                 try (FileInputStream fis = new FileInputStream(chunk)) {
                     int bytesRead;
@@ -136,6 +167,13 @@ public class FileHelper {
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void mkdir(String path) {
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
         }
     }
 

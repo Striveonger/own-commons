@@ -2,11 +2,13 @@ package com.striveonger.common.storage.context;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Pair;
+import com.striveonger.common.core.FileHelper;
 import com.striveonger.common.core.Jackson;
 import com.striveonger.common.storage.config.StorageConfig;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -66,13 +68,29 @@ public class MinioHelperTest {
 
         List<Pair<String, String>> tags = helper.getObjectTags(bucket, "/music/20240920/001.mp3");
         System.out.println(Jackson.toJSONString(tags));
-
-
     }
 
 
+    @Test
+    public void test2() {
+        String path = "/Users/striveonger/tmp/image-script-exporter-1.0.0.tar";
+        File file = new File(path);
+        List<File> chunks = FileHelper.of().splitFile(file, 10);
 
+        MinioHelper.MultipartUpload upload = helper.createMultipartUpload("image-script-exporter-1.0.0.tar", file.length(), 8);
+        String fileId = upload.getFileId();
+        System.out.println(fileId);
+        int index = 0;
+        for (File chunk : chunks) {
+            byte[] bytes = FileUtil.readBytes(chunk);
+            helper.uploadChunk(fileId, bytes, index++);
+            chunk.delete();
+        }
+        File mergedFile = helper.mergeChunks(fileId);
 
-
+        System.out.println(mergedFile);
+        helper.uploadMergedFile("omm-deploy-resource", String.format("/deploy/resource/2024-10-28/%s.tar", fileId), fileId);
+        helper.clear(fileId);
+    }
 
 }

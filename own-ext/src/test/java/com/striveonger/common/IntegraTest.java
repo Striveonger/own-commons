@@ -1,6 +1,7 @@
 package com.striveonger.common;
 
 import com.striveonger.common.ext.annotation.aspect.TimepieceAspect;
+import com.striveonger.common.ext.annotation.process.ApiPresetProcess;
 import com.striveonger.common.ext.config.ExtAutoConfiguration;
 import jakarta.annotation.Resource;
 import org.junit.Test;
@@ -22,8 +23,14 @@ public class IntegraTest {
     @Resource
     V1 v1;
 
+    static {
+        ApiPresetProcess.process("com.striveonger.common");
+    }
+
     @Test
     public void test() {
         v1.run();
     }
+
+
 }
