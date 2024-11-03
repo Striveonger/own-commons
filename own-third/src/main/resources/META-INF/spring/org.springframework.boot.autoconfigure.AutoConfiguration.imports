@@ -1,1 +1,3 @@
 com.striveonger.common.third.ThirdAutoConfiguration
+com.striveonger.common.third.prometheus.metric.MetricsContext
+com.striveonger.common.third.prometheus.metric.TailMetricController

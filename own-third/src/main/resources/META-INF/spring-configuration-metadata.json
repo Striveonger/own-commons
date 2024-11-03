@@ -1,0 +1,39 @@
+{
+    "groups": [
+        {
+            "name": "own.prometheus",
+            "description": "prometheus 配置",
+            "type": "com.striveonger.common.third.prometheus.PrometheusConfig",
+            "sourceType": "com.striveonger.common.third.prometheus.PrometheusConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.prometheus.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否开启prometheus功能",
+            "required": false,
+            "defaultValue": false
+        },
+        {
+            "name": "own.prometheus.port",
+            "type": "java.lang.Integer",
+            "description": "prometheus 端口",
+            "required": false,
+            "defaultValue": 9090
+        },
+        {
+            "name": "own.prometheus.host",
+            "type": "java.lang.String",
+            "description": "prometheus 访问地址",
+            "required": true
+        },
+        {
+            "name": "own.prometheus.timeout",
+            "type": "java.lang.Integer",
+            "description": "prometheus 请求超时时间",
+            "required": false,
+            "defaultValue": 5000
+        }
+    ]
+}

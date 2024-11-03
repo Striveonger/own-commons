@@ -20,7 +20,7 @@ public class PrometheusSourceTest extends TestCase {
 
         PrometheusConfig config = new PrometheusConfig();
         config.setHost("192.168.10.100");
-        config.setPort("59090");
+        config.setPort(59090);
         config.setTimeout(5000);
         PrometheusHolds prometheus = PrometheusHolds.Builder.builder().config(config).build();
 
@@ -89,7 +89,7 @@ public class PrometheusSourceTest extends TestCase {
     public void test2() {
         PrometheusConfig config = new PrometheusConfig();
         config.setHost("10.13.144.116");
-        config.setPort("9090");
+        config.setPort(9090);
         config.setTimeout(5000);
         PrometheusHolds prometheus = PrometheusHolds.Builder.builder().config(config).build();
 

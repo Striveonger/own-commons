@@ -1,10 +1,12 @@
 package com.striveonger.common.third;
 
 import com.striveonger.common.third.prometheus.PrometheusConfig;
+import com.striveonger.common.third.prometheus.PrometheusHolds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
@@ -29,10 +31,11 @@ public class ThirdAutoConfiguration {
         return result.orElse(null);
     }
 
-
-
-
-
+    @Bean
+    @ConditionalOnBean(PrometheusConfig.class)
+    public PrometheusHolds prometheusExporter(PrometheusConfig config) {
+        return PrometheusHolds.Builder.builder().config(config).build();
+    }
 
 
 }

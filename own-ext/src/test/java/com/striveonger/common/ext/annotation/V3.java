@@ -11,4 +11,7 @@ import org.slf4j.LoggerFactory;
 public class V3 {
     private final Logger log = LoggerFactory.getLogger(V3.class);
 
+    public String hello() {
+        return "hello";
+    }
 }

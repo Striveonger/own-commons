@@ -12,4 +12,11 @@ import org.slf4j.LoggerFactory;
 public class V2 {
     private final Logger log = LoggerFactory.getLogger(V2.class);
 
+    public String hello() {
+        return "hello";
+    }
+
+    public String helloX(String x) {
+        return "hello " + x;
+    }
 }

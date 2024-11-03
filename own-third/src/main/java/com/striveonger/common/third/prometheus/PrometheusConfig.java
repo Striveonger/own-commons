@@ -12,11 +12,21 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "own.prometheus")
 public class PrometheusConfig {
 
+    private Boolean enabled;
+
     private String host;
 
-    private String port;
+    private Integer port;
 
-    private int timeout;
+    private Integer timeout;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getHost() {
         return host;
@@ -26,19 +36,19 @@ public class PrometheusConfig {
         this.host = host;
     }
 
-    public String getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
-    public int getTimeout() {
+    public Integer getTimeout() {
         return timeout;
     }
 
-    public void setTimeout(int timeout) {
+    public void setTimeout(Integer timeout) {
         this.timeout = timeout;
     }
 }
