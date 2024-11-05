@@ -67,7 +67,7 @@ public class Scanner {
                             list.add(clazz);
                         }
                     } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
+                        log.error("", e);
                     }
                 }
             }

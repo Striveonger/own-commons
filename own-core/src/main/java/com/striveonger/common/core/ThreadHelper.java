@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
  * @author Mr.Lee
@@ -13,6 +15,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadHelper {
     private static final Logger log = LoggerFactory.getLogger(ThreadHelper.class);
+
+
+    private static final AtomicInteger num = new AtomicInteger(0);
 
     /**
      * 秒级阻塞
@@ -40,8 +45,24 @@ public class ThreadHelper {
 
 
     public static Thread run(Runnable runnable) {
-        Thread thread = new Thread(runnable);
-        thread.start();
+        return ThreadHelper.run(runnable, "thread-helper-" + num.incrementAndGet(), true);
+    }
+
+
+    public static Thread run(Runnable runnable, String name) {
+        return ThreadHelper.run(runnable, name, true);
+    }
+
+
+    public static Thread run(Runnable runnable, boolean start) {
+        return ThreadHelper.run(runnable, "thread-helper-" + num.incrementAndGet(), start);
+    }
+
+    public static Thread run(Runnable runnable, String name, boolean start) {
+        Thread thread = new Thread(runnable, name);
+        if (start) {
+            thread.start();
+        }
         return thread;
     }
 

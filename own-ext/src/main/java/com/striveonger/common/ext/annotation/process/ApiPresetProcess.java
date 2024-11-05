@@ -1,5 +1,6 @@
 package com.striveonger.common.ext.annotation.process;
 
+import com.striveonger.common.core.loader.OwnClassLoader;
 import com.striveonger.common.ext.annotation.ApiPreset;
 import com.striveonger.common.ext.annotation.Scanner;
 import net.bytebuddy.ByteBuddy;
@@ -11,6 +12,7 @@ import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -27,44 +29,19 @@ import static net.bytebuddy.matcher.ElementMatchers.any;
 public class ApiPresetProcess {
     private static final Logger log = LoggerFactory.getLogger(ApiPresetProcess.class);
 
+    static {
+        process("com.striveonger.common");
+    }
+
+
     public static void process(String basePackage) {
         log.info("ApiPresetProcess process");
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        log.info("loader: {}", loader.getName());
         List<Class<?>> list = Scanner.of().list(basePackage, ApiPreset.class);
         for (Class<?> clazz : list) {
-            HelloInterceptor interceptor = new HelloInterceptor(clazz.getSimpleName());
-            // 使用Byte Buddy重新定义类
-            DynamicType.Builder<?> builder = new ByteBuddy().redefine(clazz).method(any()).intercept(MethodDelegation.to(HelloInterceptor.class));
-            // DynamicType.Builder<?> builder = new ByteBuddy().subclass(clazz).method("hello").intercept(MethodDelegation.to(interceptor));
-            try (DynamicType.Unloaded<?> unloaded = builder.make()) {
-                // 先卸载旧类
-                // 加载新定义的类
-                Class<?> newClass = unloaded.load(loader).getLoaded();
-                Object o = newClass.getDeclaredConstructor().newInstance();
-                Method hello = newClass.getMethod("helloX", String.class);
-                Object object = hello.invoke(o, clazz.toGenericString());
-                System.out.println(object);
-            } catch (Exception e) {
-                log.error("", e);
-            }
+            System.out.println(clazz.getName());
         }
     }
 
-    public static class HelloInterceptor {
 
-        private final String title;
-
-        public HelloInterceptor(String title) {
-            this.title = title;
-        }
-
-        @RuntimeType
-        public Object intercept(@Origin Method method, @AllArguments Object[] args, @SuperCall Callable<?> callable) throws Exception {
-            System.out.println(callable.getClass().getName());
-            callable.call();
-            return "Hello " + title;
-        }
-
-    }
 }

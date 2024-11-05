@@ -24,7 +24,7 @@ public class Metric {
     /**
      * 指标值
      */
-    private final String value;
+    private final Number value;
 
     /**
      * 指标时间
@@ -41,7 +41,7 @@ public class Metric {
      */
     private String help;
 
-    public Metric(Type type, String name, String value) {
+    public Metric(Type type, String name, Number value) {
         this.type = type;
         this.name = name;
         this.value = value;
@@ -89,18 +89,23 @@ public class Metric {
         /**
          * 计数器
          */
-        counter,
+        COUNTER,
         /**
          * 仪表盘
          */
-        gauge,
+        GAUGE,
         /**
          * 摘要
          */
-        summary,
+        SUMMARY,
         /**
          * 直方图
          */
-        histogram
+        HISTOGRAM;
+
+        @Override
+        public String toString() {
+            return super.toString().toLowerCase();
+        }
     }
 }

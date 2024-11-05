@@ -15,7 +15,7 @@ public class MetricsContextTest {
         ThreadHelper.run(() -> {
             for (int i = 0; i < 20; i++) {
                 ThreadHelper.sleepSeconds(1);
-                Metric metric = new Metric(Metric.Type.counter, "test", String.valueOf(i));
+                Metric metric = new Metric(Metric.Type.COUNTER, "test", i);
                 metric.setHelp("测试指标");
                 metric.setLabels(labels);
                 context.write(metric);
@@ -35,12 +35,12 @@ public class MetricsContextTest {
 
     @Test
     public void test2() {
-        Metric metric = new Metric(Metric.Type.counter, "test", "1");
+        Metric metric = new Metric(Metric.Type.COUNTER, "test", 1.2);
         metric.setHelp("测试指标");
         metric.setLabels(Map.of("a", "1", "b", "2"));
-        long timestamp = System.currentTimeMillis();
-        metric.setTimestamp(timestamp);
-        System.out.println(timestamp/ 1000);
+        // long timestamp = System.currentTimeMillis();
+        // metric.setTimestamp(timestamp);
+        // System.out.println(timestamp/ 1000);
         System.out.println(metric);
     }
 }
