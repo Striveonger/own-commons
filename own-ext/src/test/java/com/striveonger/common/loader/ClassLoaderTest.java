@@ -1,5 +1,7 @@
 package com.striveonger.common.loader;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.lang.TypeReference;
 import com.striveonger.common.core.Jackson;
 import com.striveonger.common.core.loader.OwnClassLoader;
 import com.striveonger.common.core.result.Result;
@@ -64,11 +66,10 @@ public class ClassLoaderTest {
 
         @RuntimeType
         public Object intercept(@Origin Method method, @AllArguments Object[] args, @SuperCall Callable<?> callable) throws Exception {
-            if (args[0] instanceof Map map) {
-                map.put("title", title);
-                return Result.success().data(map);
-            }
-            return Result.success().data(Map.of("title", title));
+            TypeReference<Map<String, String>> reference = new TypeReference<>() {};
+            Map<String, String> map = Convert.convert(reference, args[0]);
+            map.put("title", title);
+            return Result.success().data(map);
         }
 
     }
