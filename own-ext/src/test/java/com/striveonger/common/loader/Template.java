@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public interface Template {
 
-    Result list(Map<String, String> map);
+    default Result list(Map<String, String> map) {
+        return Result.accident();
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.striveonger.common.storage.constant;
+package com.striveonger.common.core.constant;
 
 import cn.hutool.core.util.StrUtil;
 

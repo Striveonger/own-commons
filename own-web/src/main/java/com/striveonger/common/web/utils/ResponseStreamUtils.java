@@ -1,9 +1,9 @@
-package com.striveonger.common.storage.web.utils;
+package com.striveonger.common.web.utils;
 
 import cn.hutool.core.io.IoUtil;
+import com.striveonger.common.core.constant.FileType;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
-import com.striveonger.common.storage.constant.FileType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,8 +19,8 @@ import java.util.function.Consumer;
  * @author Mr.Lee
  * @since 2024-07-26 00:32
  */
-public class FileStreamUtils {
-    private final static Logger log = LoggerFactory.getLogger(FileStreamUtils.class);
+public class ResponseStreamUtils {
+    private final static Logger log = LoggerFactory.getLogger(ResponseStreamUtils.class);
 
     /**
      * 导出文件, 由浏览器下载

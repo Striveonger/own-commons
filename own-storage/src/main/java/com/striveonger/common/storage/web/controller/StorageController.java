@@ -6,7 +6,7 @@ import com.striveonger.common.core.result.Result;
 import com.striveonger.common.core.vo.BasicSearchVo;
 import com.striveonger.common.storage.entity.FileEntity;
 import com.striveonger.common.storage.service.StorageService;
-import com.striveonger.common.storage.web.utils.FileStreamUtils;
+import com.striveonger.common.web.utils.ResponseStreamUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -77,6 +77,6 @@ public class StorageController {
             throw CustomException.of(ResultStatus.NOT_FOUND).message("未找到文件");
         }
         byte[] bytes = service.read(id, FILE);
-        FileStreamUtils.preview(entity.getFilename(), request, response, bytes);
+        ResponseStreamUtils.preview(entity.getFilename(), request, response, bytes);
     }
 }
