@@ -15,9 +15,11 @@ import com.striveonger.common.storage.context.Storage;
 import com.striveonger.common.storage.entity.FileEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.util.Objects;
 
@@ -25,7 +27,6 @@ import java.util.Objects;
  * @author Mr.Lee
  * @since 2024-09-11 21:58
  */
-@Service
 public class StorageService {
 
     private final Logger log = LoggerFactory.getLogger(StorageService.class);

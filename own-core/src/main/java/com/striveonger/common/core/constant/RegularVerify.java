@@ -20,6 +20,11 @@ public enum RegularVerify {
      * 变量名
      */
     VARIABLE("^[a-zA-Z][a-zA-Z\\d_]*$"),
+
+    /**
+     * 数字
+     */
+    NUMBER("^\\d+$"),
     ;
 
     private final Pattern pattern;

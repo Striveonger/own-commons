@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
  * @author Mr.Lee
  * @since 2024-08-21 13:56
  */
-@Configuration
-@ConfigurationProperties(prefix = "own.prometheus")
+// @Configuration
+// @ConfigurationProperties(prefix = "own.prometheus")
 public class PrometheusConfig {
 
     private Boolean enabled;
@@ -18,6 +18,9 @@ public class PrometheusConfig {
 
     private Integer port;
 
+    /**
+     * 超时时间，单位：毫秒
+     */
     private Integer timeout;
 
     public Boolean getEnabled() {

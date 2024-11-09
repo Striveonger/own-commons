@@ -1,20 +1,25 @@
 package com.striveonger.common.storage.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * 存储配置
  * @author Mr.Lee
  * @since 2024-09-06 18:22
  */
-@Configuration
-@ConfigurationProperties(prefix = "own.storage")
 public class StorageConfig {
+
+    private Boolean enabled;
 
     private FileStoreConfig file;
 
     private MinioStoreConfig minio;
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public FileStoreConfig getFile() {
         return file;

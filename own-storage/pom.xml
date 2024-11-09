@@ -29,7 +29,6 @@
             <groupId>com.striveonger.common</groupId>
             <artifactId>own-leaf</artifactId>
         </dependency>
-
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>

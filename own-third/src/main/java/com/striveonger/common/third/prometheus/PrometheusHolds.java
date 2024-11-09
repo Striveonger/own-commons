@@ -109,11 +109,11 @@ public class PrometheusHolds {
     }
 
     private String get(String url) {
-        return HttpUtil.get(url);
+        return HttpUtil.get(url, config.getTimeout());
     }
 
     private String post(String url, Map<String, Object> body) {
-        return HttpUtil.post(url, body);
+        return HttpUtil.post(url, body, config.getTimeout());
     }
 
     public static class Builder {

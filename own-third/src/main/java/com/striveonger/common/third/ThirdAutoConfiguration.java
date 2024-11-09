@@ -1,5 +1,9 @@
 package com.striveonger.common.third;
 
+import cn.hutool.core.util.StrUtil;
+import com.striveonger.common.core.constant.RegularVerify;
+import com.striveonger.common.core.constant.ResultStatus;
+import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.third.prometheus.PrometheusConfig;
 import com.striveonger.common.third.prometheus.PrometheusHolds;
 import org.slf4j.Logger;
@@ -13,6 +17,8 @@ import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
+import java.util.Objects;
+
 /**
  * @author Mr.Lee
  * @since 2024-08-27 22:42
@@ -22,13 +28,19 @@ import org.springframework.core.env.Environment;
 public class ThirdAutoConfiguration {
     private final Logger log = LoggerFactory.getLogger(ThirdAutoConfiguration.class);
 
-
     @Bean
     @ConditionalOnProperty(prefix = "own.prometheus", name = "enabled", havingValue = "true")
     public PrometheusConfig prometheusConfig(Environment environment) {
         Binder binder = Binder.get(environment);
         BindResult<PrometheusConfig> result = binder.bind("own.prometheus", PrometheusConfig.class);
-        return result.orElse(null);
+        PrometheusConfig config = result.get();
+        if (Objects.nonNull(config)
+                && StrUtil.isNotBlank(config.getHost())
+                && RegularVerify.PORT.verify(config.getPort())
+                && RegularVerify.NUMBER.verify(config.getTimeout())) {
+            return config;
+        }
+        throw new CustomException(ResultStatus.ACCIDENT, "Prometheus missing config info");
     }
 
     @Bean
