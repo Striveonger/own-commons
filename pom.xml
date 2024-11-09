@@ -47,7 +47,7 @@
         <module>own-leaf</module>
         <module>own-storage</module>
         <module>own-test</module>
-        <module>own-third</module>
+        <module>own-third-party</module>
         <module>own-user</module>
         <module>own-web</module>
     </modules>

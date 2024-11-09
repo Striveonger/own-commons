@@ -1,11 +1,9 @@
-package com.striveonger.common.third;
+package com.striveonger.common.third.prometheus;
 
 import cn.hutool.core.util.StrUtil;
 import com.striveonger.common.core.constant.RegularVerify;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
-import com.striveonger.common.third.prometheus.PrometheusConfig;
-import com.striveonger.common.third.prometheus.PrometheusHolds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -24,9 +22,9 @@ import java.util.Objects;
  * @since 2024-08-27 22:42
  */
 @AutoConfiguration
-@AutoConfigurationPackage(basePackages = {"com.striveonger.common.third.*"})
-public class ThirdAutoConfiguration {
-    private final Logger log = LoggerFactory.getLogger(ThirdAutoConfiguration.class);
+@AutoConfigurationPackage(basePackages = {"com.striveonger.common.third.prometheus.*"})
+public class PrometheusAutoConfiguration {
+    private final Logger log = LoggerFactory.getLogger(PrometheusAutoConfiguration.class);
 
     @Bean
     @ConditionalOnProperty(prefix = "own.prometheus", name = "enabled", havingValue = "true")
@@ -48,6 +46,5 @@ public class ThirdAutoConfiguration {
     public PrometheusHolds prometheusExporter(PrometheusConfig config) {
         return PrometheusHolds.Builder.builder().config(config).build();
     }
-
 
 }

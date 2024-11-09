@@ -109,8 +109,13 @@
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-third</artifactId>
+                <artifactId>own-third-party</artifactId>
                 <version>${own.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.striveonger.common</groupId>
+                <artifactId>own-prometheus</artifactId>
+                <version>1.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
@@ -297,7 +302,12 @@
         </dependency>
         <dependency>
             <groupId>com.striveonger.common</groupId>
-            <artifactId>own-third</artifactId>
+            <artifactId>own-third-party</artifactId>
+            <version>${own.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.striveonger.common</groupId>
+            <artifactId>own-prometheus</artifactId>
             <version>${own.version}</version>
         </dependency>
         <dependency>

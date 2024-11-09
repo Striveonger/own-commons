@@ -1,12 +1,10 @@
-package com.striveonger.common.prometheus;
+package com.striveonger.common.third.prometheus;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Pair;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.striveonger.common.third.prometheus.PrometheusConfig;
-import com.striveonger.common.third.prometheus.PrometheusHolds;
 import junit.framework.TestCase;
 import org.apache.poi.ss.usermodel.Cell;
 
