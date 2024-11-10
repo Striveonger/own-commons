@@ -1,40 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.striveonger.common</groupId>
-        <artifactId>own-parent</artifactId>
+        <artifactId>own-third-party</artifactId>
         <version>1.0.0</version>
     </parent>
-
-    <artifactId>own-ext</artifactId>
-    <packaging>jar</packaging>
-
-    <name>${project.artifactId}</name>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <artifactId>own-kubernetes</artifactId>
 
     <dependencies>
 
         <dependency>
             <groupId>com.striveonger.common</groupId>
-            <artifactId>own-core</artifactId>
+            <artifactId>own-ext</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
+            <groupId>io.kubernetes</groupId>
+            <artifactId>client-java</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -43,7 +31,6 @@
             <artifactId>own-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

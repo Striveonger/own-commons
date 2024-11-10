@@ -52,6 +52,7 @@ public class ClassLoaderTest {
         map.put("name", "Mr.Lee");
         Class<?> aClass = loader.loadClass(HelloTemplate.class.getName());
         HelloTemplate template = (HelloTemplate) aClass.getDeclaredConstructor().newInstance();
+        // HelloTemplate template = new HelloTemplate();
         Result result = template.list(map);
         System.out.println(Jackson.toJSONString(result));
     }

@@ -14,6 +14,7 @@
 
     <modules>
         <module>own-prometheus</module>
+        <module>own-kubernetes</module>
     </modules>
 
 </project>

@@ -56,24 +56,6 @@
         <byte-buddy.version>1.15.7</byte-buddy.version>
     </properties>
 
-    <!--
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-maven-plugin</artifactId>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
-    -->
-
     <dependencyManagement>
         <dependencies>
             <!-- own-commons -->
@@ -115,7 +97,12 @@
             <dependency>
                 <groupId>com.striveonger.common</groupId>
                 <artifactId>own-prometheus</artifactId>
-                <version>1.0.0</version>
+                <version>${own.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.striveonger.common</groupId>
+                <artifactId>own-kubernetes</artifactId>
+                <version>${own.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
@@ -312,6 +299,11 @@
         </dependency>
         <dependency>
             <groupId>com.striveonger.common</groupId>
+            <artifactId>own-kubernetes</artifactId>
+            <version>${own.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.striveonger.common</groupId>
             <artifactId>own-user</artifactId>
             <version>${own.version}</version>
         </dependency>
@@ -331,7 +323,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
-
         </plugins>
     </build>
 </project>

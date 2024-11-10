@@ -1,24 +1,11 @@
 package com.striveonger.common.ext.annotation.process;
 
-import com.striveonger.common.core.loader.OwnClassLoader;
 import com.striveonger.common.ext.annotation.ApiPreset;
 import com.striveonger.common.ext.annotation.Scanner;
-import net.bytebuddy.ByteBuddy;
-import net.bytebuddy.dynamic.DynamicType;
-import net.bytebuddy.implementation.MethodDelegation;
-import net.bytebuddy.implementation.bind.annotation.AllArguments;
-import net.bytebuddy.implementation.bind.annotation.Origin;
-import net.bytebuddy.implementation.bind.annotation.RuntimeType;
-import net.bytebuddy.implementation.bind.annotation.SuperCall;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.util.List;
-import java.util.concurrent.Callable;
-
-import static net.bytebuddy.matcher.ElementMatchers.any;
 
 /**
  * 添加预设的处理程序

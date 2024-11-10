@@ -26,9 +26,7 @@ public class OwnClassLoader extends ClassLoader {
     @Override
     protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         Class<?> clazz;
-        if (map.containsKey(name)) {
-            clazz = map.get(name);
-        } else {
+        if ((clazz = map.get(name)) == null) {
             clazz = super.loadClass(name, resolve);
         }
 
