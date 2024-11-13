@@ -9,7 +9,7 @@ public class KubernetesHoldsTest {
     @Test
     public void test() throws Exception {
         KubernetesConfig config = new KubernetesConfig();
-        KubernetesHolds kubernetes = new KubernetesHolds(config);
+        KubernetesKit kubernetes = new KubernetesKit(config);
         // ApiClient client = kubernetes.defaultClient();
         CoreV1Api api = new CoreV1Api();
         V1NodeList list = api.listNode().execute();

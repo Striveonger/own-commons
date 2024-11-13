@@ -12,9 +12,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public class MinioHelperTest {
+public class MinioKitTest {
 
-    private MinioHelper helper;
+    private MinioKit helper;
 
     @Before
     public void before() {
@@ -24,7 +24,7 @@ public class MinioHelperTest {
         config.setSecure(false);
         config.setAccessKey("BSIgjjn67zEEAoB5rCGG");
         config.setSecretKey("RuIvDSXRgsiMa9vtgDebTP2fq8bPjMCTUhIAcQxR");
-        helper = new MinioHelper(config);
+        helper = new MinioKit(config);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class MinioHelperTest {
         File file = new File(path);
         List<File> chunks = FileHelper.of().splitFile(file, 10);
 
-        MinioHelper.MultipartUpload upload = helper.createMultipartUpload("image-script-exporter-1.0.0.tar", file.length(), 8);
+        MinioKit.MultipartUpload upload = helper.createMultipartUpload("image-script-exporter-1.0.0.tar", file.length(), 8);
         String fileId = upload.getFileId();
         System.out.println(fileId);
         int index = 0;

@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Mr.Lee
  * @since 2024-11-04 10:01
  */
-public class RandomHelper {
+public class RandomKit {
 
     public static String randomString(int length) {
         char[] chars = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L','M', 'N', 'O', 'P', 'Q', 'R','S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};

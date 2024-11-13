@@ -7,14 +7,13 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicIntegerArray;
 
 /**
  * @author Mr.Lee
  * @since 2024-09-17 12:25
  */
-public class ThreadHelper {
-    private static final Logger log = LoggerFactory.getLogger(ThreadHelper.class);
+public class ThreadKit {
+    private static final Logger log = LoggerFactory.getLogger(ThreadKit.class);
 
 
     private static final AtomicInteger num = new AtomicInteger(0);
@@ -45,17 +44,17 @@ public class ThreadHelper {
 
 
     public static Thread run(Runnable runnable) {
-        return ThreadHelper.run(runnable, "thread-helper-" + num.incrementAndGet(), true);
+        return ThreadKit.run(runnable, "thread-helper-" + num.incrementAndGet(), true);
     }
 
 
     public static Thread run(Runnable runnable, String name) {
-        return ThreadHelper.run(runnable, name, true);
+        return ThreadKit.run(runnable, name, true);
     }
 
 
     public static Thread run(Runnable runnable, boolean start) {
-        return ThreadHelper.run(runnable, "thread-helper-" + num.incrementAndGet(), start);
+        return ThreadKit.run(runnable, "thread-helper-" + num.incrementAndGet(), start);
     }
 
     public static Thread run(Runnable runnable, String name, boolean start) {
@@ -80,5 +79,8 @@ public class ThreadHelper {
             log.error("{}, Interrupted...By ThreadHelper", Thread.currentThread().getName(), e);
         }
     }
+
+    //======================线程池相关=========================
+
 
 }

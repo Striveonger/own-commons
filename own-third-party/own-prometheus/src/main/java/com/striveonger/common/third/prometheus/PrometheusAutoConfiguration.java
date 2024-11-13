@@ -43,8 +43,8 @@ public class PrometheusAutoConfiguration {
 
     @Bean
     @ConditionalOnBean(PrometheusConfig.class)
-    public PrometheusHolds prometheusExporter(PrometheusConfig config) {
-        return PrometheusHolds.Builder.builder().config(config).build();
+    public PrometheusKit prometheusExporter(PrometheusConfig config) {
+        return PrometheusKit.Builder.builder().config(config).build();
     }
 
 }

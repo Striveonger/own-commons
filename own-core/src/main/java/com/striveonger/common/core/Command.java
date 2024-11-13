@@ -141,7 +141,7 @@ public class Command {
             this.console = console;
             if (Status.RUNNING == status && null != process) {
                 InputStream inputStream = process.getInputStream();
-                this.outputThread = ThreadHelper.run(() -> {
+                this.outputThread = ThreadKit.run(() -> {
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, UTF_8))) {
                         String line;
                         while ((line = reader.readLine()) != null) {
@@ -153,7 +153,7 @@ public class Command {
                     }
                 });
 
-                this.executeThread = ThreadHelper.run(() -> {
+                this.executeThread = ThreadKit.run(() -> {
                     try {
                         int exitCode = process.waitFor();
                         if (exitCode == 0) {
@@ -192,8 +192,8 @@ public class Command {
          * 等待命令执行结束
          */
         public void await() {
-            ThreadHelper.join(executeThread);
-            ThreadHelper.join(outputThread);
+            ThreadKit.join(executeThread);
+            ThreadKit.join(outputThread);
         }
 
         private void execallbakk() {

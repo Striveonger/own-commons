@@ -1,4 +1,4 @@
-package com.striveonger.common.web.utils;
+package com.striveonger.common.web;
 
 import cn.hutool.core.io.IoUtil;
 import com.striveonger.common.core.constant.FileType;
@@ -19,8 +19,8 @@ import java.util.function.Consumer;
  * @author Mr.Lee
  * @since 2024-07-26 00:32
  */
-public class ResponseStreamUtils {
-    private final static Logger log = LoggerFactory.getLogger(ResponseStreamUtils.class);
+public class ResponseStreamKit {
+    private final static Logger log = LoggerFactory.getLogger(ResponseStreamKit.class);
 
     /**
      * 导出文件, 由浏览器下载

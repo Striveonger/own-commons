@@ -20,13 +20,13 @@ import java.util.Objects;
  * @author Mr.Lee
  * @since 2024-08-26 09:54
  */
-public class KubernetesHolds {
-    private final Logger log = LoggerFactory.getLogger(KubernetesHolds.class);
+public class KubernetesKit {
+    private final Logger log = LoggerFactory.getLogger(KubernetesKit.class);
 
     /**
      * 默认的创建方式
      */
-    public KubernetesHolds(KubernetesConfig config) {
+    public KubernetesKit(KubernetesConfig config) {
         try {
             ApiClient client;
             if (Objects.isNull(config) || StrUtil.isBlank(config.getKubeConfigPath())) {

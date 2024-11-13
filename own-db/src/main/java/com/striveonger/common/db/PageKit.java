@@ -1,4 +1,4 @@
-package com.striveonger.common.db.utils;
+package com.striveonger.common.db;
 
 import com.mybatisflex.core.paginate.Page;
 import com.striveonger.common.core.result.Result;
@@ -9,7 +9,7 @@ import java.util.function.Function;
  * @author Mr.Lee
  * @since 2024-04-09 11:37
  */
-public class PageUtil {
+public class PageKit {
 
     public static <T, R> Result.Page<R> convert(Page<T> page, Function<T, R> converter) {
         Result.Page<R> result = new Result.Page<>();

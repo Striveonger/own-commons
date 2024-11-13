@@ -30,10 +30,9 @@ public class Result implements Serializable {
     private String code;
 
     /**
-     * 响应状态
+     * 响应信息
      */
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Boolean show;
+    private String message;
 
     /**
      * 响应时间
@@ -42,12 +41,13 @@ public class Result implements Serializable {
     private final LocalDateTime now = LocalDateTime.now();
 
     /**
-     * 响应信息
+     * message 前端是否显示
      */
-    private String message;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean show;
 
     /**
-     * 用户前端是否显示
+     * 响应数据
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;

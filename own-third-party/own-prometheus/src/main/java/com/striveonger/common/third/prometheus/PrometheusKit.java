@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  * @author Mr.Lee
  * @since 2024-08-21 13:55
  */
-public class PrometheusHolds {
-    private final Logger log = LoggerFactory.getLogger(PrometheusHolds.class);
+public class PrometheusKit {
+    private final Logger log = LoggerFactory.getLogger(PrometheusKit.class);
 
     /**
      * 配置类
@@ -38,7 +38,7 @@ public class PrometheusHolds {
      */
     // todo 后面再实现吧...
     // private HttpClient client;
-    private PrometheusHolds(PrometheusConfig config) {
+    private PrometheusKit(PrometheusConfig config) {
         this.config = config;
         this.host = "http://" + config.getHost() + ":" + config.getPort();
     }
@@ -130,9 +130,9 @@ public class PrometheusHolds {
             return this;
         }
 
-        public PrometheusHolds build() {
+        public PrometheusKit build() {
             if (Objects.nonNull(this.config)) {
-                return new PrometheusHolds(config);
+                return new PrometheusKit(config);
             }
             throw CustomException.of(ResultStatus.NON_SUPPORT).message("缺少必要的配置项").show();
         }

@@ -22,16 +22,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Mr.Lee
  * @since 2024-09-21 09:31
  */
-public class MinioHelper {
-    private final Logger log = LoggerFactory.getLogger(MinioHelper.class);
+public class MinioKit {
+    private final Logger log = LoggerFactory.getLogger(MinioKit.class);
 
     private final ExtMinioClient client;
 
-    public MinioHelper(StorageConfig.MinioStoreConfig config) {
+    public MinioKit(StorageConfig.MinioStoreConfig config) {
         this(config.getEndpoint(), config.getPort(), config.getSecure(), config.getAccessKey(), config.getSecretKey());
     }
 
-    public MinioHelper(String endpoint, int port, boolean secure, String accessKey, String secretKey) {
+    public MinioKit(String endpoint, int port, boolean secure, String accessKey, String secretKey) {
         this.client = ExtMinioClient.of(MinioClient.builder().endpoint(endpoint, port, secure).credentials(accessKey, secretKey).build());
     }
 

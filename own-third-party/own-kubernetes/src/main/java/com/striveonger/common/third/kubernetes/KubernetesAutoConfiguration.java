@@ -21,10 +21,10 @@ public class KubernetesAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "own.kubernetes", name = "enabled", havingValue = "true")
-    public KubernetesHolds kubernetes(Environment environment) {
+    public KubernetesKit kubernetes(Environment environment) {
         Binder binder = Binder.get(environment);
         BindResult<KubernetesConfig> result = binder.bind("own.kubernetes", KubernetesConfig.class);
         KubernetesConfig config = result.orElse(null);
-        return new KubernetesHolds(config);
+        return new KubernetesKit(config);
     }
 }

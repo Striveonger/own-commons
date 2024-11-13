@@ -17,13 +17,13 @@ import java.util.List;
  * @author Mr.Lee
  * @since 2023-06-17 18:28
  */
-public class FileHelper {
-    private static final Logger log = LoggerFactory.getLogger(FileHelper.class);
+public class FileKit {
+    private static final Logger log = LoggerFactory.getLogger(FileKit.class);
 
-    private FileHelper() {}
+    private FileKit() {}
 
-    public static FileHelper of() {
-        return new FileHelper();
+    public static FileKit of() {
+        return new FileKit();
     }
 
     /**

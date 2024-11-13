@@ -5,7 +5,7 @@ package com.striveonger.common.core.vo;
  * @author Mr.Lee
  * @since 2024-09-13 22:43
  */
-public class BasicSearchVo {
+public class BasicVo {
 
     private Integer from;
 
