@@ -7,7 +7,7 @@
     <groupId>com.striveonger.common</groupId>
     <artifactId>own-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
 
     <name>own-parent</name>
     <description>自己常用的一些工具包, 旨在可以快速构建自己熟悉的开发环境.</description>
