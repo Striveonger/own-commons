@@ -11,7 +11,7 @@ import java.util.function.Function;
  */
 public class PageUtil {
 
-    public static <T, R> Result.Page<R> convertResultPage(Page<T> page, Function<T, R> converter) {
+    public static <T, R> Result.Page<R> convert(Page<T> page, Function<T, R> converter) {
         Result.Page<R> result = new Result.Page<>();
         result.setForm(page.getPageNumber());
         result.setSize(page.getPageSize());
@@ -20,7 +20,7 @@ public class PageUtil {
         return result;
     }
 
-    public static <T> Result.Page<T> convertResultPage(Page<T> page) {
+    public static <T> Result.Page<T> convert(Page<T> page) {
         Result.Page<T> result = new Result.Page<>();
         result.setForm(page.getPageNumber());
         result.setSize(page.getPageSize());

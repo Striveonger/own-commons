@@ -1,16 +1,12 @@
 package com.striveonger.common.leaf.core.snowflake;
 
-import cn.hutool.core.date.SystemClock;
 import cn.hutool.core.lang.Assert;
-import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.leaf.core.ID;
 import com.striveonger.common.leaf.core.IDGen;
-import com.striveonger.common.leaf.core.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
 import java.util.Random;
 
 import static com.striveonger.common.core.constant.ResultStatus.NON_SUPPORT;

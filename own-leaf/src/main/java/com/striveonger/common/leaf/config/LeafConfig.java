@@ -1,8 +1,5 @@
 package com.striveonger.common.leaf.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
 import java.util.Objects;
 
 import static com.striveonger.common.leaf.core.snowflake.SnowflakeIDGen.DEFAULT_WORKER_ID;

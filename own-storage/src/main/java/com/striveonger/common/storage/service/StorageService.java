@@ -15,11 +15,8 @@ import com.striveonger.common.storage.context.Storage;
 import com.striveonger.common.storage.entity.FileEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
 import java.io.File;
 import java.util.Objects;
 
@@ -78,7 +75,7 @@ public class StorageService {
             wrapper.where(FileEntity::getFilename).like(vo.getSearch());
         }
         wrapper.orderBy(FileEntity::getCreateTime, false);
-        return PageUtil.convertResultPage(fileService.page(page, wrapper));
+        return PageUtil.convert(fileService.page(page, wrapper));
     }
 
     public FileEntity get(String id) {

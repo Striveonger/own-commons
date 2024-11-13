@@ -2,7 +2,6 @@ package com.striveonger.common.leaf.core;
 
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
-import com.striveonger.common.leaf.config.LeafConfig;
 import com.striveonger.common.leaf.core.segment.SegmentIDGen;
 import com.striveonger.common.leaf.core.snowflake.SnowflakeIDGen;
 import org.slf4j.Logger;
