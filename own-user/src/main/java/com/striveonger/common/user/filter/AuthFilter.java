@@ -24,7 +24,7 @@ import java.util.Objects;
  * @since 2024-07-21 21:19
  */
 @Component
-@Order(1)
+@Order(5)
 @WebFilter(filterName = "authFilter", urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
     private final Logger log = LoggerFactory.getLogger(AuthFilter.class);

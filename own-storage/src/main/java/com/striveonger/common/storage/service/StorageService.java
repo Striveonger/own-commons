@@ -8,8 +8,8 @@ import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
 import com.striveonger.common.core.constant.FileHash;
-import com.striveonger.common.core.vo.BasicSearchVo;
-import com.striveonger.common.db.utils.PageUtil;
+import com.striveonger.common.core.vo.BasicVo;
+import com.striveonger.common.db.PageKit;
 import com.striveonger.common.leaf.core.IDGen;
 import com.striveonger.common.storage.context.Storage;
 import com.striveonger.common.storage.entity.FileEntity;
@@ -68,14 +68,14 @@ public class StorageService {
         }
     }
 
-    public Result.Page<FileEntity> list(BasicSearchVo vo) {
+    public Result.Page<FileEntity> list(BasicVo vo) {
         Page<FileEntity> page = new Page<>(vo.getFrom(), vo.getSize());
         QueryWrapper wrapper = QueryWrapper.create();
         if (StrUtil.isNotBlank(vo.getSearch())) {
             wrapper.where(FileEntity::getFilename).like(vo.getSearch());
         }
         wrapper.orderBy(FileEntity::getCreateTime, false);
-        return PageUtil.convert(fileService.page(page, wrapper));
+        return PageKit.convert(fileService.page(page, wrapper));
     }
 
     public FileEntity get(String id) {

@@ -2,7 +2,7 @@ package com.striveonger.common.storage.context;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Pair;
-import com.striveonger.common.core.FileHelper;
+import com.striveonger.common.core.FileKit;
 import com.striveonger.common.core.Jackson;
 import com.striveonger.common.storage.config.StorageConfig;
 import org.junit.Before;
@@ -75,7 +75,8 @@ public class MinioKitTest {
     public void test2() {
         String path = "/Users/striveonger/tmp/image-script-exporter-1.0.0.tar";
         File file = new File(path);
-        List<File> chunks = FileHelper.of().splitFile(file, 10);
+
+        List<File> chunks = FileKit.of().splitFile(file, 10);
 
         MinioKit.MultipartUpload upload = helper.createMultipartUpload("image-script-exporter-1.0.0.tar", file.length(), 8);
         String fileId = upload.getFileId();

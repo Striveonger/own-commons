@@ -2,7 +2,7 @@ package com.striveonger.common.storage.context;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Pair;
-import com.striveonger.common.core.FileHelper;
+import com.striveonger.common.core.FileKit;
 import com.striveonger.common.core.MarkGenerate;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.storage.config.StorageConfig;
@@ -338,7 +338,7 @@ public class MinioKit {
             // 初始化临时文件夹
             String path = this.tempath + File.separator + upload.getFileId();
             upload.setTempath(path);
-            FileHelper.of().mkdir(path);
+            FileKit.of().mkdir(path);
             return upload;
         }
 
@@ -350,7 +350,7 @@ public class MinioKit {
                 int len = String.valueOf(upload.getChunkCount()).length();
                 String filename = fileId + ".%0" + len + "d" + ".part";
                 File file = new File(upload.getTempath(), String.format(filename, index));
-                result = FileHelper.of().write(file, bytes);
+                result = FileKit.of().write(file, bytes);
                 FileChunk chunk = new FileChunk(file, index);
                 upload.uploadChunk(chunk);
             }
@@ -371,9 +371,9 @@ public class MinioKit {
                 }
                 File target = new File(upload.getTempath(), upload.getFileName());
                 // 根据 index 排序
-                Comparator<FileChunk> comparator = Comparator.comparingInt(FileChunk::getIndex);
-                List<File> chunks = upload.getChunks().stream().sorted(comparator).map(FileChunk::getFile).toList();
-                FileHelper.of().mergeFile(chunks, target);
+                Comparator<FileChunk> comparator = Comparator.comparingInt(FileChunk::index);
+                List<File> chunks = upload.getChunks().stream().sorted(comparator).map(FileChunk::file).toList();
+                FileKit.of().mergeFile(chunks, target);
                 upload.setMergedFile(target);
                 return target;
             } else {
@@ -385,7 +385,7 @@ public class MinioKit {
         public boolean clear(String fileId) {
             MultipartUpload upload = uploads.remove(fileId);
             if (Objects.nonNull(upload)) {
-                return FileHelper.of().delete(upload.getTempath());
+                return FileKit.of().delete(upload.getTempath());
             }
             return true;
         }
@@ -452,26 +452,10 @@ public class MinioKit {
          * 是否完整
          */
         public boolean isComplete() {
-            long total = chunks.stream().map(FileChunk::getFile).mapToLong(File::length).sum();
+            long total = chunks.stream().map(FileChunk::file).mapToLong(File::length).sum();
             return chunks.size() == chunkCount && total == fileTotalSize;
         }
     }
 
-    public static class FileChunk {
-        private final File file;
-        private final int index;
-
-        public FileChunk(File file, int index) {
-            this.file = file;
-            this.index = index;
-        }
-
-        public File getFile() {
-            return file;
-        }
-
-        public int getIndex() {
-            return index;
-        }
-    }
+    public record FileChunk(File file, int index) { }
 }

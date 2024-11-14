@@ -3,10 +3,10 @@ package com.striveonger.common.storage.web.controller;
 import com.striveonger.common.core.constant.ResultStatus;
 import com.striveonger.common.core.exception.CustomException;
 import com.striveonger.common.core.result.Result;
-import com.striveonger.common.core.vo.BasicSearchVo;
+import com.striveonger.common.core.vo.BasicVo;
 import com.striveonger.common.storage.entity.FileEntity;
 import com.striveonger.common.storage.service.StorageService;
-import com.striveonger.common.web.utils.ResponseStreamUtils;
+import com.striveonger.common.web.ResponseStreamKit;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -65,7 +65,7 @@ public class StorageController {
 
     @GetMapping("/file/list")
     @ResponseBody
-    public Result list(BasicSearchVo vo) {
+    public Result list(BasicVo vo) {
         Result.Page<FileEntity> data = service.list(vo);
         return Result.success().page(data);
     }
@@ -77,6 +77,6 @@ public class StorageController {
             throw CustomException.of(ResultStatus.NOT_FOUND).message("未找到文件");
         }
         byte[] bytes = service.read(id, FILE);
-        ResponseStreamUtils.preview(entity.getFilename(), request, response, bytes);
+        ResponseStreamKit.preview(entity.getFilename(), request, response, bytes);
     }
 }

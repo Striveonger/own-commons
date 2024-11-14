@@ -1,18 +1,32 @@
 # own-commons
 Some of their commonly used tool classes.
 
-## 1. own-common-core
+## own-core
 包含了一些常用的工具类, 如: 统一的返回格式, 基础的错误码定义, 日志打印等... 
-## 2. own-common-db
+## own-db
 包含了一些数据库相关的工具类, 如: 数据库连接池, 数据库操作, 数据库事务等...
-## 3. own-common-leaf
+## own-ext 
+包含了一些扩展功能.
+## own-leaf
 包含了一些分布式ID生成器相关的工具类, 如: Snowflake, 美团雪花算法等...
-## 4. own-common-store
+## own-storage
 包含了一些存储相关的工具类, 如: MiniO, 阿里OSS, 腾讯云OSS等...
-## 5. own-common-third
+## own-test 
+测试相关
+## own-own-third-party
 包含了一些第三方工具类, 如: Prometheus, Kubernetes, Redis等...
 > 不在配置中引入相关配置, 对应工具类, 不会加载到SpringIOC容器中, 可以根据需要引入相关配置
-## 6. own-common-user
+## own-user
 包含了一些用户相关的工具类, 如: 密码加密, 密码校验等...
-## 7. own-common-web
+## own-web
 包含了一些Web相关的工具类, 如: 验证码, 图片验证码等...
+
+
+
+---
+开发计划: 
+ - own-task 
+ - own-redis
+ - own-rabbit
+ - own-web: 添加当前请求的依赖注入, 以及对请求添加相应增强方法
+ 

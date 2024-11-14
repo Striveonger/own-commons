@@ -31,7 +31,6 @@ import javax.sql.DataSource;
 public class StorageAutoConfiguration {
     private final Logger log = LoggerFactory.getLogger(StorageAutoConfiguration.class);
 
-
     @Bean
     @ConditionalOnProperty(prefix = "own.storage", name = "enabled", havingValue = "true")
     public StorageConfig prometheusConfig(Environment environment) {

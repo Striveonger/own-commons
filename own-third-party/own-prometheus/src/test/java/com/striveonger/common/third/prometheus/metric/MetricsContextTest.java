@@ -1,6 +1,6 @@
 package com.striveonger.common.third.prometheus.metric;
 
-import com.striveonger.common.core.ThreadHelper;
+import com.striveonger.common.core.ThreadKit;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,9 +12,10 @@ public class MetricsContextTest {
     public void test() {
         MetricsContext context = new MetricsContext();
         Map<String, String> labels = Map.of("a", "1", "b", "2");
-        ThreadHelper.run(() -> {
+
+        ThreadKit.run(() -> {
             for (int i = 0; i < 20; i++) {
-                ThreadHelper.sleepSeconds(1);
+                ThreadKit.sleepSeconds(1);
                 Metric metric = new Metric(Metric.Type.COUNTER, "test", i);
                 metric.setHelp("测试指标");
                 metric.setLabels(labels);
@@ -22,15 +23,15 @@ public class MetricsContextTest {
             }
         });
 
-        ThreadHelper.run(() -> {
+        ThreadKit.run(() -> {
             while (true) {
                 List<Metric> metrics = context.readAll();
                 System.out.println(metrics);
-                ThreadHelper.sleepSeconds(5);
+                ThreadKit.sleepSeconds(5);
             }
         });
 
-        ThreadHelper.sleepSeconds(1000);
+        ThreadKit.sleepSeconds(1000);
     }
 
     @Test
