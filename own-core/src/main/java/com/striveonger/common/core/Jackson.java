@@ -68,6 +68,10 @@ public class Jackson {
         return null;
     }
 
+    public static <T> TypeReference<T> type() {
+        return new TypeReference<>() {};
+    }
+
     public static <T> T toObject(String s, TypeReference<T> type) {
         try {
             return mapper.readValue(s, type);
