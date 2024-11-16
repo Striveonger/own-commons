@@ -12,14 +12,20 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.jayway.jsonpath.JsonPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+
+import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
 
 /**
  * JSON 辅助工具
@@ -39,6 +45,10 @@ public class Jackson {
                 .build();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        JavaTimeModule module = new JavaTimeModule();
+        module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(NORM_DATETIME_PATTERN)));
+        module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(NORM_DATETIME_PATTERN)));
+        mapper.registerModule(module);
     }
 
     public static String toJSONString(Object o) {
@@ -68,14 +78,6 @@ public class Jackson {
         return null;
     }
 
-    public static <T> TypeReference<T> type() {
-        return new TypeReference<>() {};
-    }
-
-    public static <T> T toObject(String s) {
-        return toObject(s, type());
-    }
-
     public static <T> T toObject(String s, TypeReference<T> type) {
         try {
             return mapper.readValue(s, type);
@@ -94,6 +96,11 @@ public class Jackson {
         return mapper;
     }
 
+    /**
+     * JSON 字符串 转成 JsonNode 对象
+     * @param props
+     * @return
+     */
     public static JsonNode toJsonNode(String props) {
         try {
             return mapper.readTree(props);
@@ -104,6 +111,11 @@ public class Jackson {
         return null;
     }
 
+    /**
+     * 对象 转成 JsonNode 对象
+     * @param object
+     * @return
+     */
     public static JsonNode toJsonNode(Object object) {
         return mapper.valueToTree(object);
     }
@@ -164,16 +176,15 @@ public class Jackson {
         String split = "\\.";
 
         private Builder() {
-            root = Jackson.toObjectNode("{}");
+            root = Jackson.createObjectNode();
         }
 
         private Builder(String split) {
             this.split = split;
-            root = Jackson.toObjectNode("{}");
+            root = Jackson.createObjectNode();
         }
 
         private Builder(Map<String, Object> root) {
-            // this.root = JacksonUtils.toObjectNode(JacksonUtils.toJSONString(root));
             this.root = Jackson.getMapper().convertValue(root, ObjectNode.class);
         }
 
@@ -182,12 +193,12 @@ public class Jackson {
                 this.split = split;
             }
             if (Objects.nonNull(root)) {
-                this.root = Optional.ofNullable(Jackson.toJSONString(root)).map(Jackson::toObjectNode).orElse(Jackson.toObjectNode("{}"));
+                this.root = Optional.ofNullable(Jackson.toJSONString(root)).map(Jackson::toObjectNode).orElse(Jackson.createObjectNode());
             }
         }
 
         public Builder reset() {
-            root = Jackson.toObjectNode("{}");
+            root = Jackson.createObjectNode();
             return this;
         }
 
@@ -205,6 +216,10 @@ public class Jackson {
             return root;
         }
 
+        public ObjectNode build() {
+            return root;
+        }
+
         @Override
         public String toString() {
             return root.toString();
@@ -216,6 +231,7 @@ public class Jackson {
 
         private void put(ObjectNode node, String key, Object value) {
             if (node == null) {
+                // ignore
             } else if(value == null) {
                 node.putNull(key);
             } else {

@@ -18,7 +18,7 @@ public class V1 {
     public void run() {
         for (int i = 0; i < 5; i++) {
             log.info("V1 {}", i);
-            ThreadKit.sleepMilliSeconds(300);
+            ThreadKit.sleep(300);
         }
     }
 }

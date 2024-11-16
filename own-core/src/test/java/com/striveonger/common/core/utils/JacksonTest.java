@@ -1,8 +1,10 @@
 package com.striveonger.common.core.utils;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.striveonger.common.core.Jackson;
+import com.striveonger.common.core.result.Result;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Mr.Lee
@@ -53,7 +56,7 @@ public class JacksonTest {
         // https://github.com/json-path/JsonPath 使用文档
 
         ObjectNode root = Jackson.builder()
-                .put("A.B.C", "1")
+                .put("A.B.C", "sss")
                 .put("A.B.D", 2)
                 .put("A.B.E", 3.14)
                 .put("A.B.F", List.of("a", "b", "c")).getRootNode();
@@ -75,6 +78,18 @@ public class JacksonTest {
         List<Double> fs = Jackson.eval(array, "$..A.B.E");
         System.out.println(fs);
 
+    }
+
+    @Test
+    public void test3() {
+        String s = Jackson.toJSONString(Result.success().message("so so so easy"));
+
+        Result result = Optional.ofNullable(Jackson.toObject(s, Result.class)).orElse(Result.accident());
+        System.out.println(result.getMessage());
+
+        Object xxx = "SSS";
+        JsonNode node = Jackson.toJsonNode(xxx);
+        System.out.println(node);
     }
 
 }

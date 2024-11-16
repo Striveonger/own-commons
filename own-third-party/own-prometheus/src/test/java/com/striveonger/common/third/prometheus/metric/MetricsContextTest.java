@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class MetricsContextTest {
 
@@ -15,7 +16,7 @@ public class MetricsContextTest {
 
         ThreadKit.run(() -> {
             for (int i = 0; i < 20; i++) {
-                ThreadKit.sleepSeconds(1);
+                ThreadKit.sleep(1, TimeUnit.SECONDS);
                 Metric metric = new Metric(Metric.Type.COUNTER, "test", i);
                 metric.setHelp("测试指标");
                 metric.setLabels(labels);
@@ -27,11 +28,11 @@ public class MetricsContextTest {
             while (true) {
                 List<Metric> metrics = context.readAll();
                 System.out.println(metrics);
-                ThreadKit.sleepSeconds(5);
+                ThreadKit.sleep(5, TimeUnit.SECONDS);
             }
         });
 
-        ThreadKit.sleepSeconds(1000);
+        ThreadKit.sleep(1000, TimeUnit.SECONDS);
     }
 
     @Test
