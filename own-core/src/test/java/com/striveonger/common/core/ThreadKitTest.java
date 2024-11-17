@@ -50,33 +50,40 @@ public class ThreadKitTest {
         }
         System.out.println("------------------------------------------------------------------");
 
-        // 2. 多线程上下文(错误示范)
-        ThreadContext<Object> context = ThreadKit.context();
-        context.set("123456");
-        System.out.println(context.get());      // 123456
-        ThreadKit.pool().build().submit(() -> {
-            System.out.println(context.get());  // null
-            ThreadKit.sleep(1000);
-            context.set("456789");
-            System.out.println(context.get());  // 456789
-
-            Thread.currentThread().getThreadGroup().getParent();
-        });
-        ThreadKit.sleep(2000);
-        System.out.println(context.get());      // 123456
-        System.out.println("------------------------------------------------------------------");
+        // 2. 多线程上下文
+        try (ThreadContext<Object> context = ThreadKit.context()) {
+            context.set("123456");
+            System.out.println(ThreadKit.name() + ": " + context.get());      // 123456
+            ThreadKit.run(() -> {
+                System.out.println(ThreadKit.name() + ": " + context.get());  // 123456
+                ThreadKit.sleep(1000);
+                context.set("456789");
+                System.out.println(ThreadKit.name() + ": " + context.get());  // 456789, 只能向下传递, 不能向传递
+                ThreadKit.run(() -> {
+                    System.out.println(ThreadKit.name() + ": " + context.get());  // 456789
+                }, "t-sub", true);
+            }, "t", true);
+            ThreadKit.sleep(2000);
+            System.out.println(ThreadKit.name() + ": " + context.get());      // 123456
+            System.out.println("------------------------------------------------------------------");
+        }
     }
 
     @Test
     public void testBuffer() {
-        ThreadKit.buffer().put("A", "123");
-        String s = ThreadKit.buffer().get("A");
+        String key = "A";
+        ThreadKit.buffer().put(key, "123456");
+        String s = ThreadKit.buffer().get(key);
         System.out.println(ThreadKit.name() + ", A: " + s);
         ThreadKit.run(() -> {
-            String s1 = ThreadKit.buffer().get("A");
+            String s1 = ThreadKit.buffer().get(key);
             System.out.println(ThreadKit.name() + ", A: " + s1);
+            ThreadKit.buffer().put(key, "456789");
         }, "test", true);
-        ThreadKit.sleep(1000);
+        ThreadKit.sleep(2000);
+
+        s = ThreadKit.buffer().get(key);
+        System.out.println(ThreadKit.name() + ", A: " + s);
     }
 
 

@@ -54,6 +54,7 @@
         <mockito.version>4.6.1</mockito.version>
         <minio.version>8.5.12</minio.version>
         <byte-buddy.version>1.15.7</byte-buddy.version>
+        <alibaba-ttl.version>2.14.5</alibaba-ttl.version>
     </properties>
 
     <dependencyManagement>
@@ -221,6 +222,12 @@
                 <version>${byte-buddy.version}</version>
             </dependency>
 
+            <!-- alibaba ttl -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${alibaba-ttl.version}</version>
+            </dependency>
 
             <!-- 引入Knife4j的官方start包,Swagger2基于Springfox2.10.5项目 -->
             <dependency>
