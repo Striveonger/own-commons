@@ -1,6 +1,6 @@
 package com.striveonger.common.third.prometheus.metric;
 
-import com.striveonger.common.core.ThreadKit;
+import com.striveonger.common.core.thread.ThreadKit;
 import org.junit.Test;
 
 import java.util.List;

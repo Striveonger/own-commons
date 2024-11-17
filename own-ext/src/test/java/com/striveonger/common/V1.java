@@ -1,6 +1,6 @@
 package com.striveonger.common;
 
-import com.striveonger.common.core.ThreadKit;
+import com.striveonger.common.core.thread.ThreadKit;
 import com.striveonger.common.ext.annotation.Timepiece;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

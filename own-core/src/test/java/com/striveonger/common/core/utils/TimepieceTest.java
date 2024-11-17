@@ -1,6 +1,6 @@
 package com.striveonger.common.core.utils;
 
-import com.striveonger.common.core.ThreadKit;
+import com.striveonger.common.core.thread.ThreadKit;
 import com.striveonger.common.core.Timepiece;
 import junit.framework.TestCase;
 
