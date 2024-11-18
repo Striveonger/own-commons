@@ -8,7 +8,7 @@ Some of their commonly used tool classes.
 ## own-ext 
 包含了一些扩展功能.
 ## own-leaf
-包含了一些分布式ID生成器相关的工具类, 如: Snowflake, 美团雪花算法等...
+包含了一些分布式ID生成器相关的工具类, 如: Snowflake 等...
 ## own-storage
 包含了一些存储相关的工具类, 如: MiniO, 阿里OSS, 腾讯云OSS等...
 ## own-test 
@@ -25,8 +25,8 @@ Some of their commonly used tool classes.
 
 ---
 开发计划: 
- - own-task 
- - own-redis
- - own-rabbit
+ - own-task: 任务调度
+ - own-redis: 分布式锁
+ - own-rabbit: 消息队列
+ - own-trace: SkyWalking
  - own-web: 添加当前请求的依赖注入, 以及对请求添加相应增强方法
- 

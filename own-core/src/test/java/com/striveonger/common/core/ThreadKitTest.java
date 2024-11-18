@@ -45,10 +45,11 @@ public class ThreadKitTest {
             ThreadKit.sleep(1000);
             context.set("456789");
             System.out.println(context.get());
+            System.out.println("------------------------------------------------------------------");
         } finally {
             System.out.println("finally");
         }
-        System.out.println("------------------------------------------------------------------");
+        System.out.println();
 
         // 2. 多线程上下文
         try (ThreadContext<Object> context = ThreadKit.context()) {
