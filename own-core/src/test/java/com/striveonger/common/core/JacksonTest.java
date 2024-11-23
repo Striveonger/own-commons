@@ -1,9 +1,8 @@
-package com.striveonger.common.core.utils;
+package com.striveonger.common.core;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.striveonger.common.core.Jackson;
 import com.striveonger.common.core.result.Result;
 import org.junit.Test;
 import org.slf4j.Logger;

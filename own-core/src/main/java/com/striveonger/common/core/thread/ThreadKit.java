@@ -1,12 +1,12 @@
 package com.striveonger.common.core.thread;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.thread.RejectPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

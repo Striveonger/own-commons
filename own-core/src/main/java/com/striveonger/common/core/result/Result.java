@@ -80,10 +80,15 @@ public class Result implements Serializable {
         return this.data;
     }
 
+    public Boolean getShow() {
+        return show;
+    }
+
     public static Result success() {
         return new Result(ResultStatus.SUCCESS);
     }
 
+    /*
     public static <T> Result success(T data) {
         return new Result(ResultStatus.SUCCESS).data(data);
     }
@@ -99,6 +104,7 @@ public class Result implements Serializable {
     public static <T> Result success(Page<T> page, String message) {
         return new Result(ResultStatus.SUCCESS).message(message).page(page);
     }
+    */
 
     public static Result fail() {
         return new Result(ResultStatus.FAIL);

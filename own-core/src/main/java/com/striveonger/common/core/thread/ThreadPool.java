@@ -86,7 +86,7 @@ public class ThreadPool {
 
     public static class Builder {
         /**
-         * 线程池工作线程数(最好与CPU核数一致)
+         * 线程池工作线程数
          */
         private Integer corePoolSize = 8;
         /**

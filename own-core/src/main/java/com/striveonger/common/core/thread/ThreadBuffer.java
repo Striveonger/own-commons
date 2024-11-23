@@ -18,7 +18,8 @@ public class ThreadBuffer {
 
     private final Map<String, Object> cache = new ConcurrentHashMap<>();
 
-    private ThreadBuffer() { }
+    private ThreadBuffer() {
+    }
 
     public <T> T get(String key) {
         return (T) cache.get(key);
@@ -60,6 +61,16 @@ public class ThreadBuffer {
             }
         }
 
+        public boolean isEmpty() {
+            BlockingQueue<?> queue = ThreadBuffer.of().get(key);
+            return Objects.isNull(queue) || queue.isEmpty();
+        }
+
+        public int size() {
+            BlockingQueue<?> queue = ThreadBuffer.of().get(key);
+            return Objects.isNull(queue) ? 0 : queue.size();
+        }
+
         public <T> void offer(T value) {
             BlockingQueue<T> queue = ThreadBuffer.of().get(key);
             if (Objects.nonNull(queue) && Objects.nonNull(value)) {
@@ -80,7 +91,6 @@ public class ThreadBuffer {
         public void close() {
             ThreadBuffer.of().remove(key);
         }
-
 
     }
 

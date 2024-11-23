@@ -30,7 +30,7 @@ public class Retry {
                 retry = false;
             } catch (Exception e) {
                 retry = true;
-                log.error(String.format("第%d执行失败", ++count), e);
+                log.error("第{}执行失败, {}", ++count, e.getMessage());
             }
         } while (retry && count < times);
         if (retry) {

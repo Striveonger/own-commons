@@ -22,20 +22,21 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
 
 /**
  * JSON 辅助工具
+ *
  * @author Mr.Lee
  * @since 2023-02-24 10:42
  */
 public class Jackson {
 
     private static final Logger log = LoggerFactory.getLogger(Jackson.class);
-    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {};
+    private static final TypeReference<Map<String, Object>> mapType = new TypeReference<>() {
+    };
     private static final ObjectMapper mapper;
 
     static {
@@ -98,6 +99,7 @@ public class Jackson {
 
     /**
      * JSON 字符串 转成 JsonNode 对象
+     *
      * @param props
      * @return
      */
@@ -113,6 +115,7 @@ public class Jackson {
 
     /**
      * 对象 转成 JsonNode 对象
+     *
      * @param object
      * @return
      */
@@ -122,19 +125,27 @@ public class Jackson {
 
     public static ObjectNode toObjectNode(String props) {
         JsonNode node = toJsonNode(props);
+        return toObjectNode(node);
+    }
+
+    public static ObjectNode toObjectNode(JsonNode node) {
         if (node instanceof ObjectNode object) {
             return object;
         }
-        log.warn("Jackson Convert ObjectNode error, props is not ObjectNode");
+        log.warn("Jackson Convert ObjectNode error, node is not ObjectNode");
         return null;
     }
 
     public static ArrayNode toArrayNode(String props) {
         JsonNode node = toJsonNode(props);
+        return toArrayNode(node);
+    }
+
+    public static ArrayNode toArrayNode(JsonNode node) {
         if (node instanceof ArrayNode array) {
             return array;
         }
-        log.warn("Jackson Convert ArrayNode error, props is not ArrayNode");
+        log.warn("Jackson Convert ArrayNode error, node is not ArrayNode");
         return null;
     }
 
@@ -158,15 +169,7 @@ public class Jackson {
         return Builder.builder();
     }
 
-    public static Builder builder(String split) {
-        return Builder.builder(split);
-    }
-
-    public static Builder builder(Map<String, Object> root) {
-        return Builder.builder(null, root);
-    }
-
-    public static Builder builder(String split, Map<String, Object> root) {
+    public static Builder builder(String split, ObjectNode root) {
         return Builder.builder(split, root);
     }
 
@@ -179,22 +182,11 @@ public class Jackson {
             root = Jackson.createObjectNode();
         }
 
-        private Builder(String split) {
-            this.split = split;
-            root = Jackson.createObjectNode();
-        }
-
-        private Builder(Map<String, Object> root) {
-            this.root = Jackson.getMapper().convertValue(root, ObjectNode.class);
-        }
-
-        private Builder(String split, Map<String, Object> root) {
+        private Builder(String split, ObjectNode root) {
             if (StrUtil.isNotBlank(split)) {
                 this.split = split;
             }
-            if (Objects.nonNull(root)) {
-                this.root = Optional.ofNullable(Jackson.toJSONString(root)).map(Jackson::toObjectNode).orElse(Jackson.createObjectNode());
-            }
+            this.root = Optional.ofNullable(root).orElse(Jackson.createObjectNode());
         }
 
         public Builder reset() {
@@ -232,7 +224,7 @@ public class Jackson {
         private void put(ObjectNode node, String key, Object value) {
             if (node == null) {
                 // ignore
-            } else if(value == null) {
+            } else if (value == null) {
                 node.putNull(key);
             } else {
                 JsonNode val = Jackson.toJsonNode(value);
@@ -244,14 +236,8 @@ public class Jackson {
             return new Builder();
         }
 
-        static Builder builder(String split) {
-            return new Builder(split);
-        }
-
-        static Builder builder(String split, Map<String, Object> root) {
+        static Builder builder(String split, ObjectNode root) {
             return new Builder(split, root);
         }
     }
-
-
 }

@@ -13,7 +13,14 @@ public class CommandTest {
         result.await();
 
         cmds = List.of("bash", "-c", "ping 127.0.0.1 -c 4");
-        result = Command.of(cmds, false).console(System.out::println).run();
+        result = Command.of(cmds, false).run();
         result.await();
+        System.out.println(result.getStatus());
+        System.out.println(result.getContent());
+
+        result = Command.of(List.of("arch")).run();
+        result.await();
+        System.out.println(result.getContent());
+
     }
 }

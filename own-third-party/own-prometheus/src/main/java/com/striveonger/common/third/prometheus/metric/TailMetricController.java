@@ -24,7 +24,7 @@ public class TailMetricController {
     private MetricsContext context;
 
     @GetMapping(value = "/exporter/tail/metrics")
-    public void metrics(HttpServletResponse response) {
+    public void tail(HttpServletResponse response) {
 
         List<Metric> metrics = context.readAll();
 
