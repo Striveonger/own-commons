@@ -1,0 +1,19 @@
+{
+    "groups": [
+        {
+            "name": "own.leaf",
+            "description": "分布式ID配置",
+            "type": "com.striveonger.common.leaf.config.LeafConfig",
+            "sourceType": "com.striveonger.common.leaf.config.LeafConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.leaf.worker-id",
+            "type": "java.lang.Integer",
+            "description": "工作机器节点ID，取值范围: 0~4095, 默认值: 0",
+            "required": false,
+            "defaultValue": 0
+        }
+    ]
+}

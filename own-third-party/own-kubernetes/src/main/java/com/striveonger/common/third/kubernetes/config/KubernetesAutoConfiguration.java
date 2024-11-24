@@ -1,5 +1,6 @@
-package com.striveonger.common.third.kubernetes;
+package com.striveonger.common.third.kubernetes.config;
 
+import com.striveonger.common.third.kubernetes.KubernetesKit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

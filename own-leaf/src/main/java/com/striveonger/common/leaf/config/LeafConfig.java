@@ -10,9 +10,6 @@ import static com.striveonger.common.leaf.core.snowflake.SnowflakeIDGen.MAX_WORK
  * @author Mr.Lee
  * @since 2024-09-06 11:24
  */
-// @Configuration
-// @ConditionalOnProperty(prefix = "own.leaf", name = "worker-id")
-// @ConfigurationProperties(prefix = "own.leaf")
 public class LeafConfig {
 
     private int workerId = DEFAULT_WORKER_ID;

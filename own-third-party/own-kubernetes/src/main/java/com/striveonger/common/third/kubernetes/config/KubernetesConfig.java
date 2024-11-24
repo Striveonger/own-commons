@@ -1,4 +1,4 @@
-package com.striveonger.common.third.kubernetes;
+package com.striveonger.common.third.kubernetes.config;
 
 /**
  * @author Mr.Lee

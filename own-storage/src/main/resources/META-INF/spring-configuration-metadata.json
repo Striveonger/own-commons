@@ -1,0 +1,63 @@
+{
+    "groups": [
+        {
+            "name": "own.storage",
+            "description": "storage 配置",
+            "type": "com.striveonger.common.storage.config.StorageConfig",
+            "sourceType": "com.striveonger.common.storage.config.StorageConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.storage.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否启用存储",
+            "required": false,
+            "defaultValue": false
+        },
+        {
+            "name": "own.storage.file.folder",
+            "type": "java.lang.String",
+            "description": "文件存储路径",
+            "required": false
+        },
+        {
+            "name": "own.storage.minio.endpoint",
+            "type": "java.lang.String",
+            "description": "minio 服务地址",
+            "required": true
+        },
+        {
+            "name": "own.storage.minio.port",
+            "type": "java.lang.Integer",
+            "description": "minio 服务端口",
+            "required": false,
+            "defaultValue": 9000
+        },
+        {
+            "name": "own.storage.minio.secure",
+            "type": "java.lang.Boolean",
+            "description": "minio 服务是否使用https",
+            "required": false,
+            "defaultValue": false
+        },
+        {
+            "name": "own.storage.minio.access-key",
+            "type": "java.lang.String",
+            "description": "minio 服务的访问key",
+            "required": true
+        },
+        {
+            "name": "own.storage.minio.secret-key",
+            "type": "java.lang.String",
+            "description": "minio 服务的访问密钥",
+            "required": true
+        },
+        {
+            "name": "own.storage.minio.bucket",
+            "type": "java.lang.String",
+            "description": "minio 服务 bucketName",
+            "required": true
+        }
+    ]
+}

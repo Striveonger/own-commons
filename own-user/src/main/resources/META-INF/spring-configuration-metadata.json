@@ -1,0 +1,19 @@
+{
+    "groups": [
+        {
+            "name": "own.auth",
+            "description": "own auth 模块权限组",
+            "type": "com.striveonger.common.user.config.WhitelistConfig",
+            "sourceType": "com.striveonger.common.user.config.WhitelistConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.auth.whites",
+            "type": "java.util.Set",
+            "description": "白名单列表, 支持通配符. 如: /api/**",
+            "required": false,
+            "defaultValue": []
+        }
+    ]
+}

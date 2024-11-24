@@ -1,6 +1,7 @@
 package com.striveonger.common.third.kubernetes;
 
 import cn.hutool.core.util.StrUtil;
+import com.striveonger.common.third.kubernetes.config.KubernetesConfig;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;

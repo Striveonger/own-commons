@@ -1,0 +1,25 @@
+{
+    "groups": [
+        {
+            "name": "own.kubernetes",
+            "description": "kubernetes 配置",
+            "type": "com.striveonger.common.third.kubernetes.config.KubernetesConfig",
+            "sourceType": "com.striveonger.common.third.kubernetes.config.KubernetesConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.kubernetes.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否开启kubernetes功能",
+            "required": false,
+            "defaultValue": false
+        },
+        {
+            "name": "own.kubernetes.kubeConfigPath",
+            "type": "java.lang.String",
+            "description": "kube config 文件路径",
+            "required": true
+        }
+    ]
+}

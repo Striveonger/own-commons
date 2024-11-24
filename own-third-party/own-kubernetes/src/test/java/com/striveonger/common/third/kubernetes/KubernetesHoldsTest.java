@@ -1,5 +1,6 @@
 package com.striveonger.common.third.kubernetes;
 
+import com.striveonger.common.third.kubernetes.config.KubernetesConfig;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.V1NodeList;
 import org.junit.Test;
