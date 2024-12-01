@@ -1,0 +1,43 @@
+{
+    "groups": [
+        {
+            "name": "own.redis",
+            "description": "Redis 配置",
+            "type": "com.striveonger.common.third.redis.config.RedisConfig",
+            "sourceType": "com.striveonger.common.third.redis.config.RedisConfig"
+        }
+    ],
+    "properties": [
+        {
+            "name": "own.redis.enabled",
+            "type": "java.lang.Boolean",
+            "description": "是否开启Redis功能",
+            "required": false,
+            "defaultValue": false
+        },
+        {
+            "name": "own.redis.username",
+            "type": "java.lang.String",
+            "description": "Redis 用户名",
+            "required": true
+        },
+        {
+            "name": "own.redis.password",
+            "type": "java.lang.String",
+            "description": "Redis 密码",
+            "required": true
+        },
+        {
+            "name": "own.redis.single.address",
+            "type": "java.lang.String",
+            "description": "单节点模式-地址, 格式: ip:port",
+            "required": true
+        },
+        {
+            "name": "own.redis.single.database",
+            "type": "java.lang.Integer",
+            "description": "单节点模式-数据库索引",
+            "required": true
+        }
+    ]
+}

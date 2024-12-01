@@ -30,4 +30,3 @@ Some of their commonly used tool classes.
  - own-rabbit: 消息队列
  - own-trace: SkyWalking
  - own-ext: SpEL, AOP, Cglib, 反射, 字节码增强等...
- - own-web: 添加当前请求的依赖注入, 以及对请求添加相应增强方法
