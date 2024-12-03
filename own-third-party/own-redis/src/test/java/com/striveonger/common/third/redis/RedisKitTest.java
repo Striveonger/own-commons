@@ -16,8 +16,8 @@ public class RedisKitTest {
 
     @Before
     public void setup() {
-        // 初始化环境
         /*
+        初始化环境
         docker run -dit --name redis \
             -v ~/development/workspace/docker/volume/redis/data:/data \
             -v ~/development/workspace/docker/volume/redis/conf:/etc/redis \
@@ -25,9 +25,9 @@ public class RedisKitTest {
             --net mova --ip 10.13.144.104 \
             --restart=always \
             redis:7.0.11 redis-server /etc/redis/redis.conf
+        初始化用户名密码
+        acl setuser redis on >123456 +@all ~* &*
         */
-        // 初始化用户名密码
-        // acl setuser redis on >123456 +@all ~* &*
         RedisConfig config = new RedisConfig();
         config.setUsername("redis");
         config.setPassword("123456");
