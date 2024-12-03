@@ -70,23 +70,11 @@ public class RedisKit {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 获取分布式锁
      * @return 分布式锁
      */
-    public Lock lock() {
+    public Lock getLock() {
         return lock;
     }
 
