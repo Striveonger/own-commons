@@ -59,7 +59,7 @@ public class ThreadKitTest {
                 System.out.println(ThreadKit.name() + ": " + context.get());  // 123456
                 ThreadKit.sleep(1000);
                 context.set("456789");
-                System.out.println(ThreadKit.name() + ": " + context.get());  // 456789, 只能向下传递, 不能向传递
+                System.out.println(ThreadKit.name() + ": " + context.get());  // 456789, 只能向下传递, 不能向上传递
                 ThreadKit.run(() -> {
                     System.out.println(ThreadKit.name() + ": " + context.get());  // 456789
                 }, "t-sub", true);

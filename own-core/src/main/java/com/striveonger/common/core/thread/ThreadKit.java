@@ -47,9 +47,16 @@ public class ThreadKit {
     }
 
     public static <T> FutureTask<T> call(Callable<T> callable) {
+        String name = "thread-kit-" + num.incrementAndGet();
+        return call(callable, name, true);
+    }
+
+    public static <T> FutureTask<T> call(Callable<T> callable, String name, boolean start) {
         FutureTask<T> task = new FutureTask<>(callable);
-        Thread thread = new Thread(task, "thread-kit-" + num.incrementAndGet());
-        thread.start();
+        Thread thread = new Thread(task, name);
+        if (start) {
+            thread.start();
+        }
         return task;
     }
 
@@ -64,7 +71,6 @@ public class ThreadKit {
                     // ignore
                 }
             } while (retry);
-
         }
     }
 
