@@ -38,5 +38,6 @@ public class MybatisConfiguration implements MyBatisFlexCustomizer {
         config.setLogicDeleteColumn("deleted");
         config.setNormalValueOfLogicDelete(0);
         config.setDeletedValueOfLogicDelete(1);
+        config.setPrintBanner(false);
     }
 }
