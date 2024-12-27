@@ -5,7 +5,7 @@
 
     <groupId>com.striveonger.common</groupId>
     <artifactId>own-dep</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -27,6 +27,23 @@
         </developer>
     </developers>
 
+    <scm>
+        <connection>scm:git:git://github.com/striveonger/own-commons.git</connection>
+        <developerConnection>scm:git:ssh://github.com:striveonger/own-commons.git</developerConnection>
+        <url>https://github.com/striveonger/own-commons/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>central</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>central</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <!-- Ground Work -->
         <java.version>17</java.version>
@@ -37,7 +54,7 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
 
         <!-- Libraries -->
-        <own.version>0.0.1</own.version>
+        <own.version>0.0.2</own.version>
         <spring-boot.version>3.3.1</spring-boot.version>
         <hutool.version>5.8.29</hutool.version>
         <sa-token.version>1.38.0</sa-token.version>
@@ -322,13 +339,43 @@
 
     </dependencies>
 
-
     <build>
         <plugins>
             <!-- 打包并发布源码 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <keyname>0D3E16A6F713BAF46CEEA5DAA3556BABF3785C3F</keyname>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- id 与 setting.xml 的 gpg 配置中的 id 对应 -->
+                        <id>central</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
             </plugin>
         </plugins>
     </build>
