@@ -1,5 +1,8 @@
 package com.striveonger.common.third.prometheus.metric;
 
+import cn.hutool.core.util.StrUtil;
+import com.striveonger.common.core.exception.CustomException;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -85,6 +88,10 @@ public class Metric {
         return result;
     }
 
+    public static Metric.Builder builder() {
+        return new Builder();
+    }
+
     public enum Type {
         /**
          * 计数器
@@ -106,6 +113,58 @@ public class Metric {
         @Override
         public String toString() {
             return super.toString().toLowerCase();
+        }
+    }
+
+    public static class Builder {
+        private Type type;
+        private String name;
+        private Number value;
+        private Long timestamp;
+        private Map<String, String> labels;
+        private String help;
+
+        public Builder() { }
+
+        public Builder type(Type type) {
+            this.type = type;
+            return this;
+        }
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+        public Builder value(Number value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder timestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Builder labels(Map<String, String> labels) {
+            this.labels = labels;
+            return this;
+        }
+
+        public Builder help(String help) {
+            this.help = help;
+            return this;
+        }
+
+        public Metric build() {
+            if (type == null || StrUtil.isBlank(name) || value == null) {
+                throw new CustomException("type, name and value must not be null");
+            }
+            Metric metric = new Metric(type, name, value);
+            if (Objects.nonNull(timestamp)) {
+                metric.setTimestamp(timestamp);
+            }
+            metric.setLabels(labels);
+            metric.setHelp(help);
+            return metric;
         }
     }
 }

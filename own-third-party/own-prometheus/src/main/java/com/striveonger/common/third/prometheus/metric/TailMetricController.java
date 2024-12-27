@@ -26,8 +26,21 @@ public class TailMetricController {
     @GetMapping(value = "/exporter/tail/metrics")
     public void tail(HttpServletResponse response) {
 
-        List<Metric> metrics = context.readAll();
+        /*
+global:
+  scrape_interval: 10s # 默认抓取频率
 
+scrape_configs:
+  - job_name: 'mock-data'
+    metrics_path: '/exporter/tail/metrics'
+    static_configs:
+      - targets: ['10.13.147.1:18081']
+        labels:
+          mark: "metric"
+
+         */
+
+        List<Metric> metrics = context.readAll();
         // 设置响应内容类型为文本
         response.setContentType("text/plain;charset=utf-8");
         try (PrintWriter out = response.getWriter()) {

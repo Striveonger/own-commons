@@ -1,8 +1,5 @@
 package com.striveonger.common.third.prometheus;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
 /**
  * Prometheus 配置类
  * @author Mr.Lee
