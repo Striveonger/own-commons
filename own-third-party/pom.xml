@@ -13,8 +13,9 @@
     <name>${project.artifactId}</name>
 
     <modules>
-        <module>own-prometheus</module>
+        <module>own-actuator</module>
         <module>own-kubernetes</module>
+        <module>own-prometheus</module>
         <module>own-redis</module>
     </modules>
 
