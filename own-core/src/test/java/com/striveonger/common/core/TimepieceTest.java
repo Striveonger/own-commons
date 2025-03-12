@@ -8,11 +8,11 @@ public class TimepieceTest extends TestCase {
     public void testTimepiece() {
         Timepiece timepiece = Timepiece.of("XXX");
         ThreadKit.sleep(2000);
-        timepiece.keep("B");
+        timepiece.mark("B");
         ThreadKit.sleep(3000);
-        timepiece.keep("C");
+        timepiece.mark("C");
         ThreadKit.sleep(4000);
-        timepiece.keep("D");
+        timepiece.mark("D");
         ThreadKit.sleep(5000);
         timepiece.show();
     }

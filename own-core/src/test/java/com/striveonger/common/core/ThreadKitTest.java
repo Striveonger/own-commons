@@ -117,8 +117,9 @@ public class ThreadKitTest {
             }
         }, "consumer1", true);
 
-        ThreadKit.sleep(2500);
+        ThreadKit.sleep(25000);
         exitCode = 0;
+        ThreadKit.queue().close();
     }
 
 }

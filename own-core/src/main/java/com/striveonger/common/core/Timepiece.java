@@ -22,7 +22,7 @@ public class Timepiece {
 
     private Timepiece(String name) {
         this.name = name;
-        keep("start");
+        mark("start");
     }
 
     public static Timepiece of(String name) {
@@ -33,7 +33,7 @@ public class Timepiece {
      * 打点记录
      * @param title 打点标题
      */
-    public void keep(String title) {
+    public void mark(String title) {
         Thread thread = Thread.currentThread();
         List<Keep> list = map.computeIfAbsent(thread, k -> new ArrayList<>());
         list.add(new Keep(title, System.currentTimeMillis()));

@@ -18,8 +18,12 @@ public class ThreadKit {
 
     private final static AtomicInteger num = new AtomicInteger(0);
 
+    public static Thread current() {
+        return Thread.currentThread();
+    }
+
     public static String name() {
-        return Thread.currentThread().getName();
+        return ThreadKit.current().getName();
     }
 
     public static void sleep(long timeout) {
@@ -30,12 +34,12 @@ public class ThreadKit {
         try {
             unit.sleep(timeout);
         } catch (InterruptedException e) {
-            log.error("{}, Interrupted...By ThreadKit", Thread.currentThread().getName(), e);
+            log.error("{}, Interrupted...By ThreadKit", ThreadKit.name(), e);
         }
     }
 
     public static Thread run(Runnable runnable) {
-        return ThreadKit.run(runnable, "thread-kit-" + num.incrementAndGet(), true);
+        return run(runnable, "thread-kit-" + num.incrementAndGet(), true);
     }
 
     public static Thread run(Runnable runnable, String name, boolean start) {

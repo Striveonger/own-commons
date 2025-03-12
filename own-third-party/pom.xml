@@ -13,6 +13,7 @@
     <name>${project.artifactId}</name>
 
     <modules>
+        <module>own-ai</module>
         <module>own-actuator</module>
         <module>own-kubernetes</module>
         <module>own-prometheus</module>
