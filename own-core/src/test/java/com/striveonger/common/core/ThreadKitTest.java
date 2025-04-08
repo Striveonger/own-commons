@@ -94,7 +94,7 @@ public class ThreadKitTest {
         // 生产者1
         ThreadKit.run(() -> {
             for (int i = 1; i <= 3; i++) {
-                ThreadKit.queue().offer("x: " + i);
+                ThreadKit.queue().offer("X: " + i);
                 ThreadKit.sleep(500);
             }
         }, "producer1", true);
@@ -102,7 +102,7 @@ public class ThreadKitTest {
         // 生产者2
         ThreadKit.run(() -> {
             for (int i = 4; i <= 9; i++) {
-                ThreadKit.queue().offer("x: " + i);
+                ThreadKit.queue().offer("Y: " + i);
                 ThreadKit.sleep(200);
             }
         }, "producer2", true);

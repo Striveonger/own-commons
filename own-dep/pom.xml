@@ -54,11 +54,13 @@
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
 
         <!-- Libraries -->
+        <!--
         <spring-ai.version>1.0.0-SNAPSHOT</spring-ai.version>
+        -->
         <spring-boot.version>3.3.1</spring-boot.version>
         <hutool.version>5.8.29</hutool.version>
         <sa-token.version>1.38.0</sa-token.version>
-        <agent-flex.version>1.0.0-rc.6</agent-flex.version>
+        <agent-flex.version>1.0.0-rc.10</agent-flex.version>
         <mybatis-flex.version>1.9.3</mybatis-flex.version>
         <freemarker.version>2.3.31</freemarker.version>
         <mysql-connector.version>8.4.0</mysql-connector.version>
@@ -151,6 +153,7 @@
             </dependency>
 
             <!-- SpringAi -->
+            <!--
             <dependency>
                 <groupId>org.springframework.ai</groupId>
                 <artifactId>spring-ai-bom</artifactId>
@@ -158,6 +161,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            -->
 
             <!-- SpringBoot -->
             <dependency>

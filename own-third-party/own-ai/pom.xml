@@ -14,10 +14,7 @@
             <artifactId>own-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.agentsflex</groupId>
-            <artifactId>agents-flex-bom</artifactId>
-        </dependency>
+
 
         <!-- Test -->
         <dependency>

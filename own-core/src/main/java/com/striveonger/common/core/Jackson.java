@@ -3,11 +3,9 @@ package com.striveonger.common.core;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -15,9 +13,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.jayway.jsonpath.JsonPath;
+import com.striveonger.common.core.constant.ResultStatus;
+import com.striveonger.common.core.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -189,6 +191,16 @@ public class Jackson {
             this.root = Optional.ofNullable(root).orElse(Jackson.createObjectNode());
         }
 
+        public Builder read(InputStream in) {
+            try {
+                root = mapper.readValue(in, ObjectNode.class);
+                return this;
+            } catch (Exception e) {
+                log.error("read json error", e);
+                throw new CustomException(ResultStatus.ACCIDENT);
+            }
+        }
+
         public Builder reset() {
             root = Jackson.createObjectNode();
             return this;
@@ -212,13 +224,11 @@ public class Jackson {
             return root;
         }
 
+
+
         @Override
         public String toString() {
             return root.toString();
-        }
-
-        public String toJSONString() {
-            return toString();
         }
 
         private void put(ObjectNode node, String key, Object value) {

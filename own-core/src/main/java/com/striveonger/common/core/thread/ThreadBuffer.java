@@ -91,7 +91,6 @@ public class ThreadBuffer {
         public void close() {
             ThreadBuffer.of().remove(key);
         }
-
     }
 
 }

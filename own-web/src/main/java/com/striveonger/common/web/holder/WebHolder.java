@@ -2,6 +2,7 @@ package com.striveonger.common.web.holder;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -33,9 +34,19 @@ public class WebHolder {
                 .orElse(null);
     }
 
+    public static HttpSession getSession() {
+        return Optional.ofNullable(getRequest()).map(HttpServletRequest::getSession).orElse(null);
+    }
+
     public static String getAccessIp() {
         return Optional.ofNullable(getRequest()).map(HttpServletRequest::getRemoteAddr).orElse("");
     }
 
-    // TODO: 后续想到什么方法, 再来实现什么吧
+    public static String getHeader(String name) {
+        return getHeader(name, null);
+    }
+
+    public static String getHeader(String name, String defaultValue) {
+        return Optional.ofNullable(getRequest()).map(x -> x.getHeader(name)).orElse(defaultValue);
+    }
 }

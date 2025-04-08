@@ -1,0 +1,489 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "create-user-table",
+                "author": "Mr.Lee",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "user",
+                            "remarks": "用户信息表",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "user_id",
+                                        "type": "INT UNSIGNED",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        },
+                                        "remarks": "用户唯一标识"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "username",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "nullable": false,
+                                            "unique": true
+                                        },
+                                        "remarks": "用户名"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "password_hash",
+                                        "type": "VARCHAR(255)",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "密码哈希值"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "email",
+                                        "type": "VARCHAR(100)",
+                                        "defaultValue": "",
+                                        "constraints": {
+                                            "nullable": false,
+                                            "unique": true
+                                        },
+                                        "remarks": "邮箱"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "mobile",
+                                        "type": "VARCHAR(20)",
+                                        "defaultValue": "",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "手机号"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "创建时间"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "onUpdate": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "修改时间"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_user_username",
+                            "tableName": "user",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "username"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "changeSet": {
+                "id": "create-product-table",
+                "author": "Mr.Lee",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "product",
+                            "remarks": "商品信息表",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "product_id",
+                                        "type": "INT UNSIGNED",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        },
+                                        "remarks": "商品唯一标识"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "product_name",
+                                        "type": "VARCHAR(255)",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "商品名称"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "TEXT",
+                                        "remarks": "商品描述"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "price",
+                                        "type": "DECIMAL(10, 2) UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "商品单价（精确到小数点后两位）"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "stock",
+                                        "type": "INT UNSIGNED",
+                                        "defaultValue": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "库存数量"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "status",
+                                        "type": "TINYINT UNSIGNED",
+                                        "defaultValue": 1,
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "状态：0-下架, 1-上架"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "创建时间"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "onUpdate": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "修改时间"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_product_name",
+                            "tableName": "product",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "product_name"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_product_status",
+                            "tableName": "product",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "status"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "changeSet": {
+                "id": "create-order-table",
+                "author": "Mr.Lee",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "order",
+                            "remarks": "订单主表",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "order_id",
+                                        "type": "VARCHAR(64)",
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        },
+                                        "remarks": "订单唯一标识（如雪花算法生成）"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "user_id",
+                                        "type": "INT UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "关联用户ID"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "total_amount",
+                                        "type": "DECIMAL(12, 2) UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "订单总金额"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "status",
+                                        "type": "TINYINT UNSIGNED",
+                                        "defaultValue": 10,
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "状态：10-待支付, 20-已支付, 30-已发货, 40-已完成, 50-已取消"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "payment_time",
+                                        "type": "DATETIME",
+                                        "remarks": "支付时间"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "创建时间"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "onUpdate": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "修改时间"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_order_user_id",
+                            "tableName": "order",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "user_id"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_order_status",
+                            "tableName": "order",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "status"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "order",
+                            "baseColumnNames": "user_id",
+                            "referencedTableName": "user",
+                            "referencedColumnNames": "user_id",
+                            "constraintName": "fk_order_user",
+                            "onDelete": "NO ACTION",
+                            "onUpdate": "CASCADE"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "changeSet": {
+                "id": "create-order-item-table",
+                "author": "Mr.Lee",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "order_item",
+                            "remarks": "订单商品详情表",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "order_item_id",
+                                        "type": "INT UNSIGNED",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        },
+                                        "remarks": "订单项唯一标识"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "order_id",
+                                        "type": "VARCHAR(64)",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "关联订单ID"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "product_id",
+                                        "type": "INT UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "关联商品ID"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "quantity",
+                                        "type": "INT UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "购买数量"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "unit_price",
+                                        "type": "DECIMAL(10, 2) UNSIGNED",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "商品单价（下单时快照）"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "创建时间"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "DATETIME",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "onUpdate": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        },
+                                        "remarks": "修改时间"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_order_item_order_id",
+                            "tableName": "order_item",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "order_id"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "order_item",
+                            "baseColumnNames": "order_id",
+                            "referencedTableName": "order",
+                            "referencedColumnNames": "order_id",
+                            "constraintName": "fk_order_item_order",
+                            "onDelete": "CASCADE",
+                            "onUpdate": "CASCADE"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "order_item",
+                            "baseColumnNames": "product_id",
+                            "referencedTableName": "product",
+                            "referencedColumnNames": "product_id",
+                            "constraintName": "fk_order_item_product",
+                            "onDelete": "NO ACTION",
+                            "onUpdate": "CASCADE"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
