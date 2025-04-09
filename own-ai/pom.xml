@@ -7,16 +7,16 @@
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>own-third-party</artifactId>
+    <artifactId>own-ai</artifactId>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
 
     <modules>
-        <module>own-actuator</module>
-        <module>own-kubernetes</module>
-        <module>own-prometheus</module>
-        <module>own-redis</module>
+        <module>own-llm</module>
+        <!--<module>own-mcp</module>-->
     </modules>
+
+
 
 </project>

@@ -1,27 +1,40 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.striveonger.common</groupId>
-        <artifactId>own-third-party</artifactId>
-        <version>0.0.2</version>
+        <artifactId>own-ai</artifactId>
+        <version>0.1.0</version>
     </parent>
-    <artifactId>own-ai</artifactId>
+
+    <artifactId>own-llm</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.striveonger.common</groupId>
             <artifactId>own-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-ollama</artifactId>
+        </dependency>
 
+        <!--
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-openai</artifactId>
+        </dependency>
+        -->
 
-        <!-- Test -->
         <dependency>
             <groupId>com.striveonger.common</groupId>
             <artifactId>own-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
     </dependencies>
 
     <build>

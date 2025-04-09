@@ -189,6 +189,20 @@ public class Command {
             return String.join("\n", getLines());
         }
 
+        public boolean isSuccess() {
+            await();
+            return Status.SUCCESS == status;
+        }
+
+        public boolean isFail() {
+            await();
+            return Status.FAIL == status;
+        }
+
+        public boolean isRunning() {
+            return Status.RUNNING == status;
+        }
+
         /**
          * 等待命令执行结束
          */

@@ -7,7 +7,7 @@
     <groupId>com.striveonger.common</groupId>
     <artifactId>own-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
 
     <name>own-parent</name>
     <description>自己常用的一些工具包, 旨在可以快速构建自己熟悉的开发环境.</description>
@@ -56,9 +56,10 @@
     </properties>
 
     <modules>
+        <module>own-ai</module>
+        <module>own-bom</module>
         <module>own-core</module>
         <module>own-db</module>
-        <module>own-dep</module>
         <module>own-ext</module>
         <module>own-leaf</module>
         <module>own-storage</module>
@@ -72,8 +73,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.striveonger.common</groupId>
-                <artifactId>own-dep</artifactId>
-                <version>0.0.2</version>
+                <artifactId>own-bom</artifactId>
+                <version>0.1.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -85,8 +86,6 @@
             <id>release</id>
             <build>
                 <plugins>
-
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -118,7 +117,6 @@
                             <tokenAuth>true</tokenAuth>
                         </configuration>
                     </plugin>
-
 
                 </plugins>
             </build>
