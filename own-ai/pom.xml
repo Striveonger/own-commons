@@ -14,7 +14,8 @@
 
     <modules>
         <module>own-llm</module>
-        <!--<module>own-mcp</module>-->
+        <module>own-mcp-client</module>
+        <module>own-mcp-service</module>
     </modules>
 
 
